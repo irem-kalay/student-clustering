@@ -28,11 +28,11 @@ Create a Virtual Environment:
 
 2. **Create Virtual Environment:**
     ```bash
-# For Mac/Linux:
+    # For Mac/Linux:
     python3 -m venv venv
     source venv/bin/activate
 
-# For Windows:
+    # For Windows:
     python -m venv venv
     venv\Scripts\activate
 
