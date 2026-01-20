@@ -6,7 +6,7 @@ import numpy as np
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # File paths
-VECTOR_FILE = os.path.join(BASE_DIR, "student_feature_vectors2.csv") 
+VECTOR_FILE = os.path.join(BASE_DIR, "feature-vectors/student_feature_vectors2.csv") 
 EXCEL_FOLDER = os.path.join(BASE_DIR, "data")
 
 TARGET_STUDENT_ID = "Öğrenci Sınıf Listesi (97)"

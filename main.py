@@ -7,7 +7,7 @@ import numpy as np
 # SETTINGS
 # -------------------------------------------------
 DATA_FOLDER = "data"
-OUTPUT_FILE = "student_feature_vectors2.csv"
+OUTPUT_FILE = "feature-vectors/student_feature_vectors2.csv"
 
 # -------------------------------------------------
 # GRADE MAP
