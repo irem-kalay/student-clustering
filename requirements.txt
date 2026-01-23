@@ -7,3 +7,6 @@ pytz==2025.2
 tzdata==2025.3
 six==1.17.0
 et_xmlfile==2.0.0
+scikit-learn
+matplotlib
+seaborn
