@@ -6,7 +6,7 @@ import numpy as np
 # -------------------------------------------------
 # SETTINGS
 # -------------------------------------------------
-DATA_FOLDER = "data"
+DATA_FOLDER = "obs_track/fixed_xlsx"
 OUTPUT_FILE = "feature-vectors/student_feature_vectors2.csv"
 
 # -------------------------------------------------
