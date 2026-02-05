@@ -12,9 +12,9 @@ import seaborn as sns
 # 1. DATA LOADING AND PREPARATION
 # =============================================================================
 try:
-    df = pd.read_csv('feature-vectors/student_feature_vectors2_collapsed.csv')
+    df = pd.read_csv('feature-vectors/vector-1400-equivalent.csv')
 except FileNotFoundError:
-    df = pd.read_csv('student_feature_vectors2_collapsed.csv')
+    df = pd.read_csv('vector-1400-equivalent.csv')
 
 if 'Student_ID' in df.columns:
     student_ids = df['Student_ID']

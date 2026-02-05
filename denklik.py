@@ -5,9 +5,9 @@ import re
 # -----------------------------
 # FILE PATHS (EDIT HERE)
 # -----------------------------
-VECTORS_FILE = "feature-vectors/small-size-feature-vector.csv"
+VECTORS_FILE = "feature-vectors/vector-1400.csv"
 DENKLIK_FILE = "DersDenklikleri/dersdenklikleri.csv"
-OUTPUT_FILE  = "feature-vectors/student_feature_vectors2_collapsed.csv"
+OUTPUT_FILE  = "feature-vectors/vector-1400-equivalent.csv"
 
 ID_COL = "Student_ID"
 MISSING_VALUE = -1.0
