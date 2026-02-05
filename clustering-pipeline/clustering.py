@@ -324,6 +324,12 @@ X_latent = Z_scaler.fit_transform(Z)
 print("Latent shape:", X_latent.shape)
 
 # =============================================================================
+# CREATE RESULTS DIRECTORY
+# =============================================================================
+import os
+os.makedirs("clustering-pipeline/results", exist_ok=True)
+
+# =============================================================================
 # 5A. SILHOUETTE SCAN (K from 8 to 30)  -- latent uzayda
 # =============================================================================
 X = X_latent
@@ -358,8 +364,8 @@ plt.xlabel("K (number of clusters)")
 plt.ylabel("Silhouette score")
 plt.grid(True, alpha=0.2)
 plt.tight_layout()
-plt.savefig("clustering-pipeline/silhouette_k_8_30.png")
-print("Saved: clustering-pipeline/silhouette_k_8_30.png")
+plt.savefig("clustering-pipeline/results/silhouette_k_8_30.png")
+print("Saved: clustering-pipeline/results/silhouette_k_8_30.png")
 
 # =============================================================================
 # 5B. CLUSTERING (latent + KMeans)
@@ -397,10 +403,10 @@ q90 = weighted_features.groupby("Cluster")[cats].quantile(0.90)
 overall_mean = weighted_features[cats].mean()
 
 spread_q90_q10 = (q90 - q10).sort_index()
-spread_q90_q10.to_csv("clustering-pipeline/cluster_spread_q90_q10.csv")
+spread_q90_q10.to_csv("clustering-pipeline/results/cluster_spread_q90_q10.csv")
 
 std_df = weighted_features.groupby("Cluster")[cats].std().sort_index()
-std_df.to_csv("clustering-pipeline/cluster_std.csv")
+std_df.to_csv("clustering-pipeline/results/cluster_std.csv")
 
 print("\n=== Cluster Spread (q90-q10) ===")
 print(spread_q90_q10.round(3).to_string())
@@ -409,7 +415,7 @@ print("\n=== Cluster Std (within-cluster) ===")
 print(std_df.round(3).to_string())
 
 rank_df = centroids.rank(axis=0, ascending=False, method="min").astype(int)
-rank_df.to_csv("clustering-pipeline/cluster_centroid_ranks.csv")
+rank_df.to_csv("clustering-pipeline/results/cluster_centroid_ranks.csv")
 
 print("\n=== Cluster Ranks by Category (1=highest centroid) ===")
 print(rank_df.to_string())
@@ -418,8 +424,8 @@ gap_to_overall = centroids.sub(overall_mean, axis=1)
 best_centroid = centroids.max(axis=0)
 gap_to_best = best_centroid - centroids
 
-gap_to_overall.to_csv("clustering-pipeline/cluster_gap_to_overall_mean.csv")
-gap_to_best.to_csv("clustering-pipeline/cluster_gap_to_best.csv")
+gap_to_overall.to_csv("clustering-pipeline/results/cluster_gap_to_overall_mean.csv")
+gap_to_best.to_csv("clustering-pipeline/results/cluster_gap_to_best.csv")
 
 print("\n=== Gap to Overall Mean (centroid - overall_mean) ===")
 print(gap_to_overall.round(3).to_string())
@@ -440,18 +446,18 @@ cluster_summary = pd.DataFrame({
 
 cluster_summary["Compactness_Score"] = 1.0 / (1.0 + cluster_summary["Avg_Spread(q90-q10)"])
 cluster_summary["Performance_Score"] = cluster_summary["Avg_Centroid"]
-cluster_summary.to_csv("clustering-pipeline/cluster_summary.csv", index=True)
+cluster_summary.to_csv("clustering-pipeline/results/cluster_summary.csv", index=True)
 
 print("\n=== Cluster Summary (quick view) ===")
 print(cluster_summary.round(3).to_string())
 
 print("\nSaved:")
-print(" - clustering-pipeline/cluster_spread_q90_q10.csv")
-print(" - clustering-pipeline/cluster_std.csv")
-print(" - clustering-pipeline/cluster_centroid_ranks.csv")
-print(" - clustering-pipeline/cluster_gap_to_overall_mean.csv")
-print(" - clustering-pipeline/cluster_gap_to_best.csv")
-print(" - clustering-pipeline/cluster_summary.csv")
+print(" - clustering-pipeline/results/cluster_spread_q90_q10.csv")
+print(" - clustering-pipeline/results/cluster_std.csv")
+print(" - clustering-pipeline/results/cluster_centroid_ranks.csv")
+print(" - clustering-pipeline/results/cluster_gap_to_overall_mean.csv")
+print(" - clustering-pipeline/results/cluster_gap_to_best.csv")
+print(" - clustering-pipeline/results/cluster_summary.csv")
 
 # =============================================================================
 # 7. VISUALS
@@ -462,8 +468,8 @@ plt.title("Cluster Spread Heatmap (q90 - q10)  [lower = more compact]")
 plt.xlabel("Category")
 plt.ylabel("Cluster")
 plt.tight_layout()
-plt.savefig("clustering-pipeline/cluster_spread_heatmap.png")
-print("Saved: clustering-pipeline/cluster_spread_heatmap.png")
+plt.savefig("clustering-pipeline/results/cluster_spread_heatmap.png")
+print("Saved: clustering-pipeline/results/cluster_spread_heatmap.png")
 
 plt.figure(figsize=(12, 6))
 sns.heatmap(rank_df, annot=True, fmt="d")
@@ -471,8 +477,8 @@ plt.title("Cluster Rank Heatmap by Category (1 = best centroid)")
 plt.xlabel("Category")
 plt.ylabel("Cluster")
 plt.tight_layout()
-plt.savefig("clustering-pipeline/cluster_rank_heatmap.png")
-print("Saved: clustering-pipeline/cluster_rank_heatmap.png")
+plt.savefig("clustering-pipeline/results/cluster_rank_heatmap.png")
+print("Saved: clustering-pipeline/results/cluster_rank_heatmap.png")
 
 plt.figure(figsize=(12, 6))
 sns.heatmap(gap_to_overall, annot=True, fmt=".2f", center=0)
@@ -480,8 +486,8 @@ plt.title("Gap to Overall Mean (centroid - overall_mean) [positive=above avg]")
 plt.xlabel("Category")
 plt.ylabel("Cluster")
 plt.tight_layout()
-plt.savefig("clustering-pipeline/cluster_gap_to_overall_heatmap.png")
-print("Saved: clustering-pipeline/cluster_gap_to_overall_heatmap.png")
+plt.savefig("clustering-pipeline/results/cluster_gap_to_overall_heatmap.png")
+print("Saved: clustering-pipeline/results/cluster_gap_to_overall_heatmap.png")
 
 # =============================================================================
 # 8. GENDER ANALYSIS FROM TEXT FILES (They re shown like excel files)
@@ -605,12 +611,12 @@ print(f"  - Erkek: {male_count} ({male_count / len(weighted_features) * 100:.2f}
 print(f"  - Bilinmiyor: {unknown_count} ({unknown_count / len(weighted_features) * 100:.2f}%)")
 
 # Save gender statistics
-gender_cluster_stats.to_csv("clustering-pipeline/cluster_gender_count.csv")
-gender_cluster_pct.to_csv("clustering-pipeline/cluster_gender_percentage.csv")
+gender_cluster_stats.to_csv("clustering-pipeline/results/cluster_gender_count.csv")
+gender_cluster_pct.to_csv("clustering-pipeline/results/cluster_gender_percentage.csv")
 
 print("\nSaved:")
-print(" - clustering-pipeline/cluster_gender_count.csv")
-print(" - clustering-pipeline/cluster_gender_percentage.csv")
+print(" - clustering-pipeline/results/cluster_gender_count.csv")
+print(" - clustering-pipeline/results/cluster_gender_percentage.csv")
 
 # =============================================================================
 # 9B. YEAR STATISTICS
@@ -634,15 +640,15 @@ for col in gender_by_year_pct.columns:
 print("\n=== Genel Cinsiyet Dağılımı % (Yıllara göre) ===")
 print(gender_by_year_pct)
 
-gender_by_year.to_csv("clustering-pipeline/gender_distribution_by_year.csv")
-gender_by_year_pct.to_csv("clustering-pipeline/gender_distribution_by_year_pct.csv")
+gender_by_year.to_csv("clustering-pipeline/results/gender_distribution_by_year.csv")
+gender_by_year_pct.to_csv("clustering-pipeline/results/gender_distribution_by_year_pct.csv")
 
 # Gender distribution by year and cluster
 print("\n=== Cinsiyet Dağılımı (Yıl x Cluster) ===")
 gender_year_cluster = weighted_features_with_year.groupby(["Yıl", "Cluster"])["Cinsiyet"].value_counts().unstack(fill_value=0)
 print(gender_year_cluster)
 
-gender_year_cluster.to_csv("clustering-pipeline/gender_distribution_year_cluster.csv")
+gender_year_cluster.to_csv("clustering-pipeline/results/gender_distribution_year_cluster.csv")
 
 # Percentages by year and cluster
 print("\n=== Cinsiyet Dağılımı % (Yıl x Cluster) ===")
@@ -653,19 +659,19 @@ for idx in gender_year_cluster_pct.index:
         gender_year_cluster_pct.loc[idx] = (gender_year_cluster_pct.loc[idx] / total * 100).round(2)
 
 print(gender_year_cluster_pct)
-gender_year_cluster_pct.to_csv("clustering-pipeline/gender_distribution_year_cluster_pct.csv")
+gender_year_cluster_pct.to_csv("clustering-pipeline/results/gender_distribution_year_cluster_pct.csv")
 
 print("\nSaved:")
-print(" - clustering-pipeline/gender_distribution_by_year.csv")
-print(" - clustering-pipeline/gender_distribution_by_year_pct.csv")
-print(" - clustering-pipeline/gender_distribution_year_cluster.csv")
-print(" - clustering-pipeline/gender_distribution_year_cluster_pct.csv")
+print(" - clustering-pipeline/results/gender_distribution_by_year.csv")
+print(" - clustering-pipeline/results/gender_distribution_by_year_pct.csv")
+print(" - clustering-pipeline/results/gender_distribution_year_cluster.csv")
+print(" - clustering-pipeline/results/gender_distribution_year_cluster_pct.csv")
 
 # =============================================================================
 # 10. EXPORT final table
 # =============================================================================
-weighted_features.to_csv("clustering-pipeline/final_student_clusters_no_naming.csv", index=False)
-print("Saved: clustering-pipeline/final_student_clusters_no_naming.csv")
+weighted_features.to_csv("clustering-pipeline/results/final_student_clusters_no_naming.csv", index=False)
+print("Saved: clustering-pipeline/results/final_student_clusters_no_naming.csv")
 
 # =============================================================================
 # 11. (OPSİYONEL) Autoencoder sonrası Spectral Clustering istersen:
