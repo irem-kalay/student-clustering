@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
 import pandas as pd
 import numpy as np
 import re
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
+from pathlib import Path
 
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -481,13 +484,191 @@ plt.savefig("clustering-pipeline/cluster_gap_to_overall_heatmap.png")
 print("Saved: clustering-pipeline/cluster_gap_to_overall_heatmap.png")
 
 # =============================================================================
-# 8. EXPORT final table
+# 8. GENDER ANALYSIS FROM TEXT FILES (They re shown like excel files)
+# =============================================================================
+import os
+from pathlib import Path
+
+def extract_gender_from_file(file_path):
+    """Extract gender from text file"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            content = f.read().strip()
+            
+        # The file contains gender info like "Erkek" or "Kadın" or "Kiz", "Erkek", etc.
+        if content:
+            first_line = content.split('\n')[0].strip().lower()
+            
+            if 'erkek' in first_line or 'e' == first_line:
+                return 'Erkek'
+            elif 'kadın' in first_line or 'kiz' in first_line or 'k' == first_line or 'f' == first_line:
+                return 'Kadın'
+        
+        return 'Bilinmiyor'
+    except:
+        return 'Bilinmiyor'
+
+def extract_year_from_file(file_path):
+    """Extract year from text file (2nd line)"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            lines = f.read().strip().split('\n')
+        
+        if len(lines) >= 2:
+            year_str = lines[1].strip()
+            # Remove non-digit characters
+            year_str_clean = ''.join(c for c in year_str if c.isdigit())
+            
+            if len(year_str_clean) >= 4:
+                # Check if starts with "150" -> replace with "20"
+                if year_str_clean.startswith('150'):
+                    year = '20' + year_str_clean[3:5]
+                    try:
+                        year_int = int(year)
+                        # Validate: year should be reasonable (2000-2030)
+                        if 2000 <= year_int <= 2030:
+                            return year_int
+                    except:
+                        pass
+        
+        return None
+    except:
+        return None
+
+# Load gender and year data from files
+# File names: "Öğrenci Sınıf Listesi", "Öğrenci Sınıf Listesi (1)", etc.
+downloads_dir = "obs_track/downloads_properties"
+all_students_gender = {}
+all_students_year = {}
+
+if os.path.exists(downloads_dir):
+    for file in os.listdir(downloads_dir):
+        if file.endswith('.xlsx') or file.endswith('.label'):
+            # Map filename to Student_ID
+            # Remove .xlsx or .label extension
+            student_id = file.replace('.xlsx', '').replace('.label', '')
+            
+            file_path = os.path.join(downloads_dir, file)
+            gender = extract_gender_from_file(file_path)
+            year = extract_year_from_file(file_path)
+            
+            all_students_gender[student_id] = gender
+            if year is not None:
+                all_students_year[student_id] = year
+
+# Match student IDs with gender and year
+def get_gender_for_student_id(student_id_str):
+    """Match student ID with gender data"""
+    if student_id_str in all_students_gender:
+        return all_students_gender[student_id_str]
+    return "Bilinmiyor"
+
+def get_year_for_student_id(student_id_str):
+    """Match student ID with year data"""
+    if student_id_str in all_students_year:
+        return all_students_year[student_id_str]
+    return None
+
+weighted_features["Cinsiyet"] = weighted_features["Student_ID"].apply(get_gender_for_student_id)
+weighted_features["Yıl"] = weighted_features["Student_ID"].apply(get_year_for_student_id)
+
+# =============================================================================
+# 9. GENDER & YEAR STATISTICS BY CLUSTER
+# =============================================================================
+gender_cluster_stats = weighted_features.groupby("Cluster")["Cinsiyet"].value_counts().unstack(fill_value=0)
+
+# Add totals
+gender_cluster_stats["Toplam"] = gender_cluster_stats.sum(axis=1)
+
+# Calculate percentages
+gender_cluster_pct = gender_cluster_stats.copy()
+for col in gender_cluster_pct.columns:
+    if col != "Toplam":
+        gender_cluster_pct[col] = (gender_cluster_stats[col] / gender_cluster_stats["Toplam"] * 100).round(2)
+
+print("\n=== Cluster'lar İçindeki Cinsiyet Dağılımı (Sayı) ===")
+print(gender_cluster_stats.to_string())
+
+print("\n=== Cluster'lar İçindeki Cinsiyet Dağılımı (%) ===")
+print(gender_cluster_pct.to_string())
+
+# Overall statistics
+print("\n=== Genel Cinsiyet Dağılımı ===")
+overall_gender = weighted_features["Cinsiyet"].value_counts()
+print(overall_gender)
+print(f"\nToplamda {len(weighted_features)} öğrenci")
+female_count = overall_gender.get('Kadın', 0)
+male_count = overall_gender.get('Erkek', 0)
+unknown_count = overall_gender.get('Bilinmiyor', 0)
+print(f"  - Kadın: {female_count} ({female_count / len(weighted_features) * 100:.2f}%)")
+print(f"  - Erkek: {male_count} ({male_count / len(weighted_features) * 100:.2f}%)")
+print(f"  - Bilinmiyor: {unknown_count} ({unknown_count / len(weighted_features) * 100:.2f}%)")
+
+# Save gender statistics
+gender_cluster_stats.to_csv("clustering-pipeline/cluster_gender_count.csv")
+gender_cluster_pct.to_csv("clustering-pipeline/cluster_gender_percentage.csv")
+
+print("\nSaved:")
+print(" - clustering-pipeline/cluster_gender_count.csv")
+print(" - clustering-pipeline/cluster_gender_percentage.csv")
+
+# =============================================================================
+# 9B. YEAR STATISTICS
+# =============================================================================
+# Remove rows with NaN year
+weighted_features_with_year = weighted_features[weighted_features["Yıl"].notna()].copy()
+
+print("\n=== Yılları olan öğrenci sayısı ===")
+year_counts = weighted_features_with_year["Yıl"].value_counts().sort_index()
+print(year_counts)
+
+# Gender distribution by year (overall)
+print("\n=== Genel Cinsiyet Dağılımı (Yıllara göre) ===")
+gender_by_year = weighted_features_with_year.groupby("Yıl")["Cinsiyet"].value_counts().unstack(fill_value=0)
+print(gender_by_year)
+
+gender_by_year_pct = gender_by_year.copy()
+for col in gender_by_year_pct.columns:
+    gender_by_year_pct[col] = (gender_by_year[col] / gender_by_year.sum(axis=1) * 100).round(2)
+
+print("\n=== Genel Cinsiyet Dağılımı % (Yıllara göre) ===")
+print(gender_by_year_pct)
+
+gender_by_year.to_csv("clustering-pipeline/gender_distribution_by_year.csv")
+gender_by_year_pct.to_csv("clustering-pipeline/gender_distribution_by_year_pct.csv")
+
+# Gender distribution by year and cluster
+print("\n=== Cinsiyet Dağılımı (Yıl x Cluster) ===")
+gender_year_cluster = weighted_features_with_year.groupby(["Yıl", "Cluster"])["Cinsiyet"].value_counts().unstack(fill_value=0)
+print(gender_year_cluster)
+
+gender_year_cluster.to_csv("clustering-pipeline/gender_distribution_year_cluster.csv")
+
+# Percentages by year and cluster
+print("\n=== Cinsiyet Dağılımı % (Yıl x Cluster) ===")
+gender_year_cluster_pct = gender_year_cluster.copy()
+for idx in gender_year_cluster_pct.index:
+    total = gender_year_cluster_pct.loc[idx].sum()
+    if total > 0:
+        gender_year_cluster_pct.loc[idx] = (gender_year_cluster_pct.loc[idx] / total * 100).round(2)
+
+print(gender_year_cluster_pct)
+gender_year_cluster_pct.to_csv("clustering-pipeline/gender_distribution_year_cluster_pct.csv")
+
+print("\nSaved:")
+print(" - clustering-pipeline/gender_distribution_by_year.csv")
+print(" - clustering-pipeline/gender_distribution_by_year_pct.csv")
+print(" - clustering-pipeline/gender_distribution_year_cluster.csv")
+print(" - clustering-pipeline/gender_distribution_year_cluster_pct.csv")
+
+# =============================================================================
+# 10. EXPORT final table
 # =============================================================================
 weighted_features.to_csv("clustering-pipeline/final_student_clusters_no_naming.csv", index=False)
 print("Saved: clustering-pipeline/final_student_clusters_no_naming.csv")
 
 # =============================================================================
-# 9. (OPSİYONEL) Autoencoder sonrası Spectral Clustering istersen:
+# 11. (OPSİYONEL) Autoencoder sonrası Spectral Clustering istersen:
 # =============================================================================
 # from sklearn.cluster import SpectralClustering
 #
