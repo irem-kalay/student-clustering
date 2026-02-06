@@ -674,7 +674,109 @@ weighted_features.to_csv("clustering-pipeline/results/final_student_clusters_no_
 print("Saved: clustering-pipeline/results/final_student_clusters_no_naming.csv")
 
 # =============================================================================
-# 11. (OPSİYONEL) Autoencoder sonrası Spectral Clustering istersen:
+# 11. PCA VISUALIZATION OF CLUSTERS
+# =============================================================================
+print("\n=== PCA Visualization of Clusters ===")
+
+# Apply PCA to reduce latent space to 2D for visualization
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_latent)
+
+print(f"PCA explained variance ratio: {pca.explained_variance_ratio_}")
+print(f"Total variance explained by 2 components: {pca.explained_variance_ratio_.sum():.4f}")
+
+# Create a comprehensive PCA visualization
+fig, ax = plt.subplots(figsize=(14, 10))
+
+# Define a good colormap for the clusters
+cmap = plt.cm.get_cmap('tab20' if n_clusters <= 20 else 'hsv')
+colors = [cmap(i / n_clusters) for i in range(n_clusters)]
+
+# Plot each cluster with a different color
+for cluster_id in range(n_clusters):
+    mask = clusters == cluster_id
+    ax.scatter(
+        X_pca[mask, 0],
+        X_pca[mask, 1],
+        c=[colors[cluster_id]],
+        label=f'Cluster {cluster_id}',
+        s=100,
+        alpha=0.6,
+        edgecolors='black',
+        linewidth=0.5
+    )
+
+# Plot cluster centroids in latent space
+centroids_latent = np.array([X_latent[clusters == i].mean(axis=0) for i in range(n_clusters)])
+centroids_pca = pca.transform(centroids_latent)
+
+ax.scatter(
+    centroids_pca[:, 0],
+    centroids_pca[:, 1],
+    c='red',
+    marker='X',
+    s=400,
+    edgecolors='darkred',
+    linewidth=2,
+    label='Centroids',
+    zorder=5
+)
+
+# Add labels and formatting
+ax.set_xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.2%} variance)', fontsize=12)
+ax.set_ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.2%} variance)', fontsize=12)
+ax.set_title(f'PCA Visualization of Student Clusters (K={n_clusters})', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.3)
+ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=9, ncol=2)
+
+plt.tight_layout()
+plt.savefig("clustering-pipeline/results/pca_clusters_visualization.png", dpi=300, bbox_inches='tight')
+print("Saved: clustering-pipeline/results/pca_clusters_visualization.png")
+plt.close()
+
+# Create an additional detailed PCA plot with cluster sizes in legend
+fig, ax = plt.subplots(figsize=(14, 10))
+
+for cluster_id in range(n_clusters):
+    mask = clusters == cluster_id
+    cluster_size = mask.sum()
+    ax.scatter(
+        X_pca[mask, 0],
+        X_pca[mask, 1],
+        c=[colors[cluster_id]],
+        label=f'Cluster {cluster_id} (n={cluster_size})',
+        s=100,
+        alpha=0.6,
+        edgecolors='black',
+        linewidth=0.5
+    )
+
+# Plot centroids
+ax.scatter(
+    centroids_pca[:, 0],
+    centroids_pca[:, 1],
+    c='red',
+    marker='X',
+    s=400,
+    edgecolors='darkred',
+    linewidth=2,
+    label='Centroids',
+    zorder=5
+)
+
+ax.set_xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.2%} variance)', fontsize=12)
+ax.set_ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.2%} variance)', fontsize=12)
+ax.set_title(f'PCA Visualization of Student Clusters with Sizes (K={n_clusters})', fontsize=14, fontweight='bold')
+ax.grid(True, alpha=0.3)
+ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', fontsize=9, ncol=2)
+
+plt.tight_layout()
+plt.savefig("clustering-pipeline/results/pca_clusters_visualization_with_sizes.png", dpi=300, bbox_inches='tight')
+print("Saved: clustering-pipeline/results/pca_clusters_visualization_with_sizes.png")
+plt.close()
+
+# =============================================================================
+# 12. (OPSİYONEL) Autoencoder sonrası Spectral Clustering istersen:
 # =============================================================================
 # from sklearn.cluster import SpectralClustering
 #
@@ -690,3 +792,44 @@ print("Saved: clustering-pipeline/results/final_student_clusters_no_naming.csv")
 # clusters = spectral.fit_predict(X_latent)
 # weighted_features["Cluster"] = clusters
 # print("Spectral silhouette:", silhouette_score(X_latent, clusters))
+
+
+# =============================================================================
+# 13. DEMOGRAPHIC VISUALIZATIONS
+# =============================================================================
+
+# 13a. Yıllara Göre Cinsiyet Dağılımı (Stacked Bar)
+if 'Yıl' in weighted_features.columns and 'Cinsiyet' in weighted_features.columns:
+    df_plot = weighted_features[weighted_features['Yıl'].notna()].copy()
+    
+    # Yılları int yapalım temiz görünsün
+    df_plot['Yıl'] = df_plot['Yıl'].astype(int)
+    
+    plt.figure(figsize=(12, 6))
+    sns.countplot(x='Yıl', hue='Cinsiyet', data=df_plot, palette='Set2')
+    plt.title("Yıllara Göre Öğrenci ve Cinsiyet Sayıları")
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig("clustering-pipeline/results/gender_year_distribution.png")
+    print("Saved: clustering-pipeline/results/gender_year_distribution.png")
+
+# 13b. Cluster'lara Göre Cinsiyet Oranı (Stacked Bar %)
+gender_counts = weighted_features.groupby(['Cluster', 'Cinsiyet']).size().unstack(fill_value=0)
+gender_ratios = gender_counts.div(gender_counts.sum(axis=1), axis=0)
+
+gender_ratios.plot(kind='bar', stacked=True, figsize=(12, 6), colormap='Pastel1')
+plt.title("Cluster Başına Cinsiyet Dağılımı (%)")
+plt.ylabel("Oran")
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.tight_layout()
+plt.savefig("clustering-pipeline/results/cluster_gender_ratio.png")
+print("Saved: clustering-pipeline/results/cluster_gender_ratio.png")
+
+# =============================================================================
+# 14. CLUSTER PERSONA DESCRIPTIONS (For Agentic AI) 
+# =============================================================================
+from generate_agentic_personas import generate_personas
+
+# Generate personas for all clusters
+generate_personas(weighted_features, centroids, rank_df, gap_to_best, cluster_sizes, 
+                 gender_cluster_pct, cats, n_clusters, overall_mean)
