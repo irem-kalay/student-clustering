@@ -5,7 +5,7 @@ import re
 # -----------------------------
 # FILE PATHS (EDIT HERE)
 # -----------------------------
-VECTORS_FILE = "feature-vectors/vector-1400.csv"
+VECTORS_FILE = "feature-vectors/student_feature_vectors2.csv"
 DENKLIK_FILE = "DersDenklikleri/dersdenklikleri.csv"
 OUTPUT_FILE  = "feature-vectors/vector-1400-equivalent.csv"
 
