@@ -1,0 +1,423 @@
+{
+  "metadata": {
+    "total_clusters": 20,
+    "total_students": 1412,
+    "categories": [
+      "Basic_Sciences",
+      "Software_Practice",
+      "Algorithm_Theory",
+      "Systems",
+      "Hardware",
+      "Social_Cultural",
+      "Language_Comm",
+      "Math_Calc"
+    ],
+    "description": "Student cluster personas for agentic AI - describes each student cluster type with strengths, weaknesses, and demographic information"
+  },
+  "clusters": {
+    "cluster_0": {
+      "cluster_id": 0,
+      "size": 127,
+      "performance_level": "Excellent",
+      "average_score": 0.852,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Hardware"
+      ],
+      "weaknesses": [
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 79.5,
+        "female_percentage": 20.5,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 0: Social & Communication Leaders [Weak: Math Calc] (127 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.852)\n- Primary Strengths: Language_Comm, Social_Cultural - excelling in these areas with strong competency levels\n- Primary Weakness: Math_Calc - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm\n- Weak Categories: Math_Calc\n\nDemographic Profile:\n- Cluster Size: 127 students (9.0% of total)\n- Gender Distribution: Male-dominated (79.5% Male, 20.5% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Language_Comm and Social_Cultural\n- These students show solid fundamentals across academic areas\n- Notable gap in Math_Calc suggests this group either deprioritized or found math calc challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Hardware-focused work • Core scientific development\n- Career paths emphasizing language comm and social cultural"
+    },
+    "cluster_1": {
+      "cluster_id": 1,
+      "size": 50,
+      "performance_level": "Below Average",
+      "average_score": 0.19,
+      "strengths": [
+        "Social_Cultural"
+      ],
+      "weaknesses": [
+        "Hardware",
+        "Language_Comm",
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 78.0,
+        "female_percentage": 22.0,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 1: Social & Communication Leaders [Weak: Hardware] (50 students)\n\nPerformance Profile:\n- Overall Performance Level: Below Average (average score: 0.190)\n- Primary Strengths: Social_Cultural, Language_Comm - excelling in these areas with strong competency levels\n- Primary Weakness: Hardware - significantly below-average performance\n- Strong Categories: Social_Cultural\n- Weak Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Language_Comm, Math_Calc\n\nDemographic Profile:\n- Cluster Size: 50 students (3.5% of total)\n- Gender Distribution: Male-dominated (78.0% Male, 22.0% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Social_Cultural and Language_Comm\n- These students show solid fundamentals across academic areas\n- Notable gap in Hardware suggests this group either deprioritized or found hardware challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Diverse technical roles\n- Career paths emphasizing social cultural and language comm"
+    },
+    "cluster_2": {
+      "cluster_id": 2,
+      "size": 69,
+      "performance_level": "Excellent",
+      "average_score": 0.756,
+      "strengths": [],
+      "weaknesses": [
+        "Social_Cultural",
+        "Language_Comm",
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 85.5,
+        "female_percentage": 14.5,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 2: Software Development Focused [Weak: Language Comm] (69 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.756)\n- Primary Strengths: Math_Calc, Software_Practice - excelling in these areas with strong competency levels\n- Primary Weakness: Language_Comm - significantly below-average performance\n- Strong Categories: None above average\n- Weak Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n\nDemographic Profile:\n- Cluster Size: 69 students (4.9% of total)\n- Gender Distribution: Male-dominated (85.5% Male, 14.5% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Math_Calc and Software_Practice\n- These students show solid fundamentals across technical areas\n- Notable gap in Language_Comm suggests this group either deprioritized or found language comm challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Diverse technical roles\n- Career paths emphasizing math calc and software practice"
+    },
+    "cluster_3": {
+      "cluster_id": 3,
+      "size": 78,
+      "performance_level": "Excellent",
+      "average_score": 0.996,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Hardware"
+      ],
+      "weaknesses": [],
+      "gender_distribution": {
+        "male_percentage": 83.3,
+        "female_percentage": 15.4,
+        "unknown_percentage": 1.3
+      },
+      "description": "Cluster 3: Systems & Hardware Specialists [Weak: Math Calc] (78 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.996)\n- Primary Strengths: Systems, Hardware - excelling in these areas with strong competency levels\n- Primary Weakness: Math_Calc - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n- Weak Categories: None below average\n\nDemographic Profile:\n- Cluster Size: 78 students (5.5% of total)\n- Gender Distribution: Male-dominated (83.3% Male, 15.4% Female, 1.3% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Systems and Hardware\n- These students show solid fundamentals across academic areas\n- Notable gap in Math_Calc suggests this group either deprioritized or found math calc challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Hardware-focused work • Core scientific development\n- Career paths emphasizing systems and hardware"
+    },
+    "cluster_4": {
+      "cluster_id": 4,
+      "size": 89,
+      "performance_level": "Excellent",
+      "average_score": 0.713,
+      "strengths": [
+        "Language_Comm"
+      ],
+      "weaknesses": [
+        "Hardware",
+        "Social_Cultural",
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 80.9,
+        "female_percentage": 19.1,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 4: Social & Communication Leaders [Weak: Math Calc] (89 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.713)\n- Primary Strengths: Social_Cultural, Language_Comm - excelling in these areas with strong competency levels\n- Primary Weakness: Math_Calc - significantly below-average performance\n- Strong Categories: Language_Comm\n- Weak Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Math_Calc\n\nDemographic Profile:\n- Cluster Size: 89 students (6.3% of total)\n- Gender Distribution: Male-dominated (80.9% Male, 19.1% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Social_Cultural and Language_Comm\n- These students show solid fundamentals across academic areas\n- Notable gap in Math_Calc suggests this group either deprioritized or found math calc challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Diverse technical roles\n- Career paths emphasizing social cultural and language comm"
+    },
+    "cluster_5": {
+      "cluster_id": 5,
+      "size": 13,
+      "performance_level": "Good",
+      "average_score": 0.553,
+      "strengths": [
+        "Algorithm_Theory"
+      ],
+      "weaknesses": [
+        "Social_Cultural",
+        "Language_Comm",
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 53.8,
+        "female_percentage": 46.2,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 5: Algorithmic & Mathematical Focus [Weak: Basic Sciences] (13 students)\n\nPerformance Profile:\n- Overall Performance Level: Good (average score: 0.553)\n- Primary Strengths: Math_Calc, Algorithm_Theory - excelling in these areas with strong competency levels\n- Primary Weakness: Basic_Sciences - significantly below-average performance\n- Strong Categories: Algorithm_Theory\n- Weak Categories: Basic_Sciences, Software_Practice, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n\nDemographic Profile:\n- Cluster Size: 13 students (0.9% of total)\n- Gender Distribution: Balanced gender distribution (53.9% Male, 46.1% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Math_Calc and Algorithm_Theory\n- These students show solid fundamentals across technical areas\n- Notable gap in Basic_Sciences suggests this group either deprioritized or found basic sciences challenging\n- Diverse gender composition indicates inclusive skill distribution\n\nIdeal For:\n- Algorithmic challenges\n- Career paths emphasizing math calc and algorithm theory"
+    },
+    "cluster_6": {
+      "cluster_id": 6,
+      "size": 66,
+      "performance_level": "Excellent",
+      "average_score": 0.848,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Hardware"
+      ],
+      "weaknesses": [
+        "Social_Cultural"
+      ],
+      "gender_distribution": {
+        "male_percentage": 90.9,
+        "female_percentage": 9.1,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 6: Technical Excellence & Development [Weak: Social Cultural] (66 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.848)\n- Primary Strengths: Basic_Sciences, Software_Practice - excelling in these areas with strong competency levels\n- Primary Weakness: Social_Cultural - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Language_Comm, Math_Calc\n- Weak Categories: Social_Cultural\n\nDemographic Profile:\n- Cluster Size: 66 students (4.7% of total)\n- Gender Distribution: Male-dominated (90.9% Male, 9.1% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Basic_Sciences and Software_Practice\n- These students show solid fundamentals across technical areas\n- Notable gap in Social_Cultural suggests this group either deprioritized or found social cultural challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Hardware-focused work • Core scientific development\n- Career paths emphasizing basic sciences and software practice"
+    },
+    "cluster_7": {
+      "cluster_id": 7,
+      "size": 21,
+      "performance_level": "Below Average",
+      "average_score": 0.364,
+      "strengths": [],
+      "weaknesses": [
+        "Social_Cultural",
+        "Language_Comm",
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 66.7,
+        "female_percentage": 33.3,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 7: Algorithmic Problem Solvers [Weak: Basic Sciences] (21 students)\n\nPerformance Profile:\n- Overall Performance Level: Below Average (average score: 0.364)\n- Primary Strengths: Social_Cultural, Algorithm_Theory - excelling in these areas with strong competency levels\n- Primary Weakness: Basic_Sciences - significantly below-average performance\n- Strong Categories: None above average\n- Weak Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n\nDemographic Profile:\n- Cluster Size: 21 students (1.5% of total)\n- Gender Distribution: Male-dominated (66.7% Male, 33.3% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Social_Cultural and Algorithm_Theory\n- These students show solid fundamentals across technical areas\n- Notable gap in Basic_Sciences suggests this group either deprioritized or found basic sciences challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Diverse technical roles\n- Career paths emphasizing social cultural and algorithm theory"
+    },
+    "cluster_8": {
+      "cluster_id": 8,
+      "size": 119,
+      "performance_level": "Excellent",
+      "average_score": 0.741,
+      "strengths": [
+        "Basic_Sciences"
+      ],
+      "weaknesses": [
+        "Social_Cultural",
+        "Language_Comm",
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 80.7,
+        "female_percentage": 19.3,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 8: Technical Excellence & Development [Weak: Hardware] (119 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.741)\n- Primary Strengths: Basic_Sciences, Software_Practice - excelling in these areas with strong competency levels\n- Primary Weakness: Hardware - significantly below-average performance\n- Strong Categories: Basic_Sciences\n- Weak Categories: Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n\nDemographic Profile:\n- Cluster Size: 119 students (8.4% of total)\n- Gender Distribution: Male-dominated (80.7% Male, 19.3% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Basic_Sciences and Software_Practice\n- These students show solid fundamentals across technical areas\n- Notable gap in Hardware suggests this group either deprioritized or found hardware challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Core scientific development\n- Career paths emphasizing basic sciences and software practice"
+    },
+    "cluster_9": {
+      "cluster_id": 9,
+      "size": 106,
+      "performance_level": "Excellent",
+      "average_score": 0.875,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Hardware"
+      ],
+      "weaknesses": [],
+      "gender_distribution": {
+        "male_percentage": 78.3,
+        "female_percentage": 21.7,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 9: Social & Cultural Oriented [Weak: Hardware] (106 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.875)\n- Primary Strengths: Social_Cultural, Basic_Sciences - excelling in these areas with strong competency levels\n- Primary Weakness: Hardware - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n- Weak Categories: None below average\n\nDemographic Profile:\n- Cluster Size: 106 students (7.5% of total)\n- Gender Distribution: Male-dominated (78.3% Male, 21.7% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Social_Cultural and Basic_Sciences\n- These students show solid fundamentals across academic areas\n- Notable gap in Hardware suggests this group either deprioritized or found hardware challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Hardware-focused work • Core scientific development\n- Career paths emphasizing social cultural and basic sciences"
+    },
+    "cluster_10": {
+      "cluster_id": 10,
+      "size": 44,
+      "performance_level": "Excellent",
+      "average_score": 0.676,
+      "strengths": [],
+      "weaknesses": [
+        "Social_Cultural",
+        "Language_Comm",
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 86.4,
+        "female_percentage": 13.6,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 10: Hardware & Design Specialists [Weak: Math Calc] (44 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.676)\n- Primary Strengths: Hardware, Language_Comm - excelling in these areas with strong competency levels\n- Primary Weakness: Math_Calc - significantly below-average performance\n- Strong Categories: None above average\n- Weak Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n\nDemographic Profile:\n- Cluster Size: 44 students (3.1% of total)\n- Gender Distribution: Male-dominated (86.4% Male, 13.6% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Hardware and Language_Comm\n- These students show solid fundamentals across technical areas\n- Notable gap in Math_Calc suggests this group either deprioritized or found math calc challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Diverse technical roles\n- Career paths emphasizing hardware and language comm"
+    },
+    "cluster_11": {
+      "cluster_id": 11,
+      "size": 86,
+      "performance_level": "Excellent",
+      "average_score": 0.722,
+      "strengths": [],
+      "weaknesses": [
+        "Social_Cultural",
+        "Language_Comm",
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 93.0,
+        "female_percentage": 4.6,
+        "unknown_percentage": 2.3
+      },
+      "description": "Cluster 11: Technical Excellence & Development [Weak: Social Cultural] (86 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.722)\n- Primary Strengths: Basic_Sciences, Software_Practice - excelling in these areas with strong competency levels\n- Primary Weakness: Social_Cultural - significantly below-average performance\n- Strong Categories: None above average\n- Weak Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n\nDemographic Profile:\n- Cluster Size: 86 students (6.1% of total)\n- Gender Distribution: Male-dominated (93.0% Male, 4.7% Female, 2.3% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Basic_Sciences and Software_Practice\n- These students show solid fundamentals across technical areas\n- Notable gap in Social_Cultural suggests this group either deprioritized or found social cultural challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Diverse technical roles\n- Career paths emphasizing basic sciences and software practice"
+    },
+    "cluster_12": {
+      "cluster_id": 12,
+      "size": 128,
+      "performance_level": "Excellent",
+      "average_score": 0.931,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Hardware"
+      ],
+      "weaknesses": [],
+      "gender_distribution": {
+        "male_percentage": 67.2,
+        "female_percentage": 32.8,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 12: Technical Excellence & Development [Weak: Math Calc] (128 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.931)\n- Primary Strengths: Basic_Sciences, Software_Practice - excelling in these areas with strong competency levels\n- Primary Weakness: Math_Calc - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n- Weak Categories: None below average\n\nDemographic Profile:\n- Cluster Size: 128 students (9.1% of total)\n- Gender Distribution: Male-dominated (67.2% Male, 32.8% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Basic_Sciences and Software_Practice\n- These students show solid fundamentals across technical areas\n- Notable gap in Math_Calc suggests this group either deprioritized or found math calc challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Hardware-focused work • Core scientific development\n- Career paths emphasizing basic sciences and software practice"
+    },
+    "cluster_13": {
+      "cluster_id": 13,
+      "size": 47,
+      "performance_level": "Below Average",
+      "average_score": 0.244,
+      "strengths": [],
+      "weaknesses": [
+        "Social_Cultural",
+        "Language_Comm",
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 80.8,
+        "female_percentage": 19.2,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 13: Social & Cultural Oriented [Weak: Hardware] (47 students)\n\nPerformance Profile:\n- Overall Performance Level: Below Average (average score: 0.244)\n- Primary Strengths: Social_Cultural, Math_Calc - excelling in these areas with strong competency levels\n- Primary Weakness: Hardware - significantly below-average performance\n- Strong Categories: None above average\n- Weak Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n\nDemographic Profile:\n- Cluster Size: 47 students (3.3% of total)\n- Gender Distribution: Male-dominated (80.8% Male, 19.1% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Social_Cultural and Math_Calc\n- These students show solid fundamentals across academic areas\n- Notable gap in Hardware suggests this group either deprioritized or found hardware challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Diverse technical roles\n- Career paths emphasizing social cultural and math calc"
+    },
+    "cluster_14": {
+      "cluster_id": 14,
+      "size": 113,
+      "performance_level": "Excellent",
+      "average_score": 1.005,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Hardware"
+      ],
+      "weaknesses": [],
+      "gender_distribution": {
+        "male_percentage": 75.2,
+        "female_percentage": 24.8,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 14: Technical Excellence & Development [Weak: Language Comm] (113 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 1.005)\n- Primary Strengths: Basic_Sciences, Software_Practice - excelling in these areas with strong competency levels\n- Primary Weakness: Language_Comm - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n- Weak Categories: None below average\n\nDemographic Profile:\n- Cluster Size: 113 students (8.0% of total)\n- Gender Distribution: Male-dominated (75.2% Male, 24.8% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Basic_Sciences and Software_Practice\n- These students show solid fundamentals across technical areas\n- Notable gap in Language_Comm suggests this group either deprioritized or found language comm challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Hardware-focused work • Core scientific development\n- Career paths emphasizing basic sciences and software practice"
+    },
+    "cluster_15": {
+      "cluster_id": 15,
+      "size": 10,
+      "performance_level": "Excellent",
+      "average_score": 0.845,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Hardware"
+      ],
+      "weaknesses": [
+        "Social_Cultural"
+      ],
+      "gender_distribution": {
+        "male_percentage": 90.0,
+        "female_percentage": 10.0,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 15: Mathematical & Computational Focus [Weak: Social Cultural] (10 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.845)\n- Primary Strengths: Basic_Sciences, Math_Calc - excelling in these areas with strong competency levels\n- Primary Weakness: Social_Cultural - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Language_Comm, Math_Calc\n- Weak Categories: Social_Cultural\n\nDemographic Profile:\n- Cluster Size: 10 students (0.7% of total)\n- Gender Distribution: Male-dominated (90.0% Male, 10.0% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Basic_Sciences and Math_Calc\n- These students show solid fundamentals across technical areas\n- Notable gap in Social_Cultural suggests this group either deprioritized or found social cultural challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Hardware-focused work • Core scientific development\n- Career paths emphasizing basic sciences and math calc"
+    },
+    "cluster_16": {
+      "cluster_id": 16,
+      "size": 55,
+      "performance_level": "Excellent",
+      "average_score": 0.892,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Hardware"
+      ],
+      "weaknesses": [
+        "Math_Calc"
+      ],
+      "gender_distribution": {
+        "male_percentage": 78.2,
+        "female_percentage": 21.8,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 16: Social & Communication Leaders [Weak: Math Calc] (55 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.892)\n- Primary Strengths: Social_Cultural, Language_Comm - excelling in these areas with strong competency levels\n- Primary Weakness: Math_Calc - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm\n- Weak Categories: Math_Calc\n\nDemographic Profile:\n- Cluster Size: 55 students (3.9% of total)\n- Gender Distribution: Male-dominated (78.2% Male, 21.8% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Social_Cultural and Language_Comm\n- These students show solid fundamentals across technical areas\n- Notable gap in Math_Calc suggests this group either deprioritized or found math calc challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Hardware-focused work • Core scientific development\n- Career paths emphasizing social cultural and language comm"
+    },
+    "cluster_17": {
+      "cluster_id": 17,
+      "size": 83,
+      "performance_level": "Excellent",
+      "average_score": 1.074,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Hardware"
+      ],
+      "weaknesses": [],
+      "gender_distribution": {
+        "male_percentage": 88.0,
+        "female_percentage": 12.0,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 17: Technical Excellence & Development [Weak: Math Calc] (83 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 1.074)\n- Primary Strengths: Basic_Sciences, Software_Practice - excelling in these areas with strong competency levels\n- Primary Weakness: Math_Calc - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Social_Cultural, Language_Comm, Math_Calc\n- Weak Categories: None below average\n\nDemographic Profile:\n- Cluster Size: 83 students (5.9% of total)\n- Gender Distribution: Male-dominated (88.0% Male, 12.1% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Basic_Sciences and Software_Practice\n- These students show solid fundamentals across technical areas\n- Notable gap in Math_Calc suggests this group either deprioritized or found math calc challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Hardware-focused work • Core scientific development\n- Career paths emphasizing basic sciences and software practice"
+    },
+    "cluster_18": {
+      "cluster_id": 18,
+      "size": 71,
+      "performance_level": "Excellent",
+      "average_score": 0.951,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Hardware"
+      ],
+      "weaknesses": [
+        "Social_Cultural"
+      ],
+      "gender_distribution": {
+        "male_percentage": 87.3,
+        "female_percentage": 12.7,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 18: Algorithmic & Mathematical Focus [Weak: Social Cultural] (71 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.951)\n- Primary Strengths: Algorithm_Theory, Math_Calc - excelling in these areas with strong competency levels\n- Primary Weakness: Social_Cultural - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Hardware, Language_Comm, Math_Calc\n- Weak Categories: Social_Cultural\n\nDemographic Profile:\n- Cluster Size: 71 students (5.0% of total)\n- Gender Distribution: Male-dominated (87.3% Male, 12.7% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Algorithm_Theory and Math_Calc\n- These students show solid fundamentals across technical areas\n- Notable gap in Social_Cultural suggests this group either deprioritized or found social cultural challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Hardware-focused work • Core scientific development\n- Career paths emphasizing algorithm theory and math calc"
+    },
+    "cluster_19": {
+      "cluster_id": 19,
+      "size": 37,
+      "performance_level": "Excellent",
+      "average_score": 0.843,
+      "strengths": [
+        "Basic_Sciences",
+        "Software_Practice",
+        "Algorithm_Theory",
+        "Systems",
+        "Math_Calc"
+      ],
+      "weaknesses": [
+        "Hardware",
+        "Social_Cultural",
+        "Language_Comm"
+      ],
+      "gender_distribution": {
+        "male_percentage": 89.2,
+        "female_percentage": 10.8,
+        "unknown_percentage": 0.0
+      },
+      "description": "Cluster 19: Algorithmic & Mathematical Focus [Weak: Language Comm] (37 students)\n\nPerformance Profile:\n- Overall Performance Level: Excellent (average score: 0.843)\n- Primary Strengths: Math_Calc, Algorithm_Theory - excelling in these areas with strong competency levels\n- Primary Weakness: Language_Comm - significantly below-average performance\n- Strong Categories: Basic_Sciences, Software_Practice, Algorithm_Theory, Systems, Math_Calc\n- Weak Categories: Hardware, Social_Cultural, Language_Comm\n\nDemographic Profile:\n- Cluster Size: 37 students (2.6% of total)\n- Gender Distribution: Male-dominated (89.2% Male, 10.8% Female, 0.0% Unknown)\n\nDistinguishing Characteristics:\n- This cluster represents students who are particularly strong in Math_Calc and Algorithm_Theory\n- These students show solid fundamentals across technical areas\n- Notable gap in Language_Comm suggests this group either deprioritized or found language comm challenging\n- Specific gender predominance in this cluster\n\nIdeal For:\n- Backend/Systems development roles • Software engineering positions • Algorithmic challenges • Core scientific development\n- Career paths emphasizing math calc and algorithm theory"
+    }
+  }
+}

@@ -233,6 +233,7 @@ def generate_personas(weighted_features, centroids, rank_df, gap_to_best, cluste
 def load_existing_data():
     """Load pre-computed data from CSV files for standalone persona generation."""
     import os
+    import numpy as np
     
     results_dir = "clustering-pipeline/results"
     
@@ -253,22 +254,26 @@ def load_existing_data():
     # Load weighted features and cluster assignments
     weighted_features = pd.read_csv(os.path.join(results_dir, "final_student_clusters_no_naming.csv"))
     
-    # Load rank dataframe
+    # Load rank dataframe with proper type conversion
     rank_df = pd.read_csv(os.path.join(results_dir, "cluster_centroid_ranks.csv"), index_col=0)
+    rank_df = rank_df.astype('int64')  # Ensure int type
     
     # Load gap to best
     gap_to_best = pd.read_csv(os.path.join(results_dir, "cluster_gap_to_best.csv"), index_col=0)
+    gap_to_best = gap_to_best.astype('float64')  # Ensure float type
     
     # Load gender percentage by cluster
     gender_cluster_pct = pd.read_csv(os.path.join(results_dir, "cluster_gender_percentage.csv"), index_col=0)
+    gender_cluster_pct = gender_cluster_pct.astype('float64')  # Ensure float type
     
     # Define category names
     cats = ['Basic_Sciences', 'Software_Practice', 'Algorithm_Theory',
             'Systems', 'Hardware', 'Social_Cultural', 'Language_Comm', 'Math_Calc']
     
     # Extract cluster assignments and compute centroids
-    n_clusters = weighted_features['Cluster'].max() + 1
+    n_clusters = int(weighted_features['Cluster'].max() + 1)
     cluster_sizes = weighted_features['Cluster'].value_counts().sort_index()
+    cluster_sizes = cluster_sizes.astype('int64')  # Ensure int type
     
     # Compute centroids from weighted features
     centroids = weighted_features.groupby("Cluster")[cats].mean().sort_index()
