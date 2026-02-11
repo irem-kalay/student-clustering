@@ -163,10 +163,10 @@ target_categories = [
 ]
 
 # =============================================================================
-# 4. SCORE ENGINE (WITH COURSE-COUNT BONUS)
+# 4. SCORE ENGINE (WITH COURSE-COUNT BONUS)  [DEĞİŞTİ: return_counts eklendi]
 # =============================================================================
 def calculate_dynamic_features(df_norm, core_map, elective_pools, targets,
-                               alpha=0.15, bonus_type="log"):
+                               alpha=0.15, bonus_type="log", return_counts=False):
     result = pd.DataFrame(0.0, index=df_norm.index, columns=targets)
     weight_counters = pd.DataFrame(0.0, index=df_norm.index, columns=targets)
     course_counts = pd.DataFrame(0, index=df_norm.index, columns=targets, dtype=int)
@@ -210,63 +210,81 @@ def calculate_dynamic_features(df_norm, core_map, elective_pools, targets,
     avg_scores = result / weight_counters.replace(0, 1.0)
 
     if bonus_type == "none":
-        return avg_scores
-
-    max_counts = course_counts.max(axis=0).replace(0, 1)
-    if bonus_type == "log":
-        bonus = np.log1p(course_counts) / np.log1p(max_counts)   # 0..1
-    elif bonus_type == "sqrt":
-        bonus = np.sqrt(course_counts / max_counts)             # 0..1
+        final_scores = avg_scores
     else:
-        raise ValueError("bonus_type must be one of: 'log', 'sqrt', 'none'")
+        max_counts = course_counts.max(axis=0).replace(0, 1)
+        if bonus_type == "log":
+            bonus = np.log1p(course_counts) / np.log1p(max_counts)   # 0..1
+        elif bonus_type == "sqrt":
+            bonus = np.sqrt(course_counts / max_counts)             # 0..1
+        else:
+            raise ValueError("bonus_type must be one of: 'log', 'sqrt', 'none'")
+        final_scores = avg_scores * (1.0 + alpha * bonus)
 
-    final_scores = avg_scores * (1.0 + alpha * bonus)
+    if return_counts:
+        return final_scores, course_counts
     return final_scores
 
-weighted_features = calculate_dynamic_features(
+weighted_features, course_counts = calculate_dynamic_features(
     data_normalized, core_courses, elective_pools, target_categories,
     alpha=0.15,
-    bonus_type="log"
+    bonus_type="log",
+    return_counts=True
 )
 
 # Bu satır kalmalı (istatistik/heatmap’lerde kategori listesi)
 cats = target_categories
 
 # =============================================================================
-# 4B. AUTOENCODER (Representation Learning)
+# 4B. AUTOENCODER (Representation Learning)  [DEĞİŞTİ: loss düşürme paketi]
 # =============================================================================
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 
 # --- 1) Input matrix (N x 8) ---
-# weighted_features şu an sadece 8 kategori sütunu içeriyor -> (n_students, 8)
 X_raw = weighted_features[cats].values.astype(np.float32)
 
-# (opsiyonel ama iyi) AE eğitimini stabilize etmek için standartlaştırma
-# Normalizasyonunu bozmaz: sadece AE’ye giren uzayı dengeler
+# Mask: o kategoride en az 1 ders alındıysa 1, yoksa 0
+mask_np = (course_counts[cats].values > 0).astype(np.float32)
+
+# AE girişini stabilize et
 ae_scaler = StandardScaler()
 X_ae = ae_scaler.fit_transform(X_raw).astype(np.float32)
 
 X_tensor = torch.tensor(X_ae)
+M_tensor = torch.tensor(mask_np)
 
-# --- 2) Model ---
+# ---- Masked losses ----
+def masked_mse(x_hat, x, m, eps=1e-8):
+    se = (x_hat - x) ** 2
+    se = se * m
+    return se.sum() / (m.sum() + eps)
+
+def masked_huber(x_hat, x, m, beta=0.5, eps=1e-8):
+    diff = (x_hat - x).abs()
+    hub = torch.where(diff < beta, 0.5 * (diff ** 2) / beta, diff - 0.5 * beta)
+    hub = hub * m
+    return hub.sum() / (m.sum() + eps)
+
+# --- 2) Model (daha geniş + LeakyReLU + latent_dim=5) ---
 class AutoEncoder(nn.Module):
-    def __init__(self, in_dim=8, latent_dim=3):
+    def __init__(self, in_dim=8, latent_dim=5):
         super().__init__()
+        act = nn.LeakyReLU(0.1)
         self.encoder = nn.Sequential(
-            nn.Linear(in_dim, 16),
-            nn.ReLU(),
-            nn.Linear(16, 8),
-            nn.ReLU(),
-            nn.Linear(8, latent_dim)
+            nn.Linear(in_dim, 32),
+            act,
+            nn.Linear(32, 16),
+            act,
+            nn.Linear(16, latent_dim)
         )
         self.decoder = nn.Sequential(
-            nn.Linear(latent_dim, 8),
-            nn.ReLU(),
-            nn.Linear(8, 16),
-            nn.ReLU(),
-            nn.Linear(16, in_dim)
+            nn.Linear(latent_dim, 16),
+            act,
+            nn.Linear(16, 32),
+            act,
+            nn.Linear(32, in_dim)   # output linear
         )
 
     def forward(self, x):
@@ -277,12 +295,18 @@ class AutoEncoder(nn.Module):
     def encode(self, x):
         return self.encoder(x)
 
-# --- 3) Train settings ---
-latent_dim = 3
-epochs = 200
-batch_size = 64
-lr = 1e-3
+# --- 3) Train settings (loss düşürmek için) ---
+latent_dim = 5
+
+# Huber pretrain + MSE fine-tune
+epochs_huber = 300
+epochs_mse = 150
+
+batch_size = 256   # RAM yetmezse 128 yap
+lr = 3e-3
+weight_decay = 1e-4
 seed = 42
+clip_norm = 1.0
 
 torch.manual_seed(seed)
 np.random.seed(seed)
@@ -290,34 +314,72 @@ np.random.seed(seed)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = AutoEncoder(in_dim=X_ae.shape[1], latent_dim=latent_dim).to(device)
 
-criterion = nn.MSELoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
 
-dataset = TensorDataset(X_tensor)
-loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+    optimizer, mode="min", factor=0.5, patience=15, min_lr=1e-5
+)
 
-# --- 4) Train loop ---
-model.train()
-for ep in range(1, epochs + 1):
-    total_loss = 0.0
-    for (xb,) in loader:
-        xb = xb.to(device)
-        optimizer.zero_grad()
-        x_hat = model(xb)
-        loss = criterion(x_hat, xb)
-        loss.backward()
-        optimizer.step()
-        total_loss += loss.item() * xb.size(0)
+dataset = TensorDataset(X_tensor, M_tensor)
+loader = DataLoader(dataset, batch_size=batch_size, shuffle=True, drop_last=False)
 
-    if ep % 20 == 0:
-        print(f"[AE] epoch {ep:3d}/{epochs}  loss={total_loss/len(dataset):.6f}")
+# Denoising kapalı (loss’u minimum istiyoruz)
+use_denoising = False
+noise_std = 0.01
+
+def train_phase(name, epochs, loss_type="huber"):
+    model.train()
+    for ep in range(1, epochs + 1):
+        total = 0.0
+        for xb, mb in loader:
+            xb = xb.to(device)
+            mb = mb.to(device)
+
+            optimizer.zero_grad()
+
+            if use_denoising:
+                xb_in = xb + noise_std * torch.randn_like(xb)
+            else:
+                xb_in = xb
+
+            x_hat = model(xb_in)
+
+            if loss_type == "huber":
+                loss = masked_huber(x_hat, xb, mb, beta=0.5)
+            elif loss_type == "mse":
+                loss = masked_mse(x_hat, xb, mb)
+            else:
+                raise ValueError("loss_type must be 'huber' or 'mse'")
+
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_(model.parameters(), clip_norm)
+            optimizer.step()
+
+            total += loss.item() * xb.size(0)
+
+        epoch_loss = total / len(dataset)
+        scheduler.step(epoch_loss)
+
+        if ep == 1 or ep % 20 == 0 or ep == epochs:
+            cur_lr = optimizer.param_groups[0]["lr"]
+            print(f"[AE-{name}] ep {ep:3d}/{epochs}  loss={epoch_loss:.6f}  lr={cur_lr:.2e}")
+
+print("\n=== AutoEncoder Training ===")
+print("Phase 1: Huber pretrain")
+train_phase("Huber", epochs_huber, loss_type="huber")
+
+# Fine-tune'a geçerken LR'yi biraz düşür (ince ayar)
+for g in optimizer.param_groups:
+    g["lr"] = min(g["lr"], 1e-3)
+
+print("Phase 2: MSE fine-tune")
+train_phase("MSE", epochs_mse, loss_type="mse")
 
 # --- 5) Extract latent features ---
 model.eval()
 with torch.no_grad():
     Z = model.encode(X_tensor.to(device)).cpu().numpy()   # (N, latent_dim)
 
-# Latent’i ölçeklemek genelde clustering’i stabilize eder
 Z_scaler = StandardScaler()
 X_latent = Z_scaler.fit_transform(Z)
 
@@ -326,7 +388,6 @@ print("Latent shape:", X_latent.shape)
 # =============================================================================
 # CREATE RESULTS DIRECTORY
 # =============================================================================
-import os
 os.makedirs("clustering-pipeline/results", exist_ok=True)
 
 # =============================================================================
@@ -370,16 +431,12 @@ print("Saved: clustering-pipeline/results/silhouette_k_8_30.png")
 # =============================================================================
 # 5B. CLUSTERING (latent + KMeans)
 # =============================================================================
-# İstersen best_k kullan:
 # n_clusters = best_k
-
-# İstersen sabit kullan:
 n_clusters = 20
 
 kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
 clusters = kmeans.fit_predict(X_latent)
 
-# Cluster label’larını weighted_features’a ekliyoruz
 weighted_features = weighted_features.copy()
 weighted_features["Cluster"] = clusters
 weighted_features["Student_ID"] = student_ids
@@ -490,59 +547,45 @@ plt.savefig("clustering-pipeline/results/cluster_gap_to_overall_heatmap.png")
 print("Saved: clustering-pipeline/results/cluster_gap_to_overall_heatmap.png")
 
 # =============================================================================
-# 8. GENDER ANALYSIS FROM TEXT FILES (They re shown like excel files)
+# 8. GENDER ANALYSIS FROM TEXT FILES
 # =============================================================================
-import os
-from pathlib import Path
-
 def extract_gender_from_file(file_path):
-    """Extract gender from text file"""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read().strip()
-            
-        # The file contains gender info like "Erkek" or "Kadın" or "Kiz", "Erkek", etc.
+
         if content:
             first_line = content.split('\n')[0].strip().lower()
-            
             if 'erkek' in first_line or 'e' == first_line:
                 return 'Erkek'
             elif 'kadın' in first_line or 'kiz' in first_line or 'k' == first_line or 'f' == first_line:
                 return 'Kadın'
-        
         return 'Bilinmiyor'
     except:
         return 'Bilinmiyor'
 
 def extract_year_from_file(file_path):
-    """Extract year from text file (2nd line)"""
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             lines = f.read().strip().split('\n')
-        
+
         if len(lines) >= 2:
             year_str = lines[1].strip()
-            # Remove non-digit characters
             year_str_clean = ''.join(c for c in year_str if c.isdigit())
-            
+
             if len(year_str_clean) >= 4:
-                # Check if starts with "150" -> replace with "20"
                 if year_str_clean.startswith('150'):
                     year = '20' + year_str_clean[3:5]
                     try:
                         year_int = int(year)
-                        # Validate: year should be reasonable (2000-2030)
                         if 2000 <= year_int <= 2030:
                             return year_int
                     except:
                         pass
-        
         return None
     except:
         return None
 
-# Load gender and year data from files
-# File names: "Öğrenci Sınıf Listesi", "Öğrenci Sınıf Listesi (1)", etc.
 downloads_dir = "obs_track/downloads_properties"
 all_students_gender = {}
 all_students_year = {}
@@ -550,27 +593,21 @@ all_students_year = {}
 if os.path.exists(downloads_dir):
     for file in os.listdir(downloads_dir):
         if file.endswith('.xlsx') or file.endswith('.label'):
-            # Map filename to Student_ID
-            # Remove .xlsx or .label extension
             student_id = file.replace('.xlsx', '').replace('.label', '')
-            
             file_path = os.path.join(downloads_dir, file)
             gender = extract_gender_from_file(file_path)
             year = extract_year_from_file(file_path)
-            
+
             all_students_gender[student_id] = gender
             if year is not None:
                 all_students_year[student_id] = year
 
-# Match student IDs with gender and year
 def get_gender_for_student_id(student_id_str):
-    """Match student ID with gender data"""
     if student_id_str in all_students_gender:
         return all_students_gender[student_id_str]
     return "Bilinmiyor"
 
 def get_year_for_student_id(student_id_str):
-    """Match student ID with year data"""
     if student_id_str in all_students_year:
         return all_students_year[student_id_str]
     return None
@@ -582,11 +619,8 @@ weighted_features["Yıl"] = weighted_features["Student_ID"].apply(get_year_for_s
 # 9. GENDER & YEAR STATISTICS BY CLUSTER
 # =============================================================================
 gender_cluster_stats = weighted_features.groupby("Cluster")["Cinsiyet"].value_counts().unstack(fill_value=0)
-
-# Add totals
 gender_cluster_stats["Toplam"] = gender_cluster_stats.sum(axis=1)
 
-# Calculate percentages
 gender_cluster_pct = gender_cluster_stats.copy()
 for col in gender_cluster_pct.columns:
     if col != "Toplam":
@@ -598,7 +632,6 @@ print(gender_cluster_stats.to_string())
 print("\n=== Cluster'lar İçindeki Cinsiyet Dağılımı (%) ===")
 print(gender_cluster_pct.to_string())
 
-# Overall statistics
 print("\n=== Genel Cinsiyet Dağılımı ===")
 overall_gender = weighted_features["Cinsiyet"].value_counts()
 print(overall_gender)
@@ -610,7 +643,6 @@ print(f"  - Kadın: {female_count} ({female_count / len(weighted_features) * 100
 print(f"  - Erkek: {male_count} ({male_count / len(weighted_features) * 100:.2f}%)")
 print(f"  - Bilinmiyor: {unknown_count} ({unknown_count / len(weighted_features) * 100:.2f}%)")
 
-# Save gender statistics
 gender_cluster_stats.to_csv("clustering-pipeline/results/cluster_gender_count.csv")
 gender_cluster_pct.to_csv("clustering-pipeline/results/cluster_gender_percentage.csv")
 
@@ -621,14 +653,12 @@ print(" - clustering-pipeline/results/cluster_gender_percentage.csv")
 # =============================================================================
 # 9B. YEAR STATISTICS
 # =============================================================================
-# Remove rows with NaN year
 weighted_features_with_year = weighted_features[weighted_features["Yıl"].notna()].copy()
 
 print("\n=== Yılları olan öğrenci sayısı ===")
 year_counts = weighted_features_with_year["Yıl"].value_counts().sort_index()
 print(year_counts)
 
-# Gender distribution by year (overall)
 print("\n=== Genel Cinsiyet Dağılımı (Yıllara göre) ===")
 gender_by_year = weighted_features_with_year.groupby("Yıl")["Cinsiyet"].value_counts().unstack(fill_value=0)
 print(gender_by_year)
@@ -643,14 +673,12 @@ print(gender_by_year_pct)
 gender_by_year.to_csv("clustering-pipeline/results/gender_distribution_by_year.csv")
 gender_by_year_pct.to_csv("clustering-pipeline/results/gender_distribution_by_year_pct.csv")
 
-# Gender distribution by year and cluster
 print("\n=== Cinsiyet Dağılımı (Yıl x Cluster) ===")
 gender_year_cluster = weighted_features_with_year.groupby(["Yıl", "Cluster"])["Cinsiyet"].value_counts().unstack(fill_value=0)
 print(gender_year_cluster)
 
 gender_year_cluster.to_csv("clustering-pipeline/results/gender_distribution_year_cluster.csv")
 
-# Percentages by year and cluster
 print("\n=== Cinsiyet Dağılımı % (Yıl x Cluster) ===")
 gender_year_cluster_pct = gender_year_cluster.copy()
 for idx in gender_year_cluster_pct.index:
@@ -678,21 +706,16 @@ print("Saved: clustering-pipeline/results/final_student_clusters_no_naming.csv")
 # =============================================================================
 print("\n=== PCA Visualization of Clusters ===")
 
-# Apply PCA to reduce latent space to 2D for visualization
 pca = PCA(n_components=2)
 X_pca = pca.fit_transform(X_latent)
 
 print(f"PCA explained variance ratio: {pca.explained_variance_ratio_}")
 print(f"Total variance explained by 2 components: {pca.explained_variance_ratio_.sum():.4f}")
 
-# Create a comprehensive PCA visualization
 fig, ax = plt.subplots(figsize=(14, 10))
-
-# Define a good colormap for the clusters
 cmap = plt.cm.get_cmap('tab20' if n_clusters <= 20 else 'hsv')
 colors = [cmap(i / n_clusters) for i in range(n_clusters)]
 
-# Plot each cluster with a different color
 for cluster_id in range(n_clusters):
     mask = clusters == cluster_id
     ax.scatter(
@@ -706,7 +729,6 @@ for cluster_id in range(n_clusters):
         linewidth=0.5
     )
 
-# Plot cluster centroids in latent space
 centroids_latent = np.array([X_latent[clusters == i].mean(axis=0) for i in range(n_clusters)])
 centroids_pca = pca.transform(centroids_latent)
 
@@ -722,7 +744,6 @@ ax.scatter(
     zorder=5
 )
 
-# Add labels and formatting
 ax.set_xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.2%} variance)', fontsize=12)
 ax.set_ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.2%} variance)', fontsize=12)
 ax.set_title(f'PCA Visualization of Student Clusters (K={n_clusters})', fontsize=14, fontweight='bold')
@@ -734,7 +755,6 @@ plt.savefig("clustering-pipeline/results/pca_clusters_visualization.png", dpi=30
 print("Saved: clustering-pipeline/results/pca_clusters_visualization.png")
 plt.close()
 
-# Create an additional detailed PCA plot with cluster sizes in legend
 fig, ax = plt.subplots(figsize=(14, 10))
 
 for cluster_id in range(n_clusters):
@@ -751,7 +771,6 @@ for cluster_id in range(n_clusters):
         linewidth=0.5
     )
 
-# Plot centroids
 ax.scatter(
     centroids_pca[:, 0],
     centroids_pca[:, 1],
@@ -779,7 +798,6 @@ plt.close()
 # 12. (OPSİYONEL) Autoencoder sonrası Spectral Clustering istersen:
 # =============================================================================
 # from sklearn.cluster import SpectralClustering
-#
 # n_clusters = 20
 # spectral = SpectralClustering(
 #     n_clusters=n_clusters,
@@ -788,23 +806,17 @@ plt.close()
 #     assign_labels="kmeans",
 #     random_state=42
 # )
-#
 # clusters = spectral.fit_predict(X_latent)
 # weighted_features["Cluster"] = clusters
 # print("Spectral silhouette:", silhouette_score(X_latent, clusters))
 
-
 # =============================================================================
 # 13. DEMOGRAPHIC VISUALIZATIONS
 # =============================================================================
-
-# 13a. Yıllara Göre Cinsiyet Dağılımı (Stacked Bar)
 if 'Yıl' in weighted_features.columns and 'Cinsiyet' in weighted_features.columns:
     df_plot = weighted_features[weighted_features['Yıl'].notna()].copy()
-    
-    # Yılları int yapalım temiz görünsün
     df_plot['Yıl'] = df_plot['Yıl'].astype(int)
-    
+
     plt.figure(figsize=(12, 6))
     sns.countplot(x='Yıl', hue='Cinsiyet', data=df_plot, palette='Set2')
     plt.title("Yıllara Göre Öğrenci ve Cinsiyet Sayıları")
@@ -813,7 +825,6 @@ if 'Yıl' in weighted_features.columns and 'Cinsiyet' in weighted_features.colum
     plt.savefig("clustering-pipeline/results/gender_year_distribution.png")
     print("Saved: clustering-pipeline/results/gender_year_distribution.png")
 
-# 13b. Cluster'lara Göre Cinsiyet Oranı (Stacked Bar %)
 gender_counts = weighted_features.groupby(['Cluster', 'Cinsiyet']).size().unstack(fill_value=0)
 gender_ratios = gender_counts.div(gender_counts.sum(axis=1), axis=0)
 
@@ -826,10 +837,11 @@ plt.savefig("clustering-pipeline/results/cluster_gender_ratio.png")
 print("Saved: clustering-pipeline/results/cluster_gender_ratio.png")
 
 # =============================================================================
-# 14. CLUSTER PERSONA DESCRIPTIONS (For Agentic AI) 
+# 14. CLUSTER PERSONA DESCRIPTIONS (For Agentic AI)
 # =============================================================================
 from generate_agentic_personas import generate_personas
 
-# Generate personas for all clusters
-generate_personas(weighted_features, centroids, rank_df, gap_to_best, cluster_sizes, 
-                 gender_cluster_pct, cats, n_clusters, overall_mean)
+generate_personas(
+    weighted_features, centroids, rank_df, gap_to_best, cluster_sizes,
+    gender_cluster_pct, cats, n_clusters, overall_mean
+)
