@@ -10,6 +10,19 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 
+
+import random
+
+# ==========================================
+# REPRODUCIBILITY (Add this!)
+# ==========================================
+SEED = 42
+os.environ['PYTHONHASHSEED'] = str(SEED)
+random.seed(SEED)
+np.random.seed(SEED)
+tf.random.set_seed(SEED)
+# ==========================================
+
 # ==========================================
 # 1. CONFIGURATION & HELPERS
 # ==========================================
@@ -212,7 +225,7 @@ if __name__ == "__main__":
         
         # 4. DEC CLUSTERING
         print("\nInitializing DEC...")
-        kmeans = KMeans(n_clusters=5, n_init=20)
+        kmeans = KMeans(n_clusters=5, n_init=20, random_state=SEED)
         y_pred = kmeans.fit_predict(encoder.predict(X))
         
         # Build DEC Model

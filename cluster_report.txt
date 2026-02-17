@@ -1,0 +1,88 @@
+============================================================
+      CLUSTER INTERPRETATION REPORT
+============================================================
+
+==================== CLUSTER 0 ====================
+Size: 184 Students
+
+  [+] DISTINCTIVE STRENGTHS (Higher than Avg):
+    BLG 354   : Signal&Systems for Comp.Eng.        | Grade: 2.82 (Diff: +0.55)
+    BLG 442   : Tech.&Innov. Mng.for Inf.Tech.      | Grade: 1.14 (Diff: +0.52)
+    BLG 322   : Computer Architecture               | Grade: 2.64 (Diff: +0.49)
+    BLG 351   : Microcomputer Lab.                  | Grade: 3.08 (Diff: +0.47)
+    BLG 411   : Software Engineering                | Grade: 2.67 (Diff: +0.46)
+
+  [-] DISTINCTIVE WEAKNESSES (Lower than Avg):
+    TUR 122   : Türk Dili II                        | Grade: 0.86 (Diff: -1.82)
+    ATA 122   : Atatürk İlk & İnkılap Trh II        | Grade: 1.15 (Diff: -1.58)
+    TUR 121   : Türk Dili I                         | Grade: 1.15 (Diff: -1.58)
+    FIZ 101EL : Physics I Laboratory                | Grade: 1.73 (Diff: -1.43)
+    ATA 121   : Atatürk İlk & İnkılap Trh I         | Grade: 1.29 (Diff: -1.38)
+
+==================== CLUSTER 1 ====================
+Size: 493 Students
+
+  [+] DISTINCTIVE STRENGTHS (Higher than Avg):
+    FIZ 101EL : Physics I Laboratory                | Grade: 3.85 (Diff: +0.69)
+    FIZ 102EL : Physics II Laboratory               | Grade: 3.86 (Diff: +0.66)
+    ATA 122   : Atatürk İlk & İnkılap Trh II        | Grade: 3.26 (Diff: +0.53)
+    TUR 122   : Türk Dili II                        | Grade: 3.18 (Diff: +0.50)
+    FIZ 101   : Physics I                           | Grade: 3.09 (Diff: +0.47)
+
+  [-] DISTINCTIVE WEAKNESSES (Lower than Avg):
+    ING 112A  : Basics of Academic Writing          | Grade: 0.88 (Diff: -0.24)
+    ING 100   : EAP Through Global Goals            | Grade: 0.00 (Diff: -0.19)
+    BLG 442   : Tech.&Innov. Mng.for Inf.Tech.      | Grade: 0.46 (Diff: -0.16)
+    SNT 123   : Elective / Other                    | Grade: 0.14 (Diff: -0.10)
+    BLG 449   : Prog.in Parallel&DistrubedSys.      | Grade: 0.09 (Diff: -0.09)
+
+==================== CLUSTER 2 ====================
+Size: 299 Students
+
+  [+] DISTINCTIVE STRENGTHS (Higher than Avg):
+    BLG 413   : System Programming                  | Grade: 3.05 (Diff: +1.48)
+    BLG 223   : Data Structures                     | Grade: 3.19 (Diff: +0.74)
+    FIZ 102   : Physics II                          | Grade: 3.21 (Diff: +0.72)
+    FIZ 101   : Physics I                           | Grade: 3.33 (Diff: +0.71)
+    TUR 122   : Türk Dili II                        | Grade: 3.37 (Diff: +0.69)
+
+  [-] DISTINCTIVE WEAKNESSES (Lower than Avg):
+    BLG 4901  : Computer Engineering Design I       | Grade: 0.19 (Diff: -1.25)
+    ING 112A  : Basics of Academic Writing          | Grade: 0.02 (Diff: -1.10)
+    BLG 210   : Engineering Mathematics             | Grade: 0.81 (Diff: -0.84)
+    DAN 102   : Girişimcilik & Kariyer Danış.       | Grade: 0.19 (Diff: -0.40)
+    BLG 478   : Network Security                    | Grade: 0.08 (Diff: -0.39)
+
+==================== CLUSTER 3 ====================
+Size: 181 Students
+
+  [+] DISTINCTIVE STRENGTHS (Higher than Avg):
+    TUR 122   : Türk Dili II                        | Grade: 2.99 (Diff: +0.31)
+    ATA 122   : Atatürk İlk & İnkılap Trh II        | Grade: 2.97 (Diff: +0.23)
+    SNT 112   : Elective / Other                    | Grade: 0.44 (Diff: +0.21)
+    ATA 121   : Atatürk İlk & İnkılap Trh I         | Grade: 2.79 (Diff: +0.13)
+    TUR 121   : Türk Dili I                         | Grade: 2.76 (Diff: +0.03)
+
+  [-] DISTINCTIVE WEAKNESSES (Lower than Avg):
+    BLG 4902  : Computer Engineering Design II      | Grade: 0.81 (Diff: -2.53)
+    ING 201A  : Essentials of Res.Paper Writ.       | Grade: 0.80 (Diff: -2.47)
+    BLG 374   : Tech. Communic.for Comp.Eng.        | Grade: 0.55 (Diff: -2.31)
+    EHB 311   : Intr.to Electronics Laboratory      | Grade: 0.46 (Diff: -2.28)
+    FIZ 102EL : Physics II Laboratory               | Grade: 0.93 (Diff: -2.28)
+
+==================== CLUSTER 4 ====================
+Size: 255 Students
+
+  [+] DISTINCTIVE STRENGTHS (Higher than Avg):
+    ING 112A  : Basics of Academic Writing          | Grade: 3.35 (Diff: +2.23)
+    BLG 4901  : Computer Engineering Design I       | Grade: 3.35 (Diff: +1.90)
+    BLG 210   : Engineering Mathematics             | Grade: 3.16 (Diff: +1.51)
+    BLG 454   : Learning From Data                  | Grade: 2.34 (Diff: +0.80)
+    BLG 317   : Database Systems                    | Grade: 3.17 (Diff: +0.70)
+
+  [-] DISTINCTIVE WEAKNESSES (Lower than Avg):
+    BLG 413   : System Programming                  | Grade: 0.48 (Diff: -1.10)
+    ATA 122   : Atatürk İlk & İnkılap Trh II        | Grade: 2.03 (Diff: -0.70)
+    TUR 122   : Türk Dili II                        | Grade: 2.00 (Diff: -0.68)
+    ATA 121   : Atatürk İlk & İnkılap Trh I         | Grade: 2.08 (Diff: -0.58)
+    TUR 121   : Türk Dili I                         | Grade: 2.38 (Diff: -0.35)
