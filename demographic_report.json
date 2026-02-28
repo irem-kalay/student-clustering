@@ -1,0 +1,121 @@
+[
+    {
+        "cluster_id": 0,
+        "total_valid_students": 23,
+        "gender_distribution": {
+            "Erkek": {
+                "count": 18,
+                "percentage": 78.3
+            },
+            "Kadın": {
+                "count": 5,
+                "percentage": 21.7
+            }
+        },
+        "entry_year_distribution": {
+            "2011": {
+                "count": 4,
+                "percentage": 17.4
+            },
+            "2012": {
+                "count": 4,
+                "percentage": 17.4
+            },
+            "2013": {
+                "count": 5,
+                "percentage": 21.7
+            },
+            "2014": {
+                "count": 7,
+                "percentage": 30.4
+            },
+            "2015": {
+                "count": 3,
+                "percentage": 13.0
+            }
+        },
+        "dominant_entry_year": 2014
+    },
+    {
+        "cluster_id": 1,
+        "total_valid_students": 19,
+        "gender_distribution": {
+            "Erkek": {
+                "count": 16,
+                "percentage": 84.2
+            },
+            "Kadın": {
+                "count": 3,
+                "percentage": 15.8
+            }
+        },
+        "entry_year_distribution": {
+            "2014": {
+                "count": 5,
+                "percentage": 26.3
+            },
+            "2015": {
+                "count": 1,
+                "percentage": 5.3
+            },
+            "2016": {
+                "count": 7,
+                "percentage": 36.8
+            },
+            "2017": {
+                "count": 2,
+                "percentage": 10.5
+            },
+            "2018": {
+                "count": 2,
+                "percentage": 10.5
+            },
+            "2019": {
+                "count": 1,
+                "percentage": 5.3
+            },
+            "2020": {
+                "count": 1,
+                "percentage": 5.3
+            }
+        },
+        "dominant_entry_year": 2016
+    },
+    {
+        "cluster_id": 2,
+        "total_valid_students": 8,
+        "gender_distribution": {
+            "Erkek": {
+                "count": 7,
+                "percentage": 87.5
+            },
+            "Kadın": {
+                "count": 1,
+                "percentage": 12.5
+            }
+        },
+        "entry_year_distribution": {
+            "2014": {
+                "count": 1,
+                "percentage": 12.5
+            },
+            "2016": {
+                "count": 2,
+                "percentage": 25.0
+            },
+            "2017": {
+                "count": 1,
+                "percentage": 12.5
+            },
+            "2018": {
+                "count": 3,
+                "percentage": 37.5
+            },
+            "2020": {
+                "count": 1,
+                "percentage": 12.5
+            }
+        },
+        "dominant_entry_year": 2018
+    }
+]

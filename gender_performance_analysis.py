@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 import numpy as np
+import json # <--- JSON İÇİN EKLENDİ
 
 # ==========================================
 # 1. SETTINGS AND FILE PATHS
@@ -11,7 +12,9 @@ DEMOGRAPHICS_FILE = 'student_clusters_with_demographics.csv'
 
 # Output files
 GENDER_REPORT = 'gender_based_performance_report.txt'
+GENDER_JSON = 'gender_based_performance_report.json' # <--- EKLENDİ
 YEAR_REPORT = 'year_based_performance_report.txt'
+YEAR_JSON = 'year_based_performance_report.json' # <--- EKLENDİ
 
 # Course names dictionary (For readability)
 COURSE_NAMES = {
@@ -67,6 +70,8 @@ def main():
     print("Calculating GENDER-based cluster performance...")
     viz_data_pct_gender = {g: [] for g in genders}
     viz_data_abs_gender = {g: [] for g in genders}
+    
+    json_data_gender = [] # <--- JSON LİSTESİ
 
     with open(GENDER_REPORT, 'w', encoding='utf-8') as f:
         f.write("====================================================\n")
@@ -77,10 +82,18 @@ def main():
             df_g_all = df_merged[df_merged['Gender'] == gender]
             total_g = len(df_g_all)
             
+            # JSON Objesisini Oluştur
+            gender_obj = {
+                "gender": str(gender),
+                "total_population": int(total_g),
+                "clusters": []
+            }
+            
             if total_g == 0:
                 for c in clusters: 
                     viz_data_pct_gender[gender].append(0)
                     viz_data_abs_gender[gender].append(0)
+                json_data_gender.append(gender_obj)
                 continue
                 
             g_overall_means = df_g_all[course_cols].mean()
@@ -94,6 +107,15 @@ def main():
                 pct = (c_count / total_g) * 100
                 viz_data_pct_gender[gender].append(pct)
                 viz_data_abs_gender[gender].append(c_count)
+                
+                # JSON Küme Objesi
+                cluster_obj = {
+                    "cluster_id": int(c),
+                    "population": int(c_count),
+                    "percentage_of_gender": float(round(pct, 1)),
+                    "strengths": [],
+                    "weaknesses": []
+                }
 
                 f.write(f"--- CLUSTER {c} ({gender.upper()}) ---\n")
                 f.write(f"Count: {c_count} ({pct:.1f}% of all {gender}s)\n\n")
@@ -107,12 +129,35 @@ def main():
                     for course, val in strengths.items():
                         if c_means[course] > 0:
                             f.write(f"      - {get_course_label(course)}: {c_means[course]:.2f} (Avg: {g_overall_means[course]:.2f} -> +{val:.2f})\n")
+                            # JSON'a Ekle
+                            cluster_obj["strengths"].append({
+                                "course_code": str(course),
+                                "course_name": COURSE_NAMES.get(course, "Unknown Course"),
+                                "cluster_avg_grade": float(round(c_means[course], 2)),
+                                "cohort_avg_grade": float(round(g_overall_means[course], 2)),
+                                "difference": float(round(val, 2))
+                            })
 
                     weaknesses = diff.nsmallest(5)
                     f.write(f"\n  [-] RELATIVE WEAKNESSES:\n")
                     for course, val in weaknesses.items():
                         f.write(f"      - {get_course_label(course)}: {c_means[course]:.2f} (Avg: {g_overall_means[course]:.2f} -> {val:.2f})\n")
-                f.write("\n" + "="*52 + "\n\n")
+                        # JSON'a Ekle
+                        cluster_obj["weaknesses"].append({
+                            "course_code": str(course),
+                            "course_name": COURSE_NAMES.get(course, "Unknown Course"),
+                            "cluster_avg_grade": float(round(c_means[course], 2)),
+                            "cohort_avg_grade": float(round(g_overall_means[course], 2)),
+                            "difference": float(round(val, 2))
+                        })
+                        
+                gender_obj["clusters"].append(cluster_obj)
+            json_data_gender.append(gender_obj)
+            f.write("\n" + "="*52 + "\n\n")
+
+    # JSON Dosyasını Kaydet
+    with open(GENDER_JSON, 'w', encoding='utf-8') as jf:
+        json.dump(json_data_gender, jf, indent=4, ensure_ascii=False)
 
     # Draw Gender Dual Chart
     draw_dual_chart(clusters, genders, viz_data_abs_gender, viz_data_pct_gender, 
@@ -125,6 +170,8 @@ def main():
     print("Calculating ENTRY YEAR-based cluster performance...")
     viz_data_pct_year = {y: [] for y in years}
     viz_data_abs_year = {y: [] for y in years}
+    
+    json_data_year = [] # <--- JSON LİSTESİ
 
     with open(YEAR_REPORT, 'w', encoding='utf-8') as f:
         f.write("====================================================\n")
@@ -135,10 +182,18 @@ def main():
             df_y_all = df_merged[df_merged['Entry_Year'] == year]
             total_y = len(df_y_all)
             
+            # JSON Objesisini Oluştur
+            year_obj = {
+                "entry_year": int(year),
+                "total_population": int(total_y),
+                "clusters": []
+            }
+            
             if total_y == 0:
                 for c in clusters: 
                     viz_data_pct_year[year].append(0)
                     viz_data_abs_year[year].append(0)
+                json_data_year.append(year_obj)
                 continue
                 
             y_overall_means = df_y_all[course_cols].mean()
@@ -152,6 +207,15 @@ def main():
                 pct = (c_count / total_y) * 100
                 viz_data_pct_year[year].append(pct)
                 viz_data_abs_year[year].append(c_count)
+                
+                # JSON Küme Objesi
+                cluster_obj = {
+                    "cluster_id": int(c),
+                    "population": int(c_count),
+                    "percentage_of_cohort": float(round(pct, 1)),
+                    "strengths": [],
+                    "weaknesses": []
+                }
 
                 f.write(f"--- CLUSTER {c} ({year} Cohort) ---\n")
                 f.write(f"Count: {c_count} ({pct:.1f}% of all {year} entries)\n\n")
@@ -165,12 +229,35 @@ def main():
                     for course, val in strengths.items():
                         if c_means[course] > 0:
                             f.write(f"      - {get_course_label(course)}: {c_means[course]:.2f} (Avg: {y_overall_means[course]:.2f} -> +{val:.2f})\n")
+                            # JSON'a Ekle
+                            cluster_obj["strengths"].append({
+                                "course_code": str(course),
+                                "course_name": COURSE_NAMES.get(course, "Unknown Course"),
+                                "cluster_avg_grade": float(round(c_means[course], 2)),
+                                "cohort_avg_grade": float(round(y_overall_means[course], 2)),
+                                "difference": float(round(val, 2))
+                            })
 
                     weaknesses = diff.nsmallest(5)
                     f.write(f"\n  [-] RELATIVE WEAKNESSES (vs. all {year} students):\n")
                     for course, val in weaknesses.items():
                         f.write(f"      - {get_course_label(course)}: {c_means[course]:.2f} (Avg: {y_overall_means[course]:.2f} -> {val:.2f})\n")
-                f.write("\n" + "="*52 + "\n\n")
+                        # JSON'a Ekle
+                        cluster_obj["weaknesses"].append({
+                            "course_code": str(course),
+                            "course_name": COURSE_NAMES.get(course, "Unknown Course"),
+                            "cluster_avg_grade": float(round(c_means[course], 2)),
+                            "cohort_avg_grade": float(round(y_overall_means[course], 2)),
+                            "difference": float(round(val, 2))
+                        })
+                        
+                year_obj["clusters"].append(cluster_obj)
+            json_data_year.append(year_obj)
+            f.write("\n" + "="*52 + "\n\n")
+
+    # JSON Dosyasını Kaydet
+    with open(YEAR_JSON, 'w', encoding='utf-8') as jf:
+        json.dump(json_data_year, jf, indent=4, ensure_ascii=False)
 
     # Draw Year Dual Chart
     # Convert years to string labels for the chart legend
@@ -181,7 +268,7 @@ def main():
     draw_dual_chart(clusters, str_years, viz_data_abs_year_str, viz_data_pct_year_str, 
                     'Entry Year', 'year_cluster_dual_analysis.png')
                     
-    print("All analyses complete! Check the .txt reports and .png charts.")
+    print("All analyses complete! Check the .txt reports, .json reports, and .png charts.")
 
 # ==========================================
 # HELPER PLOTTING FUNCTION

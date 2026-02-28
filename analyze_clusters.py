@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import glob
+import json # <--- JSON İÇİN EKLENDİ
 
 # ==========================================
 # 1. SETTINGS AND FILE PATHS
@@ -8,6 +9,7 @@ import glob
 CLUSTERS_FILE = 'student_final_clusters.csv'
 TXT_FOLDER = 'downloads_properties'
 OUTPUT_REPORT = 'demographic_report.txt'
+OUTPUT_JSON = 'demographic_report.json' # <--- JSON ÇIKTISI İÇİN DOSYA ADI EKLENDİ
 OUTPUT_CSV = 'student_clusters_with_demographics.csv'
 
 def parse_txt_file(filepath):
@@ -97,6 +99,9 @@ def main():
     
     clusters = sorted(df_valid['Assigned_Cluster'].unique())
     
+    # JSON verilerini tutacağımız ana liste
+    json_report_data = []
+    
     with open(OUTPUT_REPORT, 'w', encoding='utf-8') as f:
         f.write("====================================================\n")
         f.write("        CLUSTER-BASED DEMOGRAPHIC ANALYSIS REPORT\n")
@@ -106,11 +111,21 @@ def main():
             df_c = df_valid[df_valid['Assigned_Cluster'] == c]
             total_students = len(df_c)
             
+            # JSON için küme objesini oluştur
+            cluster_json = {
+                "cluster_id": int(c),
+                "total_valid_students": int(total_students),
+                "gender_distribution": {},
+                "entry_year_distribution": {},
+                "dominant_entry_year": None
+            }
+            
             f.write(f"--- CLUSTER {c} PROFILE ---\n")
             f.write(f"Total Valid Student Count: {total_students}\n\n")
             
             if total_students == 0:
                 f.write("  [No Data]\n\n")
+                json_report_data.append(cluster_json)
                 continue
                 
             # Gender Distribution
@@ -120,19 +135,43 @@ def main():
                 percentage = (count / total_students) * 100
                 f.write(f"    - {g}: {count} students ({percentage:.1f}%)\n")
                 
+                # JSON'a Cinsiyet Ekleme
+                cluster_json["gender_distribution"][str(g)] = {
+                    "count": int(count),
+                    "percentage": float(round(percentage, 1))
+                }
+                
             # Entry Year Distribution
             year_counts = df_c['Entry_Year'].value_counts().sort_index()
             most_common_year = year_counts.idxmax()
+            
+            # JSON'a Baskın Yılı Ekleme
+            cluster_json["dominant_entry_year"] = int(most_common_year)
             
             f.write("\n  [ENTRY YEAR DISTRIBUTION]:\n")
             for y, count in year_counts.items():
                 percentage = (count / total_students) * 100
                 f.write(f"    - {y}: {count} students ({percentage:.1f}%)\n")
                 
+                # JSON'a Giriş Yılı Ekleme
+                cluster_json["entry_year_distribution"][str(y)] = {
+                    "count": int(count),
+                    "percentage": float(round(percentage, 1))
+                }
+                
             f.write(f"\n  > Dominant entry year in this cluster: {most_common_year}\n")
             f.write("\n" + "="*52 + "\n\n")
+            
+            # Kümeyi JSON ana listesine ekle
+            json_report_data.append(cluster_json)
 
-    print(f"Analysis complete! Results written to '{OUTPUT_REPORT}'.")
+    # ==========================================
+    # 4. EXPORT JSON FILE
+    # ==========================================
+    with open(OUTPUT_JSON, 'w', encoding='utf-8') as json_file:
+        json.dump(json_report_data, json_file, indent=4, ensure_ascii=False)
+
+    print(f"Analysis complete! Results written to '{OUTPUT_REPORT}' and '{OUTPUT_JSON}'.")
 
 if __name__ == "__main__":
     main()

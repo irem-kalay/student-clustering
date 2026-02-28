@@ -15,14 +15,8 @@ Count: 4 (100.0% of all 2011 entries)
       - BLG 112 (Discrete Mathematics): 0.00 (Avg: 0.00 -> 0.00)
       - BLG 113 (Intr.to Comp.Eng. and Ethics): 0.00 (Avg: 0.00 -> 0.00)
       - BLG 202 (Numerical Methods in CE): 0.00 (Avg: 0.00 -> 0.00)
-
-====================================================
-
 --- CLUSTER 1 (2011 Cohort) ---
 Count: 0 (0.0% of all 2011 entries)
-
-
-====================================================
 
 --- CLUSTER 2 (2011 Cohort) ---
 Count: 0 (0.0% of all 2011 entries)
@@ -43,14 +37,8 @@ Count: 4 (100.0% of all 2012 entries)
       - BLG 112 (Discrete Mathematics): 0.00 (Avg: 0.00 -> 0.00)
       - BLG 113 (Intr.to Comp.Eng. and Ethics): 0.00 (Avg: 0.00 -> 0.00)
       - BLG 202 (Numerical Methods in CE): 0.00 (Avg: 0.00 -> 0.00)
-
-====================================================
-
 --- CLUSTER 1 (2012 Cohort) ---
 Count: 0 (0.0% of all 2012 entries)
-
-
-====================================================
 
 --- CLUSTER 2 (2012 Cohort) ---
 Count: 0 (0.0% of all 2012 entries)
@@ -71,14 +59,8 @@ Count: 5 (100.0% of all 2013 entries)
       - BLG 112 (Discrete Mathematics): 0.00 (Avg: 0.00 -> 0.00)
       - BLG 113 (Intr.to Comp.Eng. and Ethics): 0.00 (Avg: 0.00 -> 0.00)
       - BLG 202 (Numerical Methods in CE): 0.00 (Avg: 0.00 -> 0.00)
-
-====================================================
-
 --- CLUSTER 1 (2013 Cohort) ---
 Count: 0 (0.0% of all 2013 entries)
-
-
-====================================================
 
 --- CLUSTER 2 (2013 Cohort) ---
 Count: 0 (0.0% of all 2013 entries)
@@ -101,9 +83,6 @@ Count: 7 (53.8% of all 2014 entries)
       - BLG 374 (Tech. Communic.for Comp.Eng.): 0.00 (Avg: 1.62 -> -1.62)
       - BLG 223 (Data Structures): 0.00 (Avg: 1.46 -> -1.46)
       - EHB 311 (Intr.to Electronics Laboratory): 0.00 (Avg: 1.42 -> -1.42)
-
-====================================================
-
 --- CLUSTER 1 (2014 Cohort) ---
 Count: 5 (38.5% of all 2014 entries)
 
@@ -120,9 +99,6 @@ Count: 5 (38.5% of all 2014 entries)
       - SNT 103 (Unknown Course): 0.00 (Avg: 0.31 -> -0.31)
       - BLG 337 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
       - BLG 449 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
-
-====================================================
-
 --- CLUSTER 2 (2014 Cohort) ---
 Count: 1 (7.7% of all 2014 entries)
 
@@ -156,9 +132,6 @@ Count: 3 (75.0% of all 2015 entries)
       - BLG 223 (Data Structures): 0.00 (Avg: 1.00 -> -1.00)
       - BLG 311 (Formal Languages and Automata): 0.00 (Avg: 1.00 -> -1.00)
       - BLG 335 (Analysis of Algorithms I): 0.00 (Avg: 1.00 -> -1.00)
-
-====================================================
-
 --- CLUSTER 1 (2015 Cohort) ---
 Count: 1 (25.0% of all 2015 entries)
 
@@ -175,9 +148,6 @@ Count: 1 (25.0% of all 2015 entries)
       - BLG 368 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
       - BLG 438 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
       - BLG 440 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
-
-====================================================
-
 --- CLUSTER 2 (2015 Cohort) ---
 Count: 0 (0.0% of all 2015 entries)
 
@@ -188,9 +158,6 @@ Count: 0 (0.0% of all 2015 entries)
 
 --- CLUSTER 0 (2016 Cohort) ---
 Count: 0 (0.0% of all 2016 entries)
-
-
-====================================================
 
 --- CLUSTER 1 (2016 Cohort) ---
 Count: 7 (77.8% of all 2016 entries)
@@ -208,9 +175,6 @@ Count: 7 (77.8% of all 2016 entries)
       - SNT 112 (Unknown Course): 0.00 (Avg: 0.39 -> -0.39)
       - KON 317 (Unknown Course): 0.29 (Avg: 0.61 -> -0.33)
       - BLG 475 (Software Quality and Testing): 0.36 (Avg: 0.67 -> -0.31)
-
-====================================================
-
 --- CLUSTER 2 (2016 Cohort) ---
 Count: 2 (22.2% of all 2016 entries)
 
@@ -235,9 +199,6 @@ Count: 2 (22.2% of all 2016 entries)
 --- CLUSTER 0 (2017 Cohort) ---
 Count: 0 (0.0% of all 2017 entries)
 
-
-====================================================
-
 --- CLUSTER 1 (2017 Cohort) ---
 Count: 2 (66.7% of all 2017 entries)
 
@@ -254,9 +215,6 @@ Count: 2 (66.7% of all 2017 entries)
       - SNT 113 (Unknown Course): 0.00 (Avg: 1.17 -> -1.17)
       - BLG 440 (Unknown Course): 0.00 (Avg: 1.00 -> -1.00)
       - MAL 201 (Unknown Course): 0.00 (Avg: 1.00 -> -1.00)
-
-====================================================
-
 --- CLUSTER 2 (2017 Cohort) ---
 Count: 1 (33.3% of all 2017 entries)
 
@@ -281,9 +239,6 @@ Count: 1 (33.3% of all 2017 entries)
 --- CLUSTER 0 (2018 Cohort) ---
 Count: 0 (0.0% of all 2018 entries)
 
-
-====================================================
-
 --- CLUSTER 1 (2018 Cohort) ---
 Count: 2 (40.0% of all 2018 entries)
 
@@ -300,9 +255,6 @@ Count: 2 (40.0% of all 2018 entries)
       - BLG 442 (Unknown Course): 0.00 (Avg: 1.10 -> -1.10)
       - BLG 354 (Signal&Systems for Comp.Eng.): 1.50 (Avg: 2.50 -> -1.00)
       - BLG 454 (Learning From Data): 2.00 (Avg: 2.70 -> -0.70)
-
-====================================================
-
 --- CLUSTER 2 (2018 Cohort) ---
 Count: 3 (60.0% of all 2018 entries)
 
@@ -327,9 +279,6 @@ Count: 3 (60.0% of all 2018 entries)
 --- CLUSTER 0 (2019 Cohort) ---
 Count: 0 (0.0% of all 2019 entries)
 
-
-====================================================
-
 --- CLUSTER 1 (2019 Cohort) ---
 Count: 1 (100.0% of all 2019 entries)
 
@@ -346,9 +295,6 @@ Count: 1 (100.0% of all 2019 entries)
       - BLG 112 (Discrete Mathematics): 4.00 (Avg: 4.00 -> 0.00)
       - BLG 113 (Intr.to Comp.Eng. and Ethics): 3.00 (Avg: 3.00 -> 0.00)
       - BLG 202 (Numerical Methods in CE): 4.00 (Avg: 4.00 -> 0.00)
-
-====================================================
-
 --- CLUSTER 2 (2019 Cohort) ---
 Count: 0 (0.0% of all 2019 entries)
 
@@ -359,9 +305,6 @@ Count: 0 (0.0% of all 2019 entries)
 
 --- CLUSTER 0 (2020 Cohort) ---
 Count: 0 (0.0% of all 2020 entries)
-
-
-====================================================
 
 --- CLUSTER 1 (2020 Cohort) ---
 Count: 1 (50.0% of all 2020 entries)
@@ -379,9 +322,6 @@ Count: 1 (50.0% of all 2020 entries)
       - BLG 242 (Logic Circuits Laboratory): 2.00 (Avg: 3.00 -> -1.00)
       - MAT 271 (Probability and Statistics): 2.50 (Avg: 3.25 -> -0.75)
       - BLG 210 (Engineering Mathematics): 2.50 (Avg: 3.00 -> -0.50)
-
-====================================================
-
 --- CLUSTER 2 (2020 Cohort) ---
 Count: 1 (50.0% of all 2020 entries)
 

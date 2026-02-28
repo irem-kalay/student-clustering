@@ -1,0 +1,439 @@
+[
+    {
+        "gender": "Erkek",
+        "total_population": 41,
+        "clusters": [
+            {
+                "cluster_id": 0,
+                "population": 18,
+                "percentage_of_gender": 43.9,
+                "strengths": [
+                    {
+                        "course_code": "MAT 103",
+                        "course_name": "Mathematics I",
+                        "cluster_avg_grade": 2.83,
+                        "cohort_avg_grade": 2.16,
+                        "difference": 0.67
+                    },
+                    {
+                        "course_code": "MAT 104",
+                        "course_name": "Mathematics II",
+                        "cluster_avg_grade": 2.5,
+                        "cohort_avg_grade": 2.41,
+                        "difference": 0.09
+                    }
+                ],
+                "weaknesses": [
+                    {
+                        "course_code": "BLG 4902",
+                        "course_name": "Computer Engineering Design II",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 2.07,
+                        "difference": -2.07
+                    },
+                    {
+                        "course_code": "ING 201A",
+                        "course_name": "Essentials of Res.Paper Writ.",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.98,
+                        "difference": -1.98
+                    },
+                    {
+                        "course_code": "EHB 311",
+                        "course_name": "Intr.to Electronics Laboratory",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.87,
+                        "difference": -1.87
+                    },
+                    {
+                        "course_code": "BLG 374",
+                        "course_name": "Tech. Communic.for Comp.Eng.",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.82,
+                        "difference": -1.82
+                    },
+                    {
+                        "course_code": "BLG 335",
+                        "course_name": "Analysis of Algorithms I",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.73,
+                        "difference": -1.73
+                    }
+                ]
+            },
+            {
+                "cluster_id": 1,
+                "population": 16,
+                "percentage_of_gender": 39.0,
+                "strengths": [
+                    {
+                        "course_code": "FIZ 101EL",
+                        "course_name": "Physics I Laboratory",
+                        "cluster_avg_grade": 3.88,
+                        "cohort_avg_grade": 1.68,
+                        "difference": 2.19
+                    },
+                    {
+                        "course_code": "FIZ 101",
+                        "course_name": "Physics I",
+                        "cluster_avg_grade": 3.31,
+                        "cohort_avg_grade": 1.37,
+                        "difference": 1.95
+                    },
+                    {
+                        "course_code": "ING 201A",
+                        "course_name": "Essentials of Res.Paper Writ.",
+                        "cluster_avg_grade": 3.66,
+                        "cohort_avg_grade": 1.98,
+                        "difference": 1.68
+                    },
+                    {
+                        "course_code": "FIZ 102EL",
+                        "course_name": "Physics II Laboratory",
+                        "cluster_avg_grade": 3.41,
+                        "cohort_avg_grade": 1.77,
+                        "difference": 1.64
+                    },
+                    {
+                        "course_code": "BLG 4902",
+                        "course_name": "Computer Engineering Design II",
+                        "cluster_avg_grade": 3.69,
+                        "cohort_avg_grade": 2.07,
+                        "difference": 1.61
+                    }
+                ],
+                "weaknesses": [
+                    {
+                        "course_code": "BLG 447",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.1,
+                        "difference": -0.1
+                    },
+                    {
+                        "course_code": "SNT 102",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.09,
+                        "difference": -0.09
+                    },
+                    {
+                        "course_code": "SNT 112",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.09,
+                        "difference": -0.09
+                    },
+                    {
+                        "course_code": "SNT 113",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.09,
+                        "difference": -0.09
+                    },
+                    {
+                        "course_code": "BLG 477",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.07,
+                        "difference": -0.07
+                    }
+                ]
+            },
+            {
+                "cluster_id": 2,
+                "population": 7,
+                "percentage_of_gender": 17.1,
+                "strengths": [
+                    {
+                        "course_code": "EHB 311",
+                        "course_name": "Intr.to Electronics Laboratory",
+                        "cluster_avg_grade": 3.71,
+                        "cohort_avg_grade": 1.87,
+                        "difference": 1.85
+                    },
+                    {
+                        "course_code": "BLG 4902",
+                        "course_name": "Computer Engineering Design II",
+                        "cluster_avg_grade": 3.71,
+                        "cohort_avg_grade": 2.07,
+                        "difference": 1.64
+                    },
+                    {
+                        "course_code": "BLG 242",
+                        "course_name": "Logic Circuits Laboratory",
+                        "cluster_avg_grade": 3.21,
+                        "cohort_avg_grade": 1.59,
+                        "difference": 1.63
+                    },
+                    {
+                        "course_code": "BLG 354",
+                        "course_name": "Signal&Systems for Comp.Eng.",
+                        "cluster_avg_grade": 3.0,
+                        "cohort_avg_grade": 1.44,
+                        "difference": 1.56
+                    },
+                    {
+                        "course_code": "BLG 374",
+                        "course_name": "Tech. Communic.for Comp.Eng.",
+                        "cluster_avg_grade": 3.29,
+                        "cohort_avg_grade": 1.82,
+                        "difference": 1.47
+                    }
+                ],
+                "weaknesses": [
+                    {
+                        "course_code": "MAT 103",
+                        "course_name": "Mathematics I",
+                        "cluster_avg_grade": 0.43,
+                        "cohort_avg_grade": 2.16,
+                        "difference": -1.73
+                    },
+                    {
+                        "course_code": "FIZ 101EL",
+                        "course_name": "Physics I Laboratory",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.68,
+                        "difference": -1.68
+                    },
+                    {
+                        "course_code": "FIZ 101",
+                        "course_name": "Physics I",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.37,
+                        "difference": -1.37
+                    },
+                    {
+                        "course_code": "MAT 104",
+                        "course_name": "Mathematics II",
+                        "cluster_avg_grade": 1.43,
+                        "cohort_avg_grade": 2.41,
+                        "difference": -0.99
+                    },
+                    {
+                        "course_code": "BLG 439",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.39,
+                        "difference": -0.39
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "gender": "Kadın",
+        "total_population": 9,
+        "clusters": [
+            {
+                "cluster_id": 0,
+                "population": 5,
+                "percentage_of_gender": 55.6,
+                "strengths": [
+                    {
+                        "course_code": "MAT 103",
+                        "course_name": "Mathematics I",
+                        "cluster_avg_grade": 2.9,
+                        "cohort_avg_grade": 2.61,
+                        "difference": 0.29
+                    }
+                ],
+                "weaknesses": [
+                    {
+                        "course_code": "BLG 4902",
+                        "course_name": "Computer Engineering Design II",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.72,
+                        "difference": -1.72
+                    },
+                    {
+                        "course_code": "ING 201A",
+                        "course_name": "Essentials of Res.Paper Writ.",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.72,
+                        "difference": -1.72
+                    },
+                    {
+                        "course_code": "BLG 101",
+                        "course_name": "Intr. to Information Systems",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.56,
+                        "difference": -1.56
+                    },
+                    {
+                        "course_code": "BLG 112",
+                        "course_name": "Discrete Mathematics",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.56,
+                        "difference": -1.56
+                    },
+                    {
+                        "course_code": "BLG 374",
+                        "course_name": "Tech. Communic.for Comp.Eng.",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.56,
+                        "difference": -1.56
+                    }
+                ]
+            },
+            {
+                "cluster_id": 1,
+                "population": 3,
+                "percentage_of_gender": 33.3,
+                "strengths": [
+                    {
+                        "course_code": "FIZ 101EL",
+                        "course_name": "Physics I Laboratory",
+                        "cluster_avg_grade": 4.0,
+                        "cohort_avg_grade": 1.33,
+                        "difference": 2.67
+                    },
+                    {
+                        "course_code": "BLG 210",
+                        "course_name": "Engineering Mathematics",
+                        "cluster_avg_grade": 3.5,
+                        "cohort_avg_grade": 1.17,
+                        "difference": 2.33
+                    },
+                    {
+                        "course_code": "FIZ 101",
+                        "course_name": "Physics I",
+                        "cluster_avg_grade": 3.5,
+                        "cohort_avg_grade": 1.17,
+                        "difference": 2.33
+                    },
+                    {
+                        "course_code": "FIZ 102EL",
+                        "course_name": "Physics II Laboratory",
+                        "cluster_avg_grade": 4.0,
+                        "cohort_avg_grade": 1.78,
+                        "difference": 2.22
+                    },
+                    {
+                        "course_code": "BLG 242",
+                        "course_name": "Logic Circuits Laboratory",
+                        "cluster_avg_grade": 3.5,
+                        "cohort_avg_grade": 1.39,
+                        "difference": 2.11
+                    }
+                ],
+                "weaknesses": [
+                    {
+                        "course_code": "BLG 346",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.0,
+                        "difference": 0.0
+                    },
+                    {
+                        "course_code": "BLG 438",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.0,
+                        "difference": 0.0
+                    },
+                    {
+                        "course_code": "BLG 439",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.0,
+                        "difference": 0.0
+                    },
+                    {
+                        "course_code": "BLG 440",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.0,
+                        "difference": 0.0
+                    },
+                    {
+                        "course_code": "BLG 442",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 0.0,
+                        "difference": 0.0
+                    }
+                ]
+            },
+            {
+                "cluster_id": 2,
+                "population": 1,
+                "percentage_of_gender": 11.1,
+                "strengths": [
+                    {
+                        "course_code": "BLG 368",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 4.0,
+                        "cohort_avg_grade": 0.83,
+                        "difference": 3.17
+                    },
+                    {
+                        "course_code": "BLG 4901",
+                        "course_name": "Computer Engineering Design I",
+                        "cluster_avg_grade": 4.0,
+                        "cohort_avg_grade": 0.89,
+                        "difference": 3.11
+                    },
+                    {
+                        "course_code": "BLG 459",
+                        "course_name": "Computer Security",
+                        "cluster_avg_grade": 3.5,
+                        "cohort_avg_grade": 0.61,
+                        "difference": 2.89
+                    },
+                    {
+                        "course_code": "BLG 460",
+                        "course_name": "Unknown Course",
+                        "cluster_avg_grade": 3.5,
+                        "cohort_avg_grade": 0.67,
+                        "difference": 2.83
+                    },
+                    {
+                        "course_code": "BLG 336",
+                        "course_name": "Analysis of Algorithms II",
+                        "cluster_avg_grade": 4.0,
+                        "cohort_avg_grade": 1.22,
+                        "difference": 2.78
+                    }
+                ],
+                "weaknesses": [
+                    {
+                        "course_code": "MAT 103",
+                        "course_name": "Mathematics I",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 2.61,
+                        "difference": -2.61
+                    },
+                    {
+                        "course_code": "MAT 104",
+                        "course_name": "Mathematics II",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 2.39,
+                        "difference": -2.39
+                    },
+                    {
+                        "course_code": "FIZ 102EL",
+                        "course_name": "Physics II Laboratory",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.78,
+                        "difference": -1.78
+                    },
+                    {
+                        "course_code": "FIZ 102",
+                        "course_name": "Physics II",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.67,
+                        "difference": -1.67
+                    },
+                    {
+                        "course_code": "FIZ 101EL",
+                        "course_name": "Physics I Laboratory",
+                        "cluster_avg_grade": 0.0,
+                        "cohort_avg_grade": 1.33,
+                        "difference": -1.33
+                    }
+                ]
+            }
+        ]
+    }
+]
