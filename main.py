@@ -4,6 +4,7 @@ import os
 import sys
 import unicodedata
 import re
+import json 
 import tensorflow as tf
 from tensorflow.keras import layers, models, backend as K
 from sklearn.cluster import KMeans
@@ -13,7 +14,7 @@ import matplotlib.pyplot as plt
 import random
 
 # ==========================================
-# REPRODUCIBILITY (Add this!)
+# REPRODUCIBILITY
 # ==========================================
 SEED = 42
 os.environ['PYTHONHASHSEED'] = str(SEED)
@@ -439,21 +440,34 @@ if __name__ == "__main__":
         # Calculate overall means for baseline comparison
         overall_means = clean_df.mean()
         
+        # JSON İÇİN LİSTE OLUŞTURUYORUZ
+        json_report_data = []
+        
         with open('report.txt', 'w', encoding='utf-8') as f:
             f.write("====================================================\n")
             f.write("      AI INSTRUCTOR: STUDENT CLUSTER ANALYSIS REPORT\n")
             f.write("====================================================\n\n")
             
-            # DÜZELTME BURADA: range(5) yerine range(n_clusters)
             for c_id in range(n_clusters):  
                 cluster_data = analysis_df[analysis_df['Cluster'] == c_id].drop('Cluster', axis=1)
                 student_count_in_cluster = len(cluster_data)
                 
+                # JSON objesini hazırlıyoruz
+                cluster_json = {
+                    "cluster_id": int(c_id),
+                    "population": int(student_count_in_cluster),
+                    "population_percentage": float(round((student_count_in_cluster/len(clean_df))*100, 1)),
+                    "strengths": [],
+                    "weaknesses": [],
+                    "top_absolute": []
+                }
+                
                 f.write(f"--- CLUSTER {c_id} PROFILE ---\n")
-                f.write(f"Population: {student_count_in_cluster} students ({(student_count_in_cluster/len(clean_df))*100:.1f}% of total)\n\n")
+                f.write(f"Population: {student_count_in_cluster} students ({cluster_json['population_percentage']}% of total)\n\n")
                 
                 if student_count_in_cluster == 0:
                     f.write("  [Empty Cluster]\n\n")
+                    json_report_data.append(cluster_json)
                     continue
                 
                 # Calculate the average course grade inside this cluster
@@ -475,6 +489,15 @@ if __name__ == "__main__":
                     if avg_grade > 0:
                         course_label = get_course_label(course)
                         f.write(f"      - {course_label}: {avg_grade:.2f} (Avg is {overall_means[course]:.2f} -> +{diff_val:.2f})\n")
+                        
+                        # JSON'a ekle (Numpy tiplerinden kaçınmak için float() ile sarıyoruz)
+                        cluster_json["strengths"].append({
+                            "course_code": course,
+                            "course_name": COURSE_NAMES.get(course, "Unknown Course"),
+                            "cluster_avg_grade": float(round(avg_grade, 2)),
+                            "overall_avg_grade": float(round(overall_means[course], 2)),
+                            "difference": float(round(diff_val, 2))
+                        })
                 
                 # Top 5 Relative Weaknesses
                 weaknesses = diff.nsmallest(5)
@@ -483,6 +506,15 @@ if __name__ == "__main__":
                     avg_grade = cluster_means[course]
                     course_label = get_course_label(course)
                     f.write(f"      - {course_label}: {avg_grade:.2f} (Avg is {overall_means[course]:.2f} -> {diff_val:.2f})\n")
+                    
+                    # JSON'a ekle
+                    cluster_json["weaknesses"].append({
+                        "course_code": course,
+                        "course_name": COURSE_NAMES.get(course, "Unknown Course"),
+                        "cluster_avg_grade": float(round(avg_grade, 2)),
+                        "overall_avg_grade": float(round(overall_means[course], 2)),
+                        "difference": float(round(diff_val, 2))
+                    })
                 
                 # Top 5 Highest Absolute Grades
                 top_abs = cluster_means.nlargest(5)
@@ -491,8 +523,22 @@ if __name__ == "__main__":
                     if val > 0:
                         course_label = get_course_label(course)
                         f.write(f"      - {course_label}: {val:.2f}/4.00\n")
+                        
+                        # JSON'a ekle
+                        cluster_json["top_absolute"].append({
+                            "course_code": course,
+                            "course_name": COURSE_NAMES.get(course, "Unknown Course"),
+                            "absolute_grade": float(round(val, 2))
+                        })
                 
                 # Space between cluster profiles
                 f.write("\n" + "="*52 + "\n\n")
+                
+                # Cluster JSON objesini ana listeye ekle
+                json_report_data.append(cluster_json)
         
-        print("Analysis complete! Insights exported to 'report.txt'.")
+        # JSON DOSYASINI KAYDETME
+        with open('report.json', 'w', encoding='utf-8') as json_file:
+            json.dump(json_report_data, json_file, indent=4, ensure_ascii=False)
+            
+        print("Analysis complete! Insights exported to 'report.txt' and 'report.json'.")

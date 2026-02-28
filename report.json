@@ -1,0 +1,299 @@
+[
+    {
+        "cluster_id": 0,
+        "population": 23,
+        "population_percentage": 46.0,
+        "strengths": [
+            {
+                "course_code": "MAT 103",
+                "course_name": "Mathematics I",
+                "cluster_avg_grade": 2.85,
+                "overall_avg_grade": 2.24,
+                "difference": 0.61
+            },
+            {
+                "course_code": "MAT 104",
+                "course_name": "Mathematics II",
+                "cluster_avg_grade": 2.41,
+                "overall_avg_grade": 2.41,
+                "difference": 0.0
+            }
+        ],
+        "weaknesses": [
+            {
+                "course_code": "BLG 4902",
+                "course_name": "Computer Engineering Design II",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 2.01,
+                "difference": -2.01
+            },
+            {
+                "course_code": "ING 201A",
+                "course_name": "Essentials of Res.Paper Writ.",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 1.93,
+                "difference": -1.93
+            },
+            {
+                "course_code": "EHB 311",
+                "course_name": "Intr.to Electronics Laboratory",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 1.79,
+                "difference": -1.79
+            },
+            {
+                "course_code": "BLG 374",
+                "course_name": "Tech. Communic.for Comp.Eng.",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 1.77,
+                "difference": -1.77
+            },
+            {
+                "course_code": "BLG 335",
+                "course_name": "Analysis of Algorithms I",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 1.66,
+                "difference": -1.66
+            }
+        ],
+        "top_absolute": [
+            {
+                "course_code": "MAT 103",
+                "course_name": "Mathematics I",
+                "absolute_grade": 2.85
+            },
+            {
+                "course_code": "MAT 104",
+                "course_name": "Mathematics II",
+                "absolute_grade": 2.41
+            },
+            {
+                "course_code": "MAT 271",
+                "course_name": "Probability and Statistics",
+                "absolute_grade": 0.74
+            },
+            {
+                "course_code": "FIZ 102EL",
+                "course_name": "Physics II Laboratory",
+                "absolute_grade": 0.5
+            },
+            {
+                "course_code": "BLG 212",
+                "course_name": "Microprocessor Systems",
+                "absolute_grade": 0.48
+            }
+        ]
+    },
+    {
+        "cluster_id": 1,
+        "population": 19,
+        "population_percentage": 38.0,
+        "strengths": [
+            {
+                "course_code": "FIZ 101EL",
+                "course_name": "Physics I Laboratory",
+                "cluster_avg_grade": 3.89,
+                "overall_avg_grade": 1.62,
+                "difference": 2.27
+            },
+            {
+                "course_code": "FIZ 101",
+                "course_name": "Physics I",
+                "cluster_avg_grade": 3.34,
+                "overall_avg_grade": 1.33,
+                "difference": 2.01
+            },
+            {
+                "course_code": "ING 201A",
+                "course_name": "Essentials of Res.Paper Writ.",
+                "cluster_avg_grade": 3.68,
+                "overall_avg_grade": 1.93,
+                "difference": 1.75
+            },
+            {
+                "course_code": "FIZ 102EL",
+                "course_name": "Physics II Laboratory",
+                "cluster_avg_grade": 3.5,
+                "overall_avg_grade": 1.77,
+                "difference": 1.73
+            },
+            {
+                "course_code": "BLG 4902",
+                "course_name": "Computer Engineering Design II",
+                "cluster_avg_grade": 3.71,
+                "overall_avg_grade": 2.01,
+                "difference": 1.7
+            }
+        ],
+        "weaknesses": [
+            {
+                "course_code": "BLG 447",
+                "course_name": "Compiler Design",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 0.08,
+                "difference": -0.08
+            },
+            {
+                "course_code": "SNT 102",
+                "course_name": "Unknown Course",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 0.07,
+                "difference": -0.07
+            },
+            {
+                "course_code": "SNT 112",
+                "course_name": "Unknown Course",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 0.07,
+                "difference": -0.07
+            },
+            {
+                "course_code": "SNT 113",
+                "course_name": "Unknown Course",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 0.07,
+                "difference": -0.07
+            },
+            {
+                "course_code": "BLG 477",
+                "course_name": "Multimedia Computing",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 0.06,
+                "difference": -0.06
+            }
+        ],
+        "top_absolute": [
+            {
+                "course_code": "FIZ 101EL",
+                "course_name": "Physics I Laboratory",
+                "absolute_grade": 3.89
+            },
+            {
+                "course_code": "BLG 4902",
+                "course_name": "Computer Engineering Design II",
+                "absolute_grade": 3.71
+            },
+            {
+                "course_code": "ING 201A",
+                "course_name": "Essentials of Res.Paper Writ.",
+                "absolute_grade": 3.68
+            },
+            {
+                "course_code": "FIZ 102EL",
+                "course_name": "Physics II Laboratory",
+                "absolute_grade": 3.5
+            },
+            {
+                "course_code": "FIZ 101",
+                "course_name": "Physics I",
+                "absolute_grade": 3.34
+            }
+        ]
+    },
+    {
+        "cluster_id": 2,
+        "population": 8,
+        "population_percentage": 16.0,
+        "strengths": [
+            {
+                "course_code": "EHB 311",
+                "course_name": "Intr.to Electronics Laboratory",
+                "cluster_avg_grade": 3.62,
+                "overall_avg_grade": 1.79,
+                "difference": 1.83
+            },
+            {
+                "course_code": "BLG 4902",
+                "course_name": "Computer Engineering Design II",
+                "cluster_avg_grade": 3.75,
+                "overall_avg_grade": 2.01,
+                "difference": 1.74
+            },
+            {
+                "course_code": "BLG 354",
+                "course_name": "Signal&Systems for Comp.Eng.",
+                "cluster_avg_grade": 3.06,
+                "overall_avg_grade": 1.39,
+                "difference": 1.67
+            },
+            {
+                "course_code": "BLG 374",
+                "course_name": "Tech. Communic.for Comp.Eng.",
+                "cluster_avg_grade": 3.38,
+                "overall_avg_grade": 1.77,
+                "difference": 1.6
+            },
+            {
+                "course_code": "BLG 317",
+                "course_name": "Database Systems",
+                "cluster_avg_grade": 3.06,
+                "overall_avg_grade": 1.51,
+                "difference": 1.55
+            }
+        ],
+        "weaknesses": [
+            {
+                "course_code": "MAT 103",
+                "course_name": "Mathematics I",
+                "cluster_avg_grade": 0.38,
+                "overall_avg_grade": 2.24,
+                "difference": -1.87
+            },
+            {
+                "course_code": "FIZ 101EL",
+                "course_name": "Physics I Laboratory",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 1.62,
+                "difference": -1.62
+            },
+            {
+                "course_code": "FIZ 101",
+                "course_name": "Physics I",
+                "cluster_avg_grade": 0.0,
+                "overall_avg_grade": 1.33,
+                "difference": -1.33
+            },
+            {
+                "course_code": "MAT 104",
+                "course_name": "Mathematics II",
+                "cluster_avg_grade": 1.25,
+                "overall_avg_grade": 2.41,
+                "difference": -1.16
+            },
+            {
+                "course_code": "FIZ 102",
+                "course_name": "Physics II",
+                "cluster_avg_grade": 0.94,
+                "overall_avg_grade": 1.49,
+                "difference": -0.55
+            }
+        ],
+        "top_absolute": [
+            {
+                "course_code": "BLG 4902",
+                "course_name": "Computer Engineering Design II",
+                "absolute_grade": 3.75
+            },
+            {
+                "course_code": "EHB 311",
+                "course_name": "Intr.to Electronics Laboratory",
+                "absolute_grade": 3.62
+            },
+            {
+                "course_code": "BLG 374",
+                "course_name": "Tech. Communic.for Comp.Eng.",
+                "absolute_grade": 3.38
+            },
+            {
+                "course_code": "ING 201A",
+                "course_name": "Essentials of Res.Paper Writ.",
+                "absolute_grade": 3.31
+            },
+            {
+                "course_code": "BLG 335",
+                "course_name": "Analysis of Algorithms I",
+                "absolute_grade": 3.12
+            }
+        ]
+    }
+]
