@@ -223,8 +223,8 @@ if __name__ == "__main__":
         print("Training Autoencoder...")
         autoencoder, encoder = build_autoencoder(X.shape[1])
         autoencoder.compile(optimizer='adam', loss='mse')
-        # verbose=1 so you can see AE loss too
-        autoencoder.fit(X, X, batch_size=32, epochs=200, verbose=1) 
+        # verbose=1 so you can see AE loss too, history is stored to plot later
+        history_ae = autoencoder.fit(X, X, batch_size=32, epochs=200, verbose=1) 
         
 # 4. DEC CLUSTERING
         print("\nInitializing DEC...")
@@ -267,6 +267,9 @@ if __name__ == "__main__":
         
         index_array = np.arange(X.shape[0])
         
+        # Array to store DEC loss for plotting
+        dec_losses = []
+        
         for ite in range(int(maxiter)):
             if ite % update_interval == 0:
                 q = dec_model.predict(X, verbose=0)
@@ -285,6 +288,7 @@ if __name__ == "__main__":
             # Train on batch
             idx = index_array[index * batch_size: min((index+1) * batch_size, X.shape[0])]
             loss = dec_model.train_on_batch(x=X[idx], y=p[idx])
+            dec_losses.append(loss)
             
             # Reset index if end of epoch
             index = index + 1 if (index + 1) * batch_size <= X.shape[0] else 0
@@ -303,6 +307,31 @@ if __name__ == "__main__":
         print("\nFinal clusters saved to 'student_final_clusters.csv'")
         
         # 6. VISUALIZATION
+        print("Generating Loss Plots...")
+        plt.figure(figsize=(12, 5))
+        
+        # Autoencoder Loss Plot
+        plt.subplot(1, 2, 1)
+        plt.plot(history_ae.history['loss'], label='AE Loss (MSE)', color='blue')
+        plt.title('Autoencoder Training Loss')
+        plt.xlabel('Epochs')
+        plt.ylabel('Loss')
+        plt.legend()
+        plt.grid(True)
+        
+        # DEC Loss Plot
+        plt.subplot(1, 2, 2)
+        plt.plot(dec_losses, label='DEC Loss (KLD)', color='orange')
+        plt.title('DEC Training Loss')
+        plt.xlabel('Iterations')
+        plt.ylabel('Loss')
+        plt.legend()
+        plt.grid(True)
+        
+        plt.tight_layout()
+        plt.savefig('loss_plots.png')
+        print("Done. Saved loss plots as 'loss_plots.png'")
+        
         print("Generating PCA Plot...")
         pca = PCA(n_components=2)
         X_pca = pca.fit_transform(encoder.predict(X, verbose=0))
