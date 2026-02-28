@@ -1,0 +1,115 @@
+====================================================
+    INTRA-GENDER CLUSTER PERFORMANCE REPORT
+====================================================
+
+### >>> ERKEK STUDENTS <<< (Total: 41)
+
+--- CLUSTER 0 (ERKEK) ---
+Count: 18 (43.9% of all Erkeks)
+
+  [+] RELATIVE STRENGTHS:
+      - MAT 103 (Mathematics I): 2.83 (Avg: 2.16 -> +0.67)
+      - MAT 104 (Mathematics II): 2.50 (Avg: 2.41 -> +0.09)
+
+  [-] RELATIVE WEAKNESSES:
+      - BLG 4902 (Computer Engineering Design II): 0.00 (Avg: 2.07 -> -2.07)
+      - ING 201A (Essentials of Res.Paper Writ.): 0.00 (Avg: 1.98 -> -1.98)
+      - EHB 311 (Intr.to Electronics Laboratory): 0.00 (Avg: 1.87 -> -1.87)
+      - BLG 374 (Tech. Communic.for Comp.Eng.): 0.00 (Avg: 1.82 -> -1.82)
+      - BLG 335 (Analysis of Algorithms I): 0.00 (Avg: 1.73 -> -1.73)
+
+====================================================
+
+--- CLUSTER 1 (ERKEK) ---
+Count: 16 (39.0% of all Erkeks)
+
+  [+] RELATIVE STRENGTHS:
+      - FIZ 101EL (Physics I Laboratory): 3.88 (Avg: 1.68 -> +2.19)
+      - FIZ 101 (Physics I): 3.31 (Avg: 1.37 -> +1.95)
+      - ING 201A (Essentials of Res.Paper Writ.): 3.66 (Avg: 1.98 -> +1.68)
+      - FIZ 102EL (Physics II Laboratory): 3.41 (Avg: 1.77 -> +1.64)
+      - BLG 4902 (Computer Engineering Design II): 3.69 (Avg: 2.07 -> +1.61)
+
+  [-] RELATIVE WEAKNESSES:
+      - BLG 447 (Unknown Course): 0.00 (Avg: 0.10 -> -0.10)
+      - SNT 102 (Unknown Course): 0.00 (Avg: 0.09 -> -0.09)
+      - SNT 112 (Unknown Course): 0.00 (Avg: 0.09 -> -0.09)
+      - SNT 113 (Unknown Course): 0.00 (Avg: 0.09 -> -0.09)
+      - BLG 477 (Unknown Course): 0.00 (Avg: 0.07 -> -0.07)
+
+====================================================
+
+--- CLUSTER 2 (ERKEK) ---
+Count: 7 (17.1% of all Erkeks)
+
+  [+] RELATIVE STRENGTHS:
+      - EHB 311 (Intr.to Electronics Laboratory): 3.71 (Avg: 1.87 -> +1.85)
+      - BLG 4902 (Computer Engineering Design II): 3.71 (Avg: 2.07 -> +1.64)
+      - BLG 242 (Logic Circuits Laboratory): 3.21 (Avg: 1.59 -> +1.63)
+      - BLG 354 (Signal&Systems for Comp.Eng.): 3.00 (Avg: 1.44 -> +1.56)
+      - BLG 374 (Tech. Communic.for Comp.Eng.): 3.29 (Avg: 1.82 -> +1.47)
+
+  [-] RELATIVE WEAKNESSES:
+      - MAT 103 (Mathematics I): 0.43 (Avg: 2.16 -> -1.73)
+      - FIZ 101EL (Physics I Laboratory): 0.00 (Avg: 1.68 -> -1.68)
+      - FIZ 101 (Physics I): 0.00 (Avg: 1.37 -> -1.37)
+      - MAT 104 (Mathematics II): 1.43 (Avg: 2.41 -> -0.99)
+      - BLG 439 (Unknown Course): 0.00 (Avg: 0.39 -> -0.39)
+
+====================================================
+
+### >>> KADIN STUDENTS <<< (Total: 9)
+
+--- CLUSTER 0 (KADIN) ---
+Count: 5 (55.6% of all Kadıns)
+
+  [+] RELATIVE STRENGTHS:
+      - MAT 103 (Mathematics I): 2.90 (Avg: 2.61 -> +0.29)
+
+  [-] RELATIVE WEAKNESSES:
+      - BLG 4902 (Computer Engineering Design II): 0.00 (Avg: 1.72 -> -1.72)
+      - ING 201A (Essentials of Res.Paper Writ.): 0.00 (Avg: 1.72 -> -1.72)
+      - BLG 101 (Intr. to Information Systems): 0.00 (Avg: 1.56 -> -1.56)
+      - BLG 112 (Discrete Mathematics): 0.00 (Avg: 1.56 -> -1.56)
+      - BLG 374 (Tech. Communic.for Comp.Eng.): 0.00 (Avg: 1.56 -> -1.56)
+
+====================================================
+
+--- CLUSTER 1 (KADIN) ---
+Count: 3 (33.3% of all Kadıns)
+
+  [+] RELATIVE STRENGTHS:
+      - FIZ 101EL (Physics I Laboratory): 4.00 (Avg: 1.33 -> +2.67)
+      - BLG 210 (Engineering Mathematics): 3.50 (Avg: 1.17 -> +2.33)
+      - FIZ 101 (Physics I): 3.50 (Avg: 1.17 -> +2.33)
+      - FIZ 102EL (Physics II Laboratory): 4.00 (Avg: 1.78 -> +2.22)
+      - BLG 242 (Logic Circuits Laboratory): 3.50 (Avg: 1.39 -> +2.11)
+
+  [-] RELATIVE WEAKNESSES:
+      - BLG 346 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 438 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 439 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 440 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 442 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+
+====================================================
+
+--- CLUSTER 2 (KADIN) ---
+Count: 1 (11.1% of all Kadıns)
+
+  [+] RELATIVE STRENGTHS:
+      - BLG 368 (Unknown Course): 4.00 (Avg: 0.83 -> +3.17)
+      - BLG 4901 (Computer Engineering Design I): 4.00 (Avg: 0.89 -> +3.11)
+      - BLG 459 (Computer Security): 3.50 (Avg: 0.61 -> +2.89)
+      - BLG 460 (Unknown Course): 3.50 (Avg: 0.67 -> +2.83)
+      - BLG 336 (Analysis of Algorithms II): 4.00 (Avg: 1.22 -> +2.78)
+
+  [-] RELATIVE WEAKNESSES:
+      - MAT 103 (Mathematics I): 0.00 (Avg: 2.61 -> -2.61)
+      - MAT 104 (Mathematics II): 0.00 (Avg: 2.39 -> -2.39)
+      - FIZ 102EL (Physics II Laboratory): 0.00 (Avg: 1.78 -> -1.78)
+      - FIZ 102 (Physics II): 0.00 (Avg: 1.67 -> -1.67)
+      - FIZ 101EL (Physics I Laboratory): 0.00 (Avg: 1.33 -> -1.33)
+
+====================================================
+

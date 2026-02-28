@@ -1,0 +1,79 @@
+====================================================
+      AI INSTRUCTOR: STUDENT CLUSTER ANALYSIS REPORT
+====================================================
+
+--- CLUSTER 0 PROFILE ---
+Population: 23 students (46.0% of total)
+
+  [+] SUCCESSFUL AT (Relative Strengths):
+      - MAT 103 (Mathematics I): 2.85 (Avg is 2.24 -> +0.61)
+      - MAT 104 (Mathematics II): 2.41 (Avg is 2.41 -> +0.00)
+
+  [-] WEAK WITH (Relative Weaknesses):
+      - BLG 4902 (Computer Engineering Design II): 0.00 (Avg is 2.01 -> -2.01)
+      - ING 201A (Essentials of Res.Paper Writ.): 0.00 (Avg is 1.93 -> -1.93)
+      - EHB 311 (Intr.to Electronics Laboratory): 0.00 (Avg is 1.79 -> -1.79)
+      - BLG 374 (Tech. Communic.for Comp.Eng.): 0.00 (Avg is 1.77 -> -1.77)
+      - BLG 335 (Analysis of Algorithms I): 0.00 (Avg is 1.66 -> -1.66)
+
+  [★] ABSOLUTE TOP PERFORMING COURSES:
+      - MAT 103 (Mathematics I): 2.85/4.00
+      - MAT 104 (Mathematics II): 2.41/4.00
+      - MAT 271 (Probability and Statistics): 0.74/4.00
+      - FIZ 102EL (Physics II Laboratory): 0.50/4.00
+      - BLG 212 (Microprocessor Systems): 0.48/4.00
+
+====================================================
+
+--- CLUSTER 1 PROFILE ---
+Population: 19 students (38.0% of total)
+
+  [+] SUCCESSFUL AT (Relative Strengths):
+      - FIZ 101EL (Physics I Laboratory): 3.89 (Avg is 1.62 -> +2.27)
+      - FIZ 101 (Physics I): 3.34 (Avg is 1.33 -> +2.01)
+      - ING 201A (Essentials of Res.Paper Writ.): 3.68 (Avg is 1.93 -> +1.75)
+      - FIZ 102EL (Physics II Laboratory): 3.50 (Avg is 1.77 -> +1.73)
+      - BLG 4902 (Computer Engineering Design II): 3.71 (Avg is 2.01 -> +1.70)
+
+  [-] WEAK WITH (Relative Weaknesses):
+      - BLG 447 (Compiler Design): 0.00 (Avg is 0.08 -> -0.08)
+      - SNT 102 (Unknown Course): 0.00 (Avg is 0.07 -> -0.07)
+      - SNT 112 (Unknown Course): 0.00 (Avg is 0.07 -> -0.07)
+      - SNT 113 (Unknown Course): 0.00 (Avg is 0.07 -> -0.07)
+      - BLG 477 (Multimedia Computing): 0.00 (Avg is 0.06 -> -0.06)
+
+  [★] ABSOLUTE TOP PERFORMING COURSES:
+      - FIZ 101EL (Physics I Laboratory): 3.89/4.00
+      - BLG 4902 (Computer Engineering Design II): 3.71/4.00
+      - ING 201A (Essentials of Res.Paper Writ.): 3.68/4.00
+      - FIZ 102EL (Physics II Laboratory): 3.50/4.00
+      - FIZ 101 (Physics I): 3.34/4.00
+
+====================================================
+
+--- CLUSTER 2 PROFILE ---
+Population: 8 students (16.0% of total)
+
+  [+] SUCCESSFUL AT (Relative Strengths):
+      - EHB 311 (Intr.to Electronics Laboratory): 3.62 (Avg is 1.79 -> +1.83)
+      - BLG 4902 (Computer Engineering Design II): 3.75 (Avg is 2.01 -> +1.74)
+      - BLG 354 (Signal&Systems for Comp.Eng.): 3.06 (Avg is 1.39 -> +1.67)
+      - BLG 374 (Tech. Communic.for Comp.Eng.): 3.38 (Avg is 1.77 -> +1.60)
+      - BLG 317 (Database Systems): 3.06 (Avg is 1.51 -> +1.55)
+
+  [-] WEAK WITH (Relative Weaknesses):
+      - MAT 103 (Mathematics I): 0.38 (Avg is 2.24 -> -1.87)
+      - FIZ 101EL (Physics I Laboratory): 0.00 (Avg is 1.62 -> -1.62)
+      - FIZ 101 (Physics I): 0.00 (Avg is 1.33 -> -1.33)
+      - MAT 104 (Mathematics II): 1.25 (Avg is 2.41 -> -1.16)
+      - FIZ 102 (Physics II): 0.94 (Avg is 1.49 -> -0.55)
+
+  [★] ABSOLUTE TOP PERFORMING COURSES:
+      - BLG 4902 (Computer Engineering Design II): 3.75/4.00
+      - EHB 311 (Intr.to Electronics Laboratory): 3.62/4.00
+      - BLG 374 (Tech. Communic.for Comp.Eng.): 3.38/4.00
+      - ING 201A (Essentials of Res.Paper Writ.): 3.31/4.00
+      - BLG 335 (Analysis of Algorithms I): 3.12/4.00
+
+====================================================
+

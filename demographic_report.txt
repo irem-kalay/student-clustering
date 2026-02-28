@@ -1,0 +1,60 @@
+====================================================
+        CLUSTER-BASED DEMOGRAPHIC ANALYSIS REPORT
+====================================================
+
+--- CLUSTER 0 PROFILE ---
+Total Valid Student Count: 23
+
+  [GENDER DISTRIBUTION]:
+    - Erkek: 18 students (78.3%)
+    - Kadın: 5 students (21.7%)
+
+  [ENTRY YEAR DISTRIBUTION]:
+    - 2011: 4 students (17.4%)
+    - 2012: 4 students (17.4%)
+    - 2013: 5 students (21.7%)
+    - 2014: 7 students (30.4%)
+    - 2015: 3 students (13.0%)
+
+  > Dominant entry year in this cluster: 2014
+
+====================================================
+
+--- CLUSTER 1 PROFILE ---
+Total Valid Student Count: 19
+
+  [GENDER DISTRIBUTION]:
+    - Erkek: 16 students (84.2%)
+    - Kadın: 3 students (15.8%)
+
+  [ENTRY YEAR DISTRIBUTION]:
+    - 2014: 5 students (26.3%)
+    - 2015: 1 students (5.3%)
+    - 2016: 7 students (36.8%)
+    - 2017: 2 students (10.5%)
+    - 2018: 2 students (10.5%)
+    - 2019: 1 students (5.3%)
+    - 2020: 1 students (5.3%)
+
+  > Dominant entry year in this cluster: 2016
+
+====================================================
+
+--- CLUSTER 2 PROFILE ---
+Total Valid Student Count: 8
+
+  [GENDER DISTRIBUTION]:
+    - Erkek: 7 students (87.5%)
+    - Kadın: 1 students (12.5%)
+
+  [ENTRY YEAR DISTRIBUTION]:
+    - 2014: 1 students (12.5%)
+    - 2016: 2 students (25.0%)
+    - 2017: 1 students (12.5%)
+    - 2018: 3 students (37.5%)
+    - 2020: 1 students (12.5%)
+
+  > Dominant entry year in this cluster: 2018
+
+====================================================
+

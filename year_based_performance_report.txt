@@ -1,0 +1,403 @@
+====================================================
+    INTRA-COHORT (ENTRY YEAR) CLUSTER PERFORMANCE REPORT
+====================================================
+
+### >>> ENTRY YEAR: 2011 <<< (Total Students: 4)
+
+--- CLUSTER 0 (2011 Cohort) ---
+Count: 4 (100.0% of all 2011 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2011 students):
+
+  [-] RELATIVE WEAKNESSES (vs. all 2011 students):
+      - BLG 101 (Intr. to Information Systems): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 102 (Intr to Sci&Eng Comp (C)): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 112 (Discrete Mathematics): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 113 (Intr.to Comp.Eng. and Ethics): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 202 (Numerical Methods in CE): 0.00 (Avg: 0.00 -> 0.00)
+
+====================================================
+
+--- CLUSTER 1 (2011 Cohort) ---
+Count: 0 (0.0% of all 2011 entries)
+
+
+====================================================
+
+--- CLUSTER 2 (2011 Cohort) ---
+Count: 0 (0.0% of all 2011 entries)
+
+
+====================================================
+
+### >>> ENTRY YEAR: 2012 <<< (Total Students: 4)
+
+--- CLUSTER 0 (2012 Cohort) ---
+Count: 4 (100.0% of all 2012 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2012 students):
+
+  [-] RELATIVE WEAKNESSES (vs. all 2012 students):
+      - BLG 101 (Intr. to Information Systems): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 102 (Intr to Sci&Eng Comp (C)): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 112 (Discrete Mathematics): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 113 (Intr.to Comp.Eng. and Ethics): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 202 (Numerical Methods in CE): 0.00 (Avg: 0.00 -> 0.00)
+
+====================================================
+
+--- CLUSTER 1 (2012 Cohort) ---
+Count: 0 (0.0% of all 2012 entries)
+
+
+====================================================
+
+--- CLUSTER 2 (2012 Cohort) ---
+Count: 0 (0.0% of all 2012 entries)
+
+
+====================================================
+
+### >>> ENTRY YEAR: 2013 <<< (Total Students: 5)
+
+--- CLUSTER 0 (2013 Cohort) ---
+Count: 5 (100.0% of all 2013 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2013 students):
+
+  [-] RELATIVE WEAKNESSES (vs. all 2013 students):
+      - BLG 101 (Intr. to Information Systems): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 102 (Intr to Sci&Eng Comp (C)): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 112 (Discrete Mathematics): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 113 (Intr.to Comp.Eng. and Ethics): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 202 (Numerical Methods in CE): 0.00 (Avg: 0.00 -> 0.00)
+
+====================================================
+
+--- CLUSTER 1 (2013 Cohort) ---
+Count: 0 (0.0% of all 2013 entries)
+
+
+====================================================
+
+--- CLUSTER 2 (2013 Cohort) ---
+Count: 0 (0.0% of all 2013 entries)
+
+
+====================================================
+
+### >>> ENTRY YEAR: 2014 <<< (Total Students: 13)
+
+--- CLUSTER 0 (2014 Cohort) ---
+Count: 7 (53.8% of all 2014 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2014 students):
+      - MAT 103 (Mathematics I): 3.07 (Avg: 2.27 -> +0.80)
+      - MAT 104 (Mathematics II): 2.64 (Avg: 2.54 -> +0.10)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2014 students):
+      - ING 201A (Essentials of Res.Paper Writ.): 0.00 (Avg: 1.73 -> -1.73)
+      - BLG 4902 (Computer Engineering Design II): 0.00 (Avg: 1.69 -> -1.69)
+      - BLG 374 (Tech. Communic.for Comp.Eng.): 0.00 (Avg: 1.62 -> -1.62)
+      - BLG 223 (Data Structures): 0.00 (Avg: 1.46 -> -1.46)
+      - EHB 311 (Intr.to Electronics Laboratory): 0.00 (Avg: 1.42 -> -1.42)
+
+====================================================
+
+--- CLUSTER 1 (2014 Cohort) ---
+Count: 5 (38.5% of all 2014 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2014 students):
+      - FIZ 101EL (Physics I Laboratory): 3.90 (Avg: 1.73 -> +2.17)
+      - ING 201A (Essentials of Res.Paper Writ.): 3.80 (Avg: 1.73 -> +2.07)
+      - BLG 101 (Intr. to Information Systems): 3.30 (Avg: 1.27 -> +2.03)
+      - BLG 4902 (Computer Engineering Design II): 3.60 (Avg: 1.69 -> +1.91)
+      - BLG 374 (Tech. Communic.for Comp.Eng.): 3.50 (Avg: 1.62 -> +1.88)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2014 students):
+      - MAT 103 (Mathematics I): 1.60 (Avg: 2.27 -> -0.67)
+      - BLG 447 (Unknown Course): 0.00 (Avg: 0.31 -> -0.31)
+      - SNT 103 (Unknown Course): 0.00 (Avg: 0.31 -> -0.31)
+      - BLG 337 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 449 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+
+====================================================
+
+--- CLUSTER 2 (2014 Cohort) ---
+Count: 1 (7.7% of all 2014 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2014 students):
+      - BLG 447 (Unknown Course): 4.00 (Avg: 0.31 -> +3.69)
+      - SNT 103 (Unknown Course): 4.00 (Avg: 0.31 -> +3.69)
+      - BLG 443 (Unknown Course): 4.00 (Avg: 0.81 -> +3.19)
+      - BLG 458 (Unknown Course): 4.00 (Avg: 1.00 -> +3.00)
+      - BLG 252 (Object Oriented Programming): 4.00 (Avg: 1.15 -> +2.85)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2014 students):
+      - MAT 104 (Mathematics II): 0.00 (Avg: 2.54 -> -2.54)
+      - MAT 103 (Mathematics I): 0.00 (Avg: 2.27 -> -2.27)
+      - FIZ 101EL (Physics I Laboratory): 0.00 (Avg: 1.73 -> -1.73)
+      - FIZ 101 (Physics I): 0.00 (Avg: 1.54 -> -1.54)
+      - BLG 101 (Intr. to Information Systems): 0.00 (Avg: 1.27 -> -1.27)
+
+====================================================
+
+### >>> ENTRY YEAR: 2015 <<< (Total Students: 4)
+
+--- CLUSTER 0 (2015 Cohort) ---
+Count: 3 (75.0% of all 2015 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2015 students):
+      - MAT 103 (Mathematics I): 2.83 (Avg: 2.62 -> +0.21)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2015 students):
+      - BLG 101 (Intr. to Information Systems): 0.00 (Avg: 1.00 -> -1.00)
+      - BLG 112 (Discrete Mathematics): 0.00 (Avg: 1.00 -> -1.00)
+      - BLG 223 (Data Structures): 0.00 (Avg: 1.00 -> -1.00)
+      - BLG 311 (Formal Languages and Automata): 0.00 (Avg: 1.00 -> -1.00)
+      - BLG 335 (Analysis of Algorithms I): 0.00 (Avg: 1.00 -> -1.00)
+
+====================================================
+
+--- CLUSTER 1 (2015 Cohort) ---
+Count: 1 (25.0% of all 2015 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2015 students):
+      - BLG 101 (Intr. to Information Systems): 4.00 (Avg: 1.00 -> +3.00)
+      - BLG 112 (Discrete Mathematics): 4.00 (Avg: 1.00 -> +3.00)
+      - BLG 223 (Data Structures): 4.00 (Avg: 1.00 -> +3.00)
+      - BLG 311 (Formal Languages and Automata): 4.00 (Avg: 1.00 -> +3.00)
+      - BLG 335 (Analysis of Algorithms I): 4.00 (Avg: 1.00 -> +3.00)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2015 students):
+      - MAT 103 (Mathematics I): 2.00 (Avg: 2.62 -> -0.62)
+      - BLG 337 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 368 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 438 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+      - BLG 440 (Unknown Course): 0.00 (Avg: 0.00 -> 0.00)
+
+====================================================
+
+--- CLUSTER 2 (2015 Cohort) ---
+Count: 0 (0.0% of all 2015 entries)
+
+
+====================================================
+
+### >>> ENTRY YEAR: 2016 <<< (Total Students: 9)
+
+--- CLUSTER 0 (2016 Cohort) ---
+Count: 0 (0.0% of all 2016 entries)
+
+
+====================================================
+
+--- CLUSTER 1 (2016 Cohort) ---
+Count: 7 (77.8% of all 2016 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2016 students):
+      - FIZ 101EL (Physics I Laboratory): 3.93 (Avg: 3.06 -> +0.87)
+      - FIZ 101 (Physics I): 3.14 (Avg: 2.44 -> +0.70)
+      - FIZ 102EL (Physics II Laboratory): 3.14 (Avg: 2.44 -> +0.70)
+      - FIZ 102 (Physics II): 2.71 (Avg: 2.11 -> +0.60)
+      - MAT 281 (Linear Algebra and Applicat.): 2.71 (Avg: 2.11 -> +0.60)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2016 students):
+      - BLG 368 (Unknown Course): 0.86 (Avg: 1.39 -> -0.53)
+      - BLG 459 (Computer Security): 2.07 (Avg: 2.50 -> -0.43)
+      - SNT 112 (Unknown Course): 0.00 (Avg: 0.39 -> -0.39)
+      - KON 317 (Unknown Course): 0.29 (Avg: 0.61 -> -0.33)
+      - BLG 475 (Software Quality and Testing): 0.36 (Avg: 0.67 -> -0.31)
+
+====================================================
+
+--- CLUSTER 2 (2016 Cohort) ---
+Count: 2 (22.2% of all 2016 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2016 students):
+      - BLG 368 (Unknown Course): 3.25 (Avg: 1.39 -> +1.86)
+      - BLG 459 (Computer Security): 4.00 (Avg: 2.50 -> +1.50)
+      - SNT 112 (Unknown Course): 1.75 (Avg: 0.39 -> +1.36)
+      - KON 317 (Unknown Course): 1.75 (Avg: 0.61 -> +1.14)
+      - BLG 475 (Software Quality and Testing): 1.75 (Avg: 0.67 -> +1.08)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2016 students):
+      - FIZ 101EL (Physics I Laboratory): 0.00 (Avg: 3.06 -> -3.06)
+      - FIZ 101 (Physics I): 0.00 (Avg: 2.44 -> -2.44)
+      - FIZ 102EL (Physics II Laboratory): 0.00 (Avg: 2.44 -> -2.44)
+      - FIZ 102 (Physics II): 0.00 (Avg: 2.11 -> -2.11)
+      - MAT 281 (Linear Algebra and Applicat.): 0.00 (Avg: 2.11 -> -2.11)
+
+====================================================
+
+### >>> ENTRY YEAR: 2017 <<< (Total Students: 3)
+
+--- CLUSTER 0 (2017 Cohort) ---
+Count: 0 (0.0% of all 2017 entries)
+
+
+====================================================
+
+--- CLUSTER 1 (2017 Cohort) ---
+Count: 2 (66.7% of all 2017 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2017 students):
+      - FIZ 101EL (Physics I Laboratory): 3.75 (Avg: 2.50 -> +1.25)
+      - FIZ 102EL (Physics II Laboratory): 3.75 (Avg: 2.50 -> +1.25)
+      - FIZ 101 (Physics I): 3.25 (Avg: 2.17 -> +1.08)
+      - FIZ 102 (Physics II): 3.25 (Avg: 2.17 -> +1.08)
+      - BLG 210 (Engineering Mathematics): 2.75 (Avg: 1.83 -> +0.92)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2017 students):
+      - BLG 443 (Unknown Course): 0.00 (Avg: 1.17 -> -1.17)
+      - BLG 453 (Unknown Course): 0.00 (Avg: 1.17 -> -1.17)
+      - SNT 113 (Unknown Course): 0.00 (Avg: 1.17 -> -1.17)
+      - BLG 440 (Unknown Course): 0.00 (Avg: 1.00 -> -1.00)
+      - MAL 201 (Unknown Course): 0.00 (Avg: 1.00 -> -1.00)
+
+====================================================
+
+--- CLUSTER 2 (2017 Cohort) ---
+Count: 1 (33.3% of all 2017 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2017 students):
+      - BLG 443 (Unknown Course): 3.50 (Avg: 1.17 -> +2.33)
+      - BLG 453 (Unknown Course): 3.50 (Avg: 1.17 -> +2.33)
+      - SNT 113 (Unknown Course): 3.50 (Avg: 1.17 -> +2.33)
+      - BLG 440 (Unknown Course): 3.00 (Avg: 1.00 -> +2.00)
+      - MAL 201 (Unknown Course): 3.00 (Avg: 1.00 -> +2.00)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2017 students):
+      - FIZ 101EL (Physics I Laboratory): 0.00 (Avg: 2.50 -> -2.50)
+      - FIZ 102EL (Physics II Laboratory): 0.00 (Avg: 2.50 -> -2.50)
+      - FIZ 101 (Physics I): 0.00 (Avg: 2.17 -> -2.17)
+      - FIZ 102 (Physics II): 0.00 (Avg: 2.17 -> -2.17)
+      - BLG 210 (Engineering Mathematics): 0.00 (Avg: 1.83 -> -1.83)
+
+====================================================
+
+### >>> ENTRY YEAR: 2018 <<< (Total Students: 5)
+
+--- CLUSTER 0 (2018 Cohort) ---
+Count: 0 (0.0% of all 2018 entries)
+
+
+====================================================
+
+--- CLUSTER 1 (2018 Cohort) ---
+Count: 2 (40.0% of all 2018 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2018 students):
+      - FIZ 101EL (Physics I Laboratory): 4.00 (Avg: 1.60 -> +2.40)
+      - FIZ 101 (Physics I): 3.75 (Avg: 1.50 -> +2.25)
+      - BLG 456 (Unknown Course): 3.50 (Avg: 1.40 -> +2.10)
+      - BLG 448 (Unknown Course): 3.25 (Avg: 1.30 -> +1.95)
+      - MAT 103 (Mathematics I): 4.00 (Avg: 2.20 -> +1.80)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2018 students):
+      - BLG 460 (Unknown Course): 0.00 (Avg: 2.10 -> -2.10)
+      - BLG 459 (Computer Security): 0.00 (Avg: 1.50 -> -1.50)
+      - BLG 442 (Unknown Course): 0.00 (Avg: 1.10 -> -1.10)
+      - BLG 354 (Signal&Systems for Comp.Eng.): 1.50 (Avg: 2.50 -> -1.00)
+      - BLG 454 (Learning From Data): 2.00 (Avg: 2.70 -> -0.70)
+
+====================================================
+
+--- CLUSTER 2 (2018 Cohort) ---
+Count: 3 (60.0% of all 2018 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2018 students):
+      - BLG 460 (Unknown Course): 3.50 (Avg: 2.10 -> +1.40)
+      - BLG 459 (Computer Security): 2.50 (Avg: 1.50 -> +1.00)
+      - BLG 442 (Unknown Course): 1.83 (Avg: 1.10 -> +0.73)
+      - BLG 354 (Signal&Systems for Comp.Eng.): 3.17 (Avg: 2.50 -> +0.67)
+      - MAL 201 (Unknown Course): 1.17 (Avg: 0.70 -> +0.47)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2018 students):
+      - FIZ 101EL (Physics I Laboratory): 0.00 (Avg: 1.60 -> -1.60)
+      - FIZ 101 (Physics I): 0.00 (Avg: 1.50 -> -1.50)
+      - BLG 456 (Unknown Course): 0.00 (Avg: 1.40 -> -1.40)
+      - BLG 448 (Unknown Course): 0.00 (Avg: 1.30 -> -1.30)
+      - MAT 103 (Mathematics I): 1.00 (Avg: 2.20 -> -1.20)
+
+====================================================
+
+### >>> ENTRY YEAR: 2019 <<< (Total Students: 1)
+
+--- CLUSTER 0 (2019 Cohort) ---
+Count: 0 (0.0% of all 2019 entries)
+
+
+====================================================
+
+--- CLUSTER 1 (2019 Cohort) ---
+Count: 1 (100.0% of all 2019 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2019 students):
+      - BLG 101 (Intr. to Information Systems): 4.00 (Avg: 4.00 -> +0.00)
+      - BLG 102 (Intr to Sci&Eng Comp (C)): 4.00 (Avg: 4.00 -> +0.00)
+      - BLG 112 (Discrete Mathematics): 4.00 (Avg: 4.00 -> +0.00)
+      - BLG 113 (Intr.to Comp.Eng. and Ethics): 3.00 (Avg: 3.00 -> +0.00)
+      - BLG 202 (Numerical Methods in CE): 4.00 (Avg: 4.00 -> +0.00)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2019 students):
+      - BLG 101 (Intr. to Information Systems): 4.00 (Avg: 4.00 -> 0.00)
+      - BLG 102 (Intr to Sci&Eng Comp (C)): 4.00 (Avg: 4.00 -> 0.00)
+      - BLG 112 (Discrete Mathematics): 4.00 (Avg: 4.00 -> 0.00)
+      - BLG 113 (Intr.to Comp.Eng. and Ethics): 3.00 (Avg: 3.00 -> 0.00)
+      - BLG 202 (Numerical Methods in CE): 4.00 (Avg: 4.00 -> 0.00)
+
+====================================================
+
+--- CLUSTER 2 (2019 Cohort) ---
+Count: 0 (0.0% of all 2019 entries)
+
+
+====================================================
+
+### >>> ENTRY YEAR: 2020 <<< (Total Students: 2)
+
+--- CLUSTER 0 (2020 Cohort) ---
+Count: 0 (0.0% of all 2020 entries)
+
+
+====================================================
+
+--- CLUSTER 1 (2020 Cohort) ---
+Count: 1 (50.0% of all 2020 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2020 students):
+      - FIZ 101EL (Physics I Laboratory): 4.00 (Avg: 2.00 -> +2.00)
+      - FIZ 102EL (Physics II Laboratory): 4.00 (Avg: 2.00 -> +2.00)
+      - MAT 103 (Mathematics I): 4.00 (Avg: 2.00 -> +2.00)
+      - FIZ 101 (Physics I): 3.50 (Avg: 1.75 -> +1.75)
+      - ING 112A (Basics of Academic Writing): 3.50 (Avg: 1.75 -> +1.75)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2020 students):
+      - BLG 454 (Learning From Data): 0.00 (Avg: 1.75 -> -1.75)
+      - BLG 478 (Unknown Course): 0.00 (Avg: 1.25 -> -1.25)
+      - BLG 242 (Logic Circuits Laboratory): 2.00 (Avg: 3.00 -> -1.00)
+      - MAT 271 (Probability and Statistics): 2.50 (Avg: 3.25 -> -0.75)
+      - BLG 210 (Engineering Mathematics): 2.50 (Avg: 3.00 -> -0.50)
+
+====================================================
+
+--- CLUSTER 2 (2020 Cohort) ---
+Count: 1 (50.0% of all 2020 entries)
+
+  [+] RELATIVE STRENGTHS (vs. all 2020 students):
+      - BLG 454 (Learning From Data): 3.50 (Avg: 1.75 -> +1.75)
+      - BLG 478 (Unknown Course): 2.50 (Avg: 1.25 -> +1.25)
+      - BLG 242 (Logic Circuits Laboratory): 4.00 (Avg: 3.00 -> +1.00)
+      - MAT 271 (Probability and Statistics): 4.00 (Avg: 3.25 -> +0.75)
+      - BLG 210 (Engineering Mathematics): 3.50 (Avg: 3.00 -> +0.50)
+
+  [-] RELATIVE WEAKNESSES (vs. all 2020 students):
+      - FIZ 101EL (Physics I Laboratory): 0.00 (Avg: 2.00 -> -2.00)
+      - FIZ 102EL (Physics II Laboratory): 0.00 (Avg: 2.00 -> -2.00)
+      - MAT 103 (Mathematics I): 0.00 (Avg: 2.00 -> -2.00)
+      - FIZ 101 (Physics I): 0.00 (Avg: 1.75 -> -1.75)
+      - ING 112A (Basics of Academic Writing): 0.00 (Avg: 1.75 -> -1.75)
+
+====================================================
+

@@ -10,7 +10,6 @@ from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 
-
 import random
 
 # ==========================================
@@ -119,7 +118,11 @@ def load_raw_student_data(student_files):
         if (i+1)%50==0: sys.stdout.write(f"\rLoading: {i+1}/{total}")
         try:
             df = pd.read_excel(file) if file.endswith('.xlsx') else pd.read_csv(file)
-            sid = f"Student_{i+1}"
+            
+            # DOSYA ADINI ID OLARAK ALMA KISMI EKLENDİ
+            base_name = os.path.basename(file)
+            sid, _ = os.path.splitext(base_name)
+            
             for _, row in df.iterrows():
                 grade = parse_grade(row['Harf Notu'])
                 if grade is not None:
@@ -188,7 +191,7 @@ if __name__ == "__main__":
     
     # 1. SETUP PATHS
     eq_file = "dersdenklikleri.csv" 
-    student_dir = os.path.join(script_dir, 'fixed_xlsx')
+    student_dir = os.path.join(script_dir, 'test-sınıf-50')
     
     if os.path.exists(student_dir):
         student_files = [os.path.join(student_dir, f) for f in os.listdir(student_dir) 
@@ -223,14 +226,24 @@ if __name__ == "__main__":
         # verbose=1 so you can see AE loss too
         autoencoder.fit(X, X, batch_size=32, epochs=200, verbose=1) 
         
-        # 4. DEC CLUSTERING
+# 4. DEC CLUSTERING
         print("\nInitializing DEC...")
-        kmeans = KMeans(n_clusters=5, n_init=20, random_state=SEED)
+        # Sınıf mevcuduna göre dinamik küme sayısı belirleme
+        student_count = len(clean_df)
+
+        if student_count < 40:
+            n_clusters = 2
+        elif student_count <= 100:
+            n_clusters = 3
+        else:
+            n_clusters = 5
+            
+        kmeans = KMeans(n_clusters=n_clusters, n_init=20, random_state=SEED)
         y_pred = kmeans.fit_predict(encoder.predict(X))
         
         # Build DEC Model
         dec_model = models.Model(inputs=encoder.input, 
-                                 outputs=ClusteringLayer(5, weights=[kmeans.cluster_centers_])(encoder.output))
+                                 outputs=ClusteringLayer(n_clusters, weights=[kmeans.cluster_centers_])(encoder.output))
         dec_model.compile(optimizer='adam', loss='kld')
         
         # --- DEC TRAINING LOOP ---
@@ -240,8 +253,13 @@ if __name__ == "__main__":
         maxiter = 2000 # Max iterations
         update_interval = 140 # Update target distribution p every 140 iters
         tol = 0.001 # Tolerance for convergence
-        batch_size = 256
         
+        # YORUMUNUZU KODA DÖKTÜK: Öğrenci sayısına göre dinamik batch_size
+        if student_count <= 100:
+            batch_size = 16
+        else:
+            batch_size = 256 
+            
         # Initialize q and p
         q = dec_model.predict(X, verbose=0)
         p = target_distribution(q)
@@ -295,3 +313,157 @@ if __name__ == "__main__":
         plt.colorbar(label='Cluster')
         plt.savefig('cluster_plot.png')
         print("Done. Saved plot as 'cluster_plot.png'")
+        
+        # ==========================================
+        # 7. CLUSTER ANALYSIS & REPORT GENERATION
+        # ==========================================
+        print("\nGenerating Report for Instructor AI...")
+        
+        # Course name mapping dictionary
+        COURSE_NAMES = {
+            "FIZ 101": "Physics I",
+            "FIZ 101EL": "Physics I Laboratory",
+            "BLG 101": "Intr. to Information Systems",
+            "BLG 113": "Intr.to Comp.Eng. and Ethics",
+            "MAT 103": "Mathematics I",
+            "MAT 281": "Linear Algebra and Applicat.",
+            "ING 100": "EAP Through Global Goals",
+            "BLG 112": "Discrete Mathematics",
+            "BLG 102": "Intr to Sci&Eng Comp (C)",
+            "MAT 104": "Mathematics II",
+            "FIZ 102": "Physics II",
+            "FIZ 102EL": "Physics II Laboratory",
+            "ING 112A": "Basics of Academic Writing",
+            "DAN 102": "Girişimcilik & Kariyer Danış.",
+            "BLG 210": "Engineering Mathematics",
+            "BLG 231": "Digital Circuits",
+            "BLG 223": "Data Structures",
+            "EHB 222": "Introduction to Electronics",
+            "EHB 211": "Basics of Electrical Circuits",
+            "ING 201A": "Essentials of Res.Paper Writ.",
+            "BLG 252": "Object Oriented Programming",
+            "BLG 222": "Computer Organization",
+            "BLG 242": "Logic Circuits Laboratory",
+            "BLG 202": "Numerical Methods in CE",
+            "BLG 311": "Formal Languages and Automata",
+            "TUR 121": "Türk Dili I",
+            "BLG 335": "Analysis of Algorithms I",
+            "MAT 271": "Probability and Statistics",
+            "BLG 351": "Microcomputer Lab.",
+            "TUR 122": "Türk Dili II",
+            "BLG 317": "Database Systems",
+            "BLG 212": "Microprocessor Systems",
+            "EHB 311": "Intr.to Electronics Laboratory",
+            "BLG 322": "Computer Architecture",
+            "BLG 312": "Computer Operating Systems",
+            "BLG 336": "Analysis of Algorithms II",
+            "ATA 121": "Atatürk İlk & İnkılap Trh I",
+            "BLG 354": "Signal&Systems for Comp.Eng.",
+            "BLG 374": "Tech. Communic.for Comp.Eng.",
+            "ATA 122": "Atatürk İlk & İnkılap Trh II",
+            "BLG 411": "Software Engineering",
+            "BLG 4901": "Computer Engineering Design I",
+            "BLG 4902": "Computer Engineering Design II",
+            "EKO 201": "Economics",
+            "BLG 337": "Principles of Computer Comm.",
+            "BLG 345": "Logic & Computability",
+            "BLG 348": "Introduction to Bioinformatics",
+            "BLG 368": "Operations Research",
+            "BLG 442": "Tech.&Innov. Mng.for Inf.Tech.",
+            "BLG 448": "Project Management in Eng.",
+            "BLG 454": "Learning From Data",
+            "KON 224": "Measurement&Instrumentation",
+            "KON 317": "Control Systems",
+            "MAL 201": "Materials Science",
+            "BLG 413": "System Programming",
+            "BLG 430": "Computer Networks",
+            "BLG 433": "Computer Communications",
+            "BLG 434": "Introduction to Expert Systems",
+            "BLG 435": "Artificial Intelligence",
+            "BLG 438": "Digital System Design Laboratory",
+            "BLG 439": "Computer Project I",
+            "BLG 440": "Computer Project II",
+            "BLG 443": "Discrete Event Simulation",
+            "BLG 444": "Computer Graphics",
+            "BLG 447": "Compiler Design",
+            "BLG 449": "Prog.in Parallel&DistrubedSys.",
+            "BLG 450": "Real-Time Systems Software",
+            "BLG 451": "Real-Time Systems",
+            "BLG 452": "Microprocessor Design Laboratory",
+            "BLG 453": "Computer Vision",
+            "BLG 456": "Robotics",
+            "BLG 458": "Functional Programming",
+            "BLG 459": "Computer Security",
+            "BLG 460": "Secure Programming",
+            "BLG 475": "Software Quality and Testing",
+            "BLG 477": "Multimedia Computing",
+            "BLG 478": "Network Security",
+            "BLG 481": "Al Accelerators Lab.",
+            "BLG 483": "Artificial Intelligence Aided Computer Engineering",
+            "YZV 406": "Robotics"
+        }
+
+        # Add cluster labels temporarily to our dataframe to calculate means
+        analysis_df = clean_df.copy()
+        analysis_df['Cluster'] = clusters
+        
+        # Calculate overall means for baseline comparison
+        overall_means = clean_df.mean()
+        
+        with open('report.txt', 'w', encoding='utf-8') as f:
+            f.write("====================================================\n")
+            f.write("      AI INSTRUCTOR: STUDENT CLUSTER ANALYSIS REPORT\n")
+            f.write("====================================================\n\n")
+            
+            # DÜZELTME BURADA: range(5) yerine range(n_clusters)
+            for c_id in range(n_clusters):  
+                cluster_data = analysis_df[analysis_df['Cluster'] == c_id].drop('Cluster', axis=1)
+                student_count_in_cluster = len(cluster_data)
+                
+                f.write(f"--- CLUSTER {c_id} PROFILE ---\n")
+                f.write(f"Population: {student_count_in_cluster} students ({(student_count_in_cluster/len(clean_df))*100:.1f}% of total)\n\n")
+                
+                if student_count_in_cluster == 0:
+                    f.write("  [Empty Cluster]\n\n")
+                    continue
+                
+                # Calculate the average course grade inside this cluster
+                cluster_means = cluster_data.mean()
+                
+                # Compare to overall population to find relative strengths/weaknesses
+                diff = cluster_means - overall_means
+                
+                # Helper function to get the formatted name
+                def get_course_label(course_code):
+                    name = COURSE_NAMES.get(course_code, "Unknown Course")
+                    return f"{course_code} ({name})"
+                
+                # Top 5 Relative Strengths
+                strengths = diff.nlargest(5)
+                f.write("  [+] SUCCESSFUL AT (Relative Strengths):\n")
+                for course, diff_val in strengths.items():
+                    avg_grade = cluster_means[course]
+                    if avg_grade > 0:
+                        course_label = get_course_label(course)
+                        f.write(f"      - {course_label}: {avg_grade:.2f} (Avg is {overall_means[course]:.2f} -> +{diff_val:.2f})\n")
+                
+                # Top 5 Relative Weaknesses
+                weaknesses = diff.nsmallest(5)
+                f.write("\n  [-] WEAK WITH (Relative Weaknesses):\n")
+                for course, diff_val in weaknesses.items():
+                    avg_grade = cluster_means[course]
+                    course_label = get_course_label(course)
+                    f.write(f"      - {course_label}: {avg_grade:.2f} (Avg is {overall_means[course]:.2f} -> {diff_val:.2f})\n")
+                
+                # Top 5 Highest Absolute Grades
+                top_abs = cluster_means.nlargest(5)
+                f.write("\n  [★] ABSOLUTE TOP PERFORMING COURSES:\n")
+                for course, val in top_abs.items():
+                    if val > 0:
+                        course_label = get_course_label(course)
+                        f.write(f"      - {course_label}: {val:.2f}/4.00\n")
+                
+                # Space between cluster profiles
+                f.write("\n" + "="*52 + "\n\n")
+        
+        print("Analysis complete! Insights exported to 'report.txt'.")
