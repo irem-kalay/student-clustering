@@ -38,6 +38,48 @@ After a successful run, the pipeline will generate several files in the reposito
 - `cluster_plot.png` — 2D PCA visualization of clusters
 - `report.txt` and `report.json` — human-readable and machine-readable cluster analysis reports
 
+## Other scripts — When to run and what they do
+
+The following helper scripts are intended to be run separately from `main.py` when indicated. Each entry shows required input files, purpose, and an example command.
+
+- `analyze_clusters.py`:
+	- When: Run after `main.py` if `student_final_clusters.csv` exists and the `downloads_properties` folder (student .txt files) is present.
+	- Purpose: Merge gender and entry-year data into cluster assignments; produces `demographic_report.txt`, `demographic_report.json`, and `student_clusters_with_demographics.csv`.
+	- Example:
+
+```bash
+python3 analyze_clusters.py
+```
+
+- `gender_performance_analysis.py`:
+	- When: Run after `main.py` and `analyze_clusters.py`; requires `vector-equivalent.csv` and `student_clusters_with_demographics.csv`.
+	- Purpose: Analyze cluster strengths/weaknesses by gender and entry year; outputs `gender_based_performance_report.txt`, `gender_based_performance_report.json`, `year_based_performance_report.txt`, `year_based_performance_report.json`, and related PNG charts.
+	- Example:
+
+```bash
+python3 gender_performance_analysis.py
+```
+
+- `sillhoute-score.py`:
+	- When: Run after `main.py`; requires `vector-equivalent.csv` and `student_final_clusters.csv`.
+	- Purpose: Compute `Silhouette Score` and `Davies-Bouldin Index` to evaluate clustering quality (printed to console).
+	- Example:
+
+```bash
+python3 sillhoute-score.py
+```
+
+- `icaite-grafikleri/grafik.py`:
+	- When: Run after `main.py` when `vector-equivalent.csv` is available.
+	- Purpose: Create a 3D scatter of total courses taken, average grade, and grade standard deviation per student; saves `raw_data_complexity_3d.pdf` and `raw_data_complexity_3d.png`.
+	- Example (run from repo root):
+
+```bash
+python3 icaite-grafikleri/grafik.py
+```
+
+Run these helper scripts individually as needed; run them in the repository root so relative file paths resolve correctly.
+
 ## Notes & Troubleshooting
 - If you see `Error: Files not found.`, confirm that `fixed_xlsx` contains `.xlsx`/`.csv` files and `dersdenklikleri.csv` exists.
 - If you have many students, training may take significant time and memory. Consider reducing the dataset size for testing or use a machine with GPU.
