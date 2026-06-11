@@ -111,6 +111,58 @@ def filter_and_aggregate_features(raw_df, eq_map):
         
     return out_df
 
+def extract_student_year_from_id(student_id_str):
+    """
+    Extracts entry year from student ID.
+    Example: "15020" -> 2020 (last 2 digits represent the year)
+    """
+    try:
+        id_str = str(student_id_str).strip()
+        if len(id_str) >= 2:
+            year_digits = id_str[-2:]
+            year = int(year_digits)
+            # Convert 2-digit year to 4-digit year (00-99 -> 2000-2099)
+            return 2000 + year
+    except:
+        pass
+    return None
+
+def load_student_metadata_from_downloads(script_dir):
+    """
+    Loads student metadata (gender and entry year) from downloads_properties folder.
+    Returns a dictionary: {student_id -> {'gender': gender, 'year': year}}
+    """
+    metadata = {}
+    downloads_dir = os.path.join(script_dir, 'downloads_properties')
+    
+    if not os.path.exists(downloads_dir):
+        print(f"Warning: {downloads_dir} not found. Skipping metadata extraction.")
+        return metadata
+    
+    for filename in os.listdir(downloads_dir):
+        if filename.endswith('.txt'):
+            filepath = os.path.join(downloads_dir, filename)
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    lines = f.readlines()
+                    if len(lines) >= 2:
+                        gender = lines[0].strip()
+                        student_id = lines[1].strip()
+                        entry_year = extract_student_year_from_id(student_id)
+                        
+                        # Use filename (without extension) as the key to match with fixed_xlsx
+                        base_name = os.path.splitext(filename)[0]
+                        metadata[base_name] = {
+                            'student_id': student_id,
+                            'gender': gender,
+                            'entry_year': entry_year
+                        }
+            except:
+                pass
+    
+    print(f"Loaded metadata for {len(metadata)} students from downloads_properties.")
+    return metadata
+
 def load_raw_student_data(student_files):
     """Loads raw data without mapping."""
     all_data = []
@@ -192,7 +244,7 @@ if __name__ == "__main__":
     
     # 1. SETUP PATHS
     eq_file = "dersdenklikleri.csv" 
-    student_dir = os.path.join(script_dir, 'test-sınıf-50')
+    student_dir = os.path.join(script_dir, 'fixed_xlsx')
     
     if os.path.exists(student_dir):
         student_files = [os.path.join(student_dir, f) for f in os.listdir(student_dir) 
@@ -210,11 +262,114 @@ if __name__ == "__main__":
         print("Loading raw student data...")
         raw_df = load_raw_student_data(student_files)
         
-        print("Applying Curriculum Filter...")
-        clean_df = filter_and_aggregate_features(raw_df, eq_map)
+        # LOAD METADATA FOR YEAR FILTERING
+        print("Loading student metadata...")
+        metadata = load_student_metadata_from_downloads(script_dir)
         
-        clean_df.to_csv('vector-equivalent.csv', index=False)
-        print(f"Cleaned feature vector saved to 'vector-equivalent.csv'. Shape: {clean_df.shape}")
+        # ADD YEAR AND GENDER INFO TO RAW DATA
+        years = []
+        genders = []
+        for student_id in raw_df['Student_ID']:
+            if student_id in metadata:
+                years.append(metadata[student_id]['entry_year'])
+                genders.append(metadata[student_id]['gender'])
+            else:
+                years.append(None)
+                genders.append(None)
+        
+        raw_df['Entry_Year'] = years
+        raw_df['Gender'] = genders
+        
+        # YEAR FILTERING
+        print("\n" + "="*60)
+        print("YEAR FILTERING OPTIONS")
+        print("="*60)
+        available_years = sorted([y for y in set(years) if y is not None])
+        output_folder = None  # Will be set based on user choice
+        
+        if available_years:
+            print(f"Available entry years: {available_years}")
+            print(f"Year range: {min(available_years)} - {max(available_years)}")
+            print("\nOptions:")
+            print("  - Enter '0' for all students")
+            print("  - Enter a number like '5' for last 5 years")
+            print("  - Enter a range like '2018-2022' for specific years")
+            
+            try:
+                user_input = input(f"\nEnter filter (0/number/range) [default: 0]: ").strip()
+            except ValueError:
+                user_input = "0"
+            
+            if not user_input:
+                user_input = "0"
+            
+            # Check if input is a year range (contains '-' or ':')
+            if '-' in user_input or ':' in user_input:
+                # Parse year range
+                separator = '-' if '-' in user_input else ':'
+                try:
+                    range_parts = user_input.split(separator)
+                    if len(range_parts) == 2:
+                        start_year = int(range_parts[0].strip())
+                        end_year = int(range_parts[1].strip())
+                        
+                        # Validate range
+                        if start_year <= end_year:
+                            print(f"Filtering students from year {start_year} to {end_year}...")
+                            raw_df = raw_df[raw_df['Entry_Year'].isna() | ((raw_df['Entry_Year'] >= start_year) & (raw_df['Entry_Year'] <= end_year))].copy()
+                            output_folder = f"{start_year}-{end_year}"
+                            print(f"Students after filtering: {len(raw_df)}")
+                        else:
+                            print(f"Invalid range: start year ({start_year}) is greater than end year ({end_year}). Using all students.")
+                            output_folder = "all-students"
+                    else:
+                        print("Invalid range format. Using all students.")
+                        output_folder = "all-students"
+                except ValueError:
+                    print("Invalid range format. Using all students.")
+                    output_folder = "all-students"
+            else:
+                # Parse as single number (last X years)
+                try:
+                    last_x_years = int(user_input)
+                    
+                    if last_x_years == 0:
+                        print("Using all available students (no year filtering).")
+                        output_folder = "all-students"
+                    elif last_x_years > 0:
+                        cutoff_year = max(available_years) - last_x_years + 1
+                        print(f"Filtering students from year {cutoff_year} onwards (last {last_x_years} years)...")
+                        raw_df = raw_df[raw_df['Entry_Year'].isna() | (raw_df['Entry_Year'] >= cutoff_year)].copy()
+                        output_folder = f"last-{last_x_years}-years"
+                        print(f"Students after filtering: {len(raw_df)}")
+                    else:
+                        print("Invalid input. Using all students.")
+                        output_folder = "all-students"
+                except ValueError:
+                    print("Invalid input format. Using all students.")
+                    output_folder = "all-students"
+        else:
+            print("Warning: No year information found in metadata. Using all students.")
+            output_folder = "all-students"
+        
+        print("="*60 + "\n")
+        
+        # Create output folder
+        if output_folder:
+            output_dir = os.path.join(script_dir, output_folder)
+            if not os.path.exists(output_dir):
+                os.makedirs(output_dir)
+                print(f"Created output directory: {output_folder}\n")
+            else:
+                print(f"Using existing output directory: {output_folder}\n")
+        
+        print("Applying Curriculum Filter...")
+        # Remove year and gender columns before filtering (they will be added back if needed)
+        clean_df = filter_and_aggregate_features(raw_df.drop(['Entry_Year', 'Gender'], axis=1), eq_map)
+        
+        vector_output_path = os.path.join(output_dir, 'vector-equivalent.csv')
+        clean_df.to_csv(vector_output_path, index=False)
+        print(f"Cleaned feature vector saved to '{output_folder}/vector-equivalent.csv'. Shape: {clean_df.shape}")
         
         # Prepare Data
         clean_df = clean_df.set_index('Student_ID')
@@ -304,8 +459,9 @@ if __name__ == "__main__":
         clusters = final_q.argmax(1)
         
         results = pd.DataFrame({'Student_ID': clean_df.index, 'Assigned_Cluster': clusters})
-        results.to_csv('student_final_clusters.csv', index=False)
-        print("\nFinal clusters saved to 'student_final_clusters.csv'")
+        clusters_output_path = os.path.join(output_dir, 'student_final_clusters.csv')
+        results.to_csv(clusters_output_path, index=False)
+        print(f"Final clusters saved to '{output_folder}/student_final_clusters.csv'")
         
         # 6. VISUALIZATION
         print("Generating Loss Plots...")
@@ -330,8 +486,9 @@ if __name__ == "__main__":
         plt.grid(True)
         
         plt.tight_layout()
-        plt.savefig('loss_plots.png')
-        print("Done. Saved loss plots as 'loss_plots.png'")
+        loss_plots_path = os.path.join(output_dir, 'loss_plots.png')
+        plt.savefig(loss_plots_path)
+        print(f"Done. Saved loss plots as '{output_folder}/loss_plots.png'")
         
         print("Generating PCA Plot...")
         pca = PCA(n_components=2)
@@ -341,8 +498,9 @@ if __name__ == "__main__":
         plt.scatter(X_pca[:, 0], X_pca[:, 1], c=clusters, cmap='tab10', alpha=0.6)
         plt.title('Student Clusters (Curriculum Courses Only)')
         plt.colorbar(label='Cluster')
-        plt.savefig('cluster_plot.png')
-        print("Done. Saved plot as 'cluster_plot.png'")
+        cluster_plot_path = os.path.join(output_dir, 'cluster_plot.png')
+        plt.savefig(cluster_plot_path)
+        print(f"Done. Saved plot as '{output_folder}/cluster_plot.png'")
         
         # ==========================================
         # 7. CLUSTER ANALYSIS & REPORT GENERATION
@@ -443,7 +601,8 @@ if __name__ == "__main__":
         # JSON İÇİN LİSTE OLUŞTURUYORUZ
         json_report_data = []
         
-        with open('report.txt', 'w', encoding='utf-8') as f:
+        report_txt_path = os.path.join(output_dir, 'report.txt')
+        with open(report_txt_path, 'w', encoding='utf-8') as f:
             f.write("====================================================\n")
             f.write("      AI INSTRUCTOR: STUDENT CLUSTER ANALYSIS REPORT\n")
             f.write("====================================================\n\n")
@@ -538,7 +697,8 @@ if __name__ == "__main__":
                 json_report_data.append(cluster_json)
         
         # JSON DOSYASINI KAYDETME
-        with open('report.json', 'w', encoding='utf-8') as json_file:
+        report_json_path = os.path.join(output_dir, 'report.json')
+        with open(report_json_path, 'w', encoding='utf-8') as json_file:
             json.dump(json_report_data, json_file, indent=4, ensure_ascii=False)
             
-        print("Analysis complete! Insights exported to 'report.txt' and 'report.json'.")
+        print(f"Analysis complete! Insights exported to '{output_folder}/report.txt' and '{output_folder}/report.json'.")
