@@ -186,7 +186,8 @@ def load_raw_student_data(student_files):
     if not all_data: return pd.DataFrame()
     
     master = pd.DataFrame(all_data)
-    pivot = master.pivot_table(index='Student_ID', columns='Course', values='Grade', aggfunc='max').fillna(0.0).reset_index()
+    pivot = master.pivot_table(index='Student_ID', columns='Course', values='Grade', aggfunc='max').reset_index()
+    # NaN korunuyor: alınmamış dersleri 0 yerine NaN ile işaretliyoruz
     return pivot
 
 # ==========================================
@@ -371,9 +372,90 @@ if __name__ == "__main__":
         clean_df.to_csv(vector_output_path, index=False)
         print(f"Cleaned feature vector saved to '{output_folder}/vector-equivalent.csv'. Shape: {clean_df.shape}")
         
-        # Prepare Data
+        # ==========================================
+        # OPTIONAL: Core Courses Filter
+        # ==========================================
+        CORE_COURSES = [
+            # 1. Yarıyıl
+            "FIZ 101", "FIZ 101EL", "BLG 101", "BLG 113",
+            "MAT 103", "MAT 281", "ING 100",
+
+            # 2. Yarıyıl
+            "BLG 112", "BLG 102", "MAT 104",
+            "FIZ 102", "FIZ 102EL", "ING 112A", "DAN 102",
+
+            # 3. Yarıyıl
+            "BLG 210", "BLG 231", "BLG 223",
+            "EHB 222", "EHB 211", "ING 201A",
+
+            # 4. Yarıyıl
+            "BLG 252", "BLG 222", "BLG 242",
+            "BLG 202", "BLG 311", "TUR 121",
+
+            # 5. Yarıyıl
+            "BLG 335", "MAT 271", "BLG 351",
+            "TUR 122", "BLG 317", "BLG 212", "EHB 311",
+
+            # 6. Yarıyıl
+            "BLG 322", "BLG 312", "BLG 336",
+            "ATA 121", "BLG 354", "BLG 374",
+
+            # 7. Yarıyıl
+            "ATA 122", "BLG 411", "BLG 4901",
+
+            # 8. Yarıyıl
+            "BLG 4902", "EKO 201",
+        ]
+        #USE_CORE_ONLY = False  # True olursa sadece core dersler kullanılıyor
+        print("\n" + "="*60)
+        print("COURSE SELECTION")
+        print("="*60)
+        print("Options:")
+        print("  1 - Use ALL courses")
+        print("  2 - Use CORE courses only")
+        try:
+            course_input = input("\nEnter selection (1/2) [default: 1]: ").strip()
+        except:
+            course_input = "1"
+
+        if not course_input:
+            course_input = "1"
+
+        USE_CORE_ONLY = course_input == "2"
+
+        if USE_CORE_ONLY:
+            print("Selected: Core courses only")
+        else:
+            print("Selected: All courses")
+        print("="*60 + "\n")
+        
+        if USE_CORE_ONLY:
+            available = [c for c in CORE_COURSES if c in clean_df.columns]
+            clean_df = clean_df[["Student_ID"] + available]
+            print(f"Core courses only: {len(available)} ders kullanılıyor.")
+        # ==========================================
+        
+        # Prepare Data with Mask Features
         clean_df = clean_df.set_index('Student_ID')
-        X = clean_df.values / 4.0 
+        course_cols = clean_df.columns.tolist()
+        
+        # Mask: 1 = ders alındı, 0 = alınmadı (NaN -> 0, değer -> 1)
+        mask_df = clean_df[course_cols].notna().astype(float)
+        mask_df.columns = [f"{c}_mask" for c in course_cols]
+        
+        # FF ve alınmamış dersleri ayırt etmek için orijinali sakla
+        # NaN = alınmamış (ortalamaya girmez), 0.0 = FF (ortalamaya girer)
+        clean_df_with_nan = clean_df.copy()
+        
+        # Grade: alınmamış dersleri 0.0 yap (clustering için)
+        clean_df = clean_df.fillna(0.0)
+        
+        # Grade normalize + Mask birleştir
+        X_grades = clean_df.values / 4.0          # [0.0, 1.0] aralığında
+        X_mask   = mask_df.values                  # [0.0, 1.0] aralığında
+        X = np.concatenate([X_grades, X_mask], axis=1)
+        
+        print(f"Feature shape: {X.shape}  ({len(course_cols)} ders × 2 = grade + mask)") 
         
         # 3. TRAIN AUTOENCODER
         print("Training Autoencoder...")
@@ -509,6 +591,8 @@ if __name__ == "__main__":
         
         # Course name mapping dictionary
         COURSE_NAMES = {
+            # ==================== ZORUNLU DERSLER ====================
+            # 1. Yarıyıl
             "FIZ 101": "Physics I",
             "FIZ 101EL": "Physics I Laboratory",
             "BLG 101": "Intr. to Information Systems",
@@ -516,6 +600,7 @@ if __name__ == "__main__":
             "MAT 103": "Mathematics I",
             "MAT 281": "Linear Algebra and Applicat.",
             "ING 100": "EAP Through Global Goals",
+            # 2. Yarıyıl
             "BLG 112": "Discrete Mathematics",
             "BLG 102": "Intr to Sci&Eng Comp (C)",
             "MAT 104": "Mathematics II",
@@ -523,18 +608,21 @@ if __name__ == "__main__":
             "FIZ 102EL": "Physics II Laboratory",
             "ING 112A": "Basics of Academic Writing",
             "DAN 102": "Girişimcilik & Kariyer Danış.",
+            # 3. Yarıyıl
             "BLG 210": "Engineering Mathematics",
             "BLG 231": "Digital Circuits",
             "BLG 223": "Data Structures",
             "EHB 222": "Introduction to Electronics",
             "EHB 211": "Basics of Electrical Circuits",
             "ING 201A": "Essentials of Res.Paper Writ.",
+            # 4. Yarıyıl
             "BLG 252": "Object Oriented Programming",
             "BLG 222": "Computer Organization",
             "BLG 242": "Logic Circuits Laboratory",
             "BLG 202": "Numerical Methods in CE",
             "BLG 311": "Formal Languages and Automata",
             "TUR 121": "Türk Dili I",
+            # 5. Yarıyıl
             "BLG 335": "Analysis of Algorithms I",
             "MAT 271": "Probability and Statistics",
             "BLG 351": "Microcomputer Lab.",
@@ -542,27 +630,28 @@ if __name__ == "__main__":
             "BLG 317": "Database Systems",
             "BLG 212": "Microprocessor Systems",
             "EHB 311": "Intr.to Electronics Laboratory",
+            # 6. Yarıyıl
             "BLG 322": "Computer Architecture",
             "BLG 312": "Computer Operating Systems",
             "BLG 336": "Analysis of Algorithms II",
             "ATA 121": "Atatürk İlk & İnkılap Trh I",
             "BLG 354": "Signal&Systems for Comp.Eng.",
             "BLG 374": "Tech. Communic.for Comp.Eng.",
+            # 7. Yarıyıl
             "ATA 122": "Atatürk İlk & İnkılap Trh II",
             "BLG 411": "Software Engineering",
             "BLG 4901": "Computer Engineering Design I",
+            # 8. Yarıyıl
             "BLG 4902": "Computer Engineering Design II",
             "EKO 201": "Economics",
+
+            # ==================== SEÇMELİ: BLG/MT ====================
             "BLG 337": "Principles of Computer Comm.",
             "BLG 345": "Logic & Computability",
+            "BLG 346": "Basics of Visual Composition",
+            "BLG 346E": "Basics of Visual Composition",
             "BLG 348": "Introduction to Bioinformatics",
             "BLG 368": "Operations Research",
-            "BLG 442": "Tech.&Innov. Mng.for Inf.Tech.",
-            "BLG 448": "Project Management in Eng.",
-            "BLG 454": "Learning From Data",
-            "KON 224": "Measurement&Instrumentation",
-            "KON 317": "Control Systems",
-            "MAL 201": "Materials Science",
             "BLG 413": "System Programming",
             "BLG 430": "Computer Networks",
             "BLG 433": "Computer Communications",
@@ -571,32 +660,175 @@ if __name__ == "__main__":
             "BLG 438": "Digital System Design Laboratory",
             "BLG 439": "Computer Project I",
             "BLG 440": "Computer Project II",
+            "BLG 442": "Tech.&Innov. Mng.for Inf.Tech.",
             "BLG 443": "Discrete Event Simulation",
             "BLG 444": "Computer Graphics",
             "BLG 447": "Compiler Design",
+            "BLG 448": "Project Management in Eng.",
             "BLG 449": "Prog.in Parallel&DistrubedSys.",
             "BLG 450": "Real-Time Systems Software",
             "BLG 451": "Real-Time Systems",
             "BLG 452": "Microprocessor Design Laboratory",
             "BLG 453": "Computer Vision",
+            "BLG 454": "Learning From Data",
             "BLG 456": "Robotics",
             "BLG 458": "Functional Programming",
             "BLG 459": "Computer Security",
             "BLG 460": "Secure Programming",
+            "BLG 463": "Innov. Leadership in Comp.Eng.",
             "BLG 475": "Software Quality and Testing",
             "BLG 477": "Multimedia Computing",
             "BLG 478": "Network Security",
-            "BLG 481": "Al Accelerators Lab.",
-            "BLG 483": "Artificial Intelligence Aided Computer Engineering",
-            "YZV 406": "Robotics"
+            "BLG 481": "AI Accelerators Lab.",
+            "BLG 483": "Artificial Intelligence Aided Comp.Eng.",
+            "KON 224": "Measurement&Instrumentation",
+            "KON 317": "Control Systems",
+            "MAL 201": "Materials Science",
+            "YZV 406": "Robotics",
+
+            # ==================== SEÇMELİ: SNT (ITB) ====================
+            "SNT 102": "Photography",           
+            "SNT 103": "Drawing",           
+            "SNT 104": "Mythology and Art",            
+            "SNT 105": "Film Art",        
+            "SNT 106": "Traditional Turkish Art&Crafts",
+            "SNT 107": "Ancient Civilizat.in Anatolia",
+            
+            "SNT 112": "Theater",
+           
+            "SNT 113": "Art and Interpretation",
+            
+            "SNT 114": "Contemporary Art",
+            
+            "SNT 116": "The Art of Communication",
+           
+            "SNT 117": "Jazz Appreciation",
+            "SNT 121": "World Music Cultures",
+            "SNT 123": "Film Production",
+            "SNT 211": "Istanbul:Hist.,Art and Society",
+            "SNT 212": "Art,Culture and Society",
+            "SNT 215": "Balkan Musics",
+            "SNT 226": "Philosophy of Art",
+            "SNT 227": "Sound and Society",
+
+            # ==================== SEÇMELİ: ITB ====================
+            "ITB 020": "Formations of Modernity",
+            "ITB 037": "Knowledge, Language & Logic",
+            "ITB 087": "Media and Society",
+            "ITB 094": "International.Rel.and Globali.",
+            "ITB 095": "Technology, Policy and Law",
+            "ITB 143": "Orientalism Practiced and Theorized",
+            "ITB 151": "Human Resources and Management",
+            "ITB 171": "Science,Technology and Society",
+            "ITB 179": "Literatures of Intimate Separacies",
+            "ITB 201": "Introduction to Humanities & Social Sciences",
+            "ITB 202": "World History",
+            "ITB 203": "Sociology",
+            "ITB 204": "Political Science",
+            "ITB 205": "Philosophy",
+            "ITB 206": "Issues in World Politics",
+            "ITB 207": "Ottoman History",
+            "ITB 208": "Formations of Modern Türkiye",
+            "ITB 209": "Türkiye in World Affairs",
+            "ITB 213": "Topics in Literature and Society",
+            "ITB 214": "The Modern Middle East",
+            "ITB 215": "Topics in Hist.and Society",
+            "ITB 216": "Economy and Society",
+            "ITB 217": "Engineering Ethics",
+            "ITB 218": "History of Science&Technology",
+            "ITB 219": "Ethics",
+            "ITB 220": "Psychology",
+            "ITB 221": "Anatolian Archaeology",
+            "ITB 222": "City and Society",
+            "ITB 224": "Environment and Society",
+            "ITB 227": "Political Theory",
+            "ITB 228": "Gender Studies",
+            "ITB 230": "Disaster Awareness",
+            "ITB 231": "Volunteering Studies",
+            "ITB 233": "Anthropology",
+            "ITB 234": "The Rise of Civilizations",
+            "ITB 235": "Türkiye and European Union",
+
+            # ==================== SEÇMELİ: İNG (ITB) ====================
+            "ING 103A": "Creative Writing",
+            "ING 103AC": "Urban Ecology",
+            "ING 103AD": "Advanced English for Engineers",
+            "ING 103B": "Business English",
+            "ING 103C": "Great Moments in Science",
+            "ING 103CO": "Profess.Communic.for Engineers",
+            "ING 103DD": "Decoding Discourse",
+            "ING 103ES": "Intercultural Citizenship",
+            "ING 103G": "Business Communications",
+            "ING 103H": "Public Presentations",
+            "ING 103I": "Short Stories",
+            "ING 103L": "Mythology",
+            "ING 103N": "Film Studies",
+            "ING 103O": "Psychology",
+            "ING 103P": "Poetry",
+            "ING 103SC": "Science Communication",
+
+            # ==================== SEÇMELİ: İŞL (ITB) ====================
+            "ISL 465": "Int.to Entrepreneurship&Innov.",
+            "ISL 478": "Entrepreneurship",
+
+            # ==================== SEÇMELİ: HUK (ITB) ====================
+            "HUK 211": "Sosyal Güvenlik Hukuku",
+            "HUK 212": "Sendika.&Toplu İş Sözl.Hukuku",
+            "HUK 213": "İş Sağlığı ve Güvenliği Hukuku",
+            "HUK 214": "Teknolojik Yeniliklerin Korun.",
+            "HUK 215": "Sözleşmeler Hukuku",
+            "HUK 216": "Telekomünikasyon Hukuku",
+            "HUK 217": "AR-GE Hukuku",
+            "HUK 218": "Ticaret Hukuku",
+
+            # ==================== SEÇMELİ: YABANCI DİL (ITB) ====================
+            "ALM 101": "Almanca I",
+            "ALM 102": "Almanca II",
+            "ALM 201": "Almanca III",
+            "ALM 202": "Almanca IV",
+            "ALM 301": "Almanca V",
+            "ALM 302": "Almanca VI",
+            "ALM 401": "Almanca VII",
+            "ARB 101": "Arapça I",
+            "ARB 102": "Arapça II",
+            "CIN 101": "Çince I",
+            "CIN 102": "Çince II",
+            "CIN 201": "Çince III",
+            "FRA 101": "Fransızca I",
+            "FRA 102": "Fransızca II",
+            "FRA 201": "Fransızca III",
+            "FRA 202": "Fransızca IV",
+            "FRA 301": "Fransızca V",
+            "FRA 302": "Fransızca VI",
+            "ISP 101": "İspanyolca I",
+            "ISP 102": "İspanyolca II",
+            "ISP 201": "İspanyolca III",
+            "ISP 202": "İspanyolca IV",
+            "ISP 301": "İspanyolca V",
+            "ISP 302": "İspanyolca VI",
+            "ITA 101": "İtalyanca I",
+            "ITA 102": "İtalyanca II",
+            "ITA 201": "İtalyanca III",
+            "ITA 202": "İtalyanca IV",
+            "ITA 301": "İtalyanca V",
+            "JPN 101": "Japonca I",
+            "JPN 102": "Japonca II",
+            "JPN 201": "Japonca III",
+            "JPN 202": "Japonca IV",
+            "RUS 101": "Rusça I",
+            "RUS 102": "Rusça II",
+            "RUS 201": "Rusça III",
+            "RUS 202": "Rusça IV",
         }
 
         # Add cluster labels temporarily to our dataframe to calculate means
-        analysis_df = clean_df.copy()
+        # clean_df_with_nan kullan: NaN=alınmamış (ortalamaya girmez), 0.0=FF (ortalamaya girer)
+        analysis_df = clean_df_with_nan.copy()
         analysis_df['Cluster'] = clusters
         
         # Calculate overall means for baseline comparison
-        overall_means = clean_df.mean()
+        # Pandas mean() otomatik olarak NaN'ları atlar
+        overall_means = clean_df_with_nan.mean()
         
         # JSON İÇİN LİSTE OLUŞTURUYORUZ
         json_report_data = []
@@ -630,6 +862,7 @@ if __name__ == "__main__":
                     continue
                 
                 # Calculate the average course grade inside this cluster
+                # Pandas mean() otomatik olarak NaN'ları (alınmamış) atlar
                 cluster_means = cluster_data.mean()
                 
                 # Compare to overall population to find relative strengths/weaknesses
